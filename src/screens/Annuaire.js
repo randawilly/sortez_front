@@ -4,29 +4,24 @@ import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 import Header from '../includes/Header';
 import Filtre from '../includes/Filtre';
-import ListeArtAg from '../includes/ListeArtAg';
+import ListeAnnuaire from '../includes/ListeAnnuaire';
 
-
-export default function Agenda({route}) {
+export default function Annuaire({route}) {
 
     const rubrique = route.params.rubrique;
     const txt_rubrique = route.params.txt_rubrique;
 
-    if(rubrique == "agenda"){
-        var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/get_communes";
-        var url_commercant = "https://www.sortez.org/sortez_pro/Api_front_global/getCommercantsAgenda";
-        var url_categorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getCategorieAgenda';
-        var url_rubrique = 'https://www.sortez.org/sortez_pro/Api_front_global/getAgendasListe';
-    }else if(rubrique == "article"){
-        var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/get_communesArticle";
-        var url_commercant = "https://www.sortez.org/sortez_pro/Api_front_global/getCommercantsArticle";
-        var url_categorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getCategorieArticle';
-        var url_rubrique = 'https://www.sortez.org/sortez_pro/Api_front_global/getArticlesListe';
+    if(rubrique == "annuaire"){
+        var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/get_communesAnnonce";
+        var url_subcateg = "https://www.sortez.org/sortez_pro/Api_front_global/getCommercantsAgenda";
+        var url_categorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getCategorieAnnuaire';
+        var url_rubrique = 'https://www.sortez.org/sortez_pro/Api_front_global/getAnnuaireListe';
     }
 
     const [commune, setCommune] = useState("");
-    const [commercant, setCommercant] = useState("");
+    const [subcateg, setSubcateg] = useState("");
     const [categorie, setCategorie] = useState("");
+    const [commercant, setCommercant] = useState("");
 
     const [agendas, setAgendas] = useState("");
 
@@ -48,14 +43,6 @@ export default function Agenda({route}) {
               .catch((error) => console.error(error))
               .finally(() => setLoading(false));
     }, []);  
-          
-    useEffect(() => {
-    fetch(url_commercant)
-        .then((response) => response.json())
-        .then((json) => setCommercant(json))
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
-    }, []);
     
     useEffect(() => {
         fetch(url_categorie)
@@ -68,20 +55,20 @@ export default function Agenda({route}) {
     useEffect(() => {
         fetch(url_rubrique)
             .then((response) => response.json())
-            .then((json) => setAgendas(json))
+            .then((json) => setCommercant(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
     }, []);
     function changeAgenda(new_valeur){
-        setAgendas(new_valeur);
+        setCommercant(new_valeur);
     }
     return (
         <ScrollView>
             <View style={[styles.container]}>
                 <Header />
                 <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
-                <Filtre rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie}  />
-                <ListeArtAg rubrique = {rubrique} agenda = {agendas} />
+                <Filtre rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} categorie = {categorie}  />
+                <ListeAnnuaire rubrique = {rubrique} commercant = {commercant} />
             </View>
         </ScrollView>
     );
