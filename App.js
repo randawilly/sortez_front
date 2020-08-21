@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './src/screens/Home';
 import Agenda from './src/screens/Agenda';
 import Annuaire from './src/screens/Annuaire';
+import Boutique from './src/screens/Boutique';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Agenda" component={Agenda} />
       <Stack.Screen name="Annuaire" component={Annuaire} />
+      <Stack.Screen name="Boutique" component={Boutique} />
     </Stack.Navigator>
   </NavigationContainer>
   );
