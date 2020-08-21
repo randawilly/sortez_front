@@ -28,8 +28,8 @@ export default function Filtre(props) {
         var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterArticle";
         var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getArticlesListe"
     }else if(props.rubrique == "boutique"){
-        var url_filter = "https://www.randawilly.ovh/sortez_pro/Api_front_global/filterAnnonce";
-        var url_reset_filter = "https://www.randawilly.ovh/sortez_pro/Api_front_global/getAnnonceListe"
+        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterAnnonce";
+        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getAnnonceListe"
     }
 
     if(typeof(communes) !='undefined'){

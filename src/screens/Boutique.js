@@ -3,7 +3,7 @@ import { Text, View, Button,ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 import Header from '../includes/Header';
-import Filtre from '../includes/Filtre';
+import Filtre from '../includes/FiltreAnnonce';
 import ListAnnonce from '../includes/ListAnnonce';
 
 
@@ -13,11 +13,11 @@ export default function Boutique({route}) {
     const txt_rubrique = route.params.txt_rubrique;
 
 
-    var url_communes = "https://www.randawilly.ovh/sortez_pro/Api_front_global/getcommunesAnnonce";
-    var url_commercant = "https://www.randawilly.ovh/sortez_pro/Api_front_global/getpartenaireAnnonce";
-    var url_categorie = 'https://www.randawilly.ovh/sortez_pro/Api_front_global/getcategorieAnnonce';
-    var url_souscategorie = 'https://www.randawilly.ovh/sortez_pro/Api_front_global/getsouscategorieAnnonce';
-    var url_rubrique = 'https://www.randawilly.ovh/sortez_pro/Api_front_global/getAnnonceListe';
+    var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/getcommunesAnnonce";
+    var url_commercant = "https://www.sortez.org/sortez_pro/Api_front_global/getpartenaireAnnonce";
+    var url_categorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getcategorieAnnonce';
+    var url_souscategorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getsouscategorieAnnonce';
+    var url_rubrique = 'https://www.sortez.org/sortez_pro/Api_front_global/getAnnonceListe';
 
 
     const [commune, setCommune] = useState("");

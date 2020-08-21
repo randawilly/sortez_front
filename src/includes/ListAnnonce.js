@@ -6,7 +6,7 @@ import{ListeStyle} from '../style/ListeStyle';
 import{styles} from '../style/Style';
 // import { Icon } from 'react-native-elements'
 export default function Filtre(props) {const [selectedValue, setSelectedValue] = useState("java");
-    const base_dir = "https://www.randawilly.ovh/";
+    const base_dir = "https://www.sortez.org/";
     const image_dir = base_dir+"application/resources/front/photoCommercant/imagesbank/";
     const agenda = props.agenda.toAnnonce;
     if(typeof(agenda) !='undefined'){
