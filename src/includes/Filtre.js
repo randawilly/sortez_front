@@ -10,13 +10,24 @@ export default function Filtre(props) {
     const [selectedValueCommercant, setSelectedValueCommercant] = useState("0");
     const [selectedValueMedia, setSelectedValueMedia] = useState("0");
     const [selectedValueCategorie, setSelectedValueCategorie] = useState("0");
+    const [selectedValueSubcateg, setSelectedValueSubcateg] = useState("0");
     const [isLoading, setLoading] = useState(false);
     const [isLoading2, setLoading2] = useState(false);
     const [dateDebut, setDateDebut] = useState("0000-00-00");
     const [dateFin, setDateFin] = useState("0000-00-00");
     const [motcle, setmotcle] = useState("");
+    const [subcateg, setSubcateg] = useState("");
     const communes = props.commune.toVille;
-    const commercant = props.commercant.tocommercant;
+
+    if(subcateg != ''){
+        var bouclesubcateg = subcateg.toSubcateg.map( (s, i) => {
+            return <Picker.Item key={i} value={s.IdRubrique} label={s.Nom} />
+        }); 
+    }
+
+    if(typeof(props.commercant) !="undefined"){
+        var commercant = props.commercant.tocommercant;
+    }
     const categorie = props.categorie.toCategorie_principale;
 
     if(props.rubrique =="agenda"){
@@ -25,6 +36,9 @@ export default function Filtre(props) {
     }else if(props.rubrique == "article"){
         var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterArticle";
         var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getArticlesListe"
+    }else if(props.rubrique =="annuaire"){
+        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterAnnuaire";
+        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getAnnuaireListe"
     }
 
     if(typeof(communes) !='undefined'){
@@ -51,9 +65,15 @@ export default function Filtre(props) {
 
     if(typeof(categorie) !='undefined'){
         var bouclecategorie = categorie.map( (s, i) => {
+            if(typeof(s.agenda_categid) != "undefined"){
             if(s.agenda_categid != "null"){
             return <Picker.Item key={i} value={s.agenda_categid} label={s.category} />
             }
+        }else{
+            if(s.IdRubrique != "null"){
+                return <Picker.Item key={i} value={s.IdRubrique} label={s.Nom} />
+                }
+        }
         });   
     }else{
         var bouclecategorie = <Picker.Item label="Selectionner" value="0" />;
@@ -82,6 +102,7 @@ export default function Filtre(props) {
                 commune: selectedValueCommune,
                 commercant: selectedValueCommercant,
                 categorie:selectedValueCategorie,
+                souscategorie:selectedValueSubcateg,
                 date_debut:dateDebut,
                 date_fin:dateFin,
                 motcles:motcle,
@@ -122,6 +143,24 @@ export default function Filtre(props) {
     function setDate_fin(){
         setDateFin(new Date());
     }
+    function changecateg(id_categ){
+        setSelectedValueCategorie(id_categ);
+        setLoading(true)
+            fetch("https://www.sortez.org/sortez_pro/Api_front_global/getsubcategby_categid", {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_categ: id_categ,
+            })
+            })
+            .then((response) => response.json())
+            .then((json) => setSubcateg(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }
     return(
         
         <View style={filstreStyle.sub_container}>
@@ -137,6 +176,19 @@ export default function Filtre(props) {
                 </Picker>
             </View>
         </View>
+        {props.rubrique =="annuaire" ? 
+        <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                    <Picker 
+                        selectedValue={selectedValueCategorie}
+                        style={filstreStyle.selectText}
+                        onValueChange={(itemValue, itemIndex) => changecateg(itemValue)}>
+                        <Picker.Item label="Catégories" value="0" />
+                        {bouclecategorie}
+                    </Picker>
+                </View>
+            </View>
+        : (
         <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
             <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
                 <Picker
@@ -148,7 +200,25 @@ export default function Filtre(props) {
                 </Picker>
             </View>
         </View>
+        )}
         </View>
+        {props.rubrique =="annuaire" ? 
+        
+        <View style={filstreStyle.row}>
+            <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
+                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                    <Picker
+                        selectedValue={selectedValueSubcateg}
+                        style={filstreStyle.selectText}
+                        onValueChange={(itemValue, itemIndex) => setSelectedValueSubcateg(itemValue)}>
+                        <Picker.Item label="Sous-catégories" value="0" />
+                        {bouclesubcateg}
+                    </Picker>
+                </View>
+            </View>
+        </View>
+
+        : (
         <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
@@ -173,6 +243,8 @@ export default function Filtre(props) {
                 </View>
             </View>
         </View>
+        )}
+        {props.rubrique !="annuaire" ? 
         <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
@@ -229,6 +301,9 @@ export default function Filtre(props) {
                 </View>
             </View>
         </View>
+        : (
+            <TouchableOpacity></TouchableOpacity>
+        )}
         <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
             <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >

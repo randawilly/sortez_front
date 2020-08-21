@@ -143,6 +143,10 @@ import { StyleSheet } from 'react-native';
         categ_bg:{
             backgroundColor: "black",
             opacity:0.6,
+        },
+        title_rubrique:{
+            fontSize:20,
+            
         }
  });
 export {styles}

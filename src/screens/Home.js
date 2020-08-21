@@ -16,7 +16,13 @@ export default function Home() {
         navigation.navigate("Agenda",{
             rubrique: "article",
             txt_rubrique: 'Les actualité',
-          });
+        });
+    }
+    function annuaire_page(){
+        navigation.navigate("Annuaire",{
+            rubrique: "annuaire",
+            txt_rubrique: 'Les bonnes adresses',
+        });
     }
     
     return (    
@@ -45,7 +51,7 @@ export default function Home() {
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/agenda_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>agenda</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
+                <TouchableOpacity onPress={()=>annuaire_page()} style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/annuaire_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>annuaire</Text>
                 </TouchableOpacity>
