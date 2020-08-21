@@ -18,6 +18,12 @@ export default function Home() {
             txt_rubrique: 'Les actualité',
           });
     }
+    function boutiquePage() {
+        navigation.navigate("Boutique",{
+            rubrique: "boutique",
+            txt_rubrique: 'Les annonces',
+          });
+    }
     
     return (    
         <ScrollView>
@@ -51,7 +57,7 @@ export default function Home() {
                 </TouchableOpacity>
             </View>
             <View style={styles.row}>
-                <TouchableOpacity style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
+                <TouchableOpacity onPress={()=>boutiquePage()} style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/boutiques_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>boutiques</Text>
                 </TouchableOpacity>

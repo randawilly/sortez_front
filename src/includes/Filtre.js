@@ -10,6 +10,7 @@ export default function Filtre(props) {
     const [selectedValueCommercant, setSelectedValueCommercant] = useState("0");
     const [selectedValueMedia, setSelectedValueMedia] = useState("0");
     const [selectedValueCategorie, setSelectedValueCategorie] = useState("0");
+    const [selectedValueSousCategorie, setSelectedValueSousCategorie] = useState("0");
     const [isLoading, setLoading] = useState(false);
     const [isLoading2, setLoading2] = useState(false);
     const [dateDebut, setDateDebut] = useState("0000-00-00");
@@ -18,6 +19,7 @@ export default function Filtre(props) {
     const communes = props.commune.toVille;
     const commercant = props.commercant.tocommercant;
     const categorie = props.categorie.toCategorie_principale;
+    const souscategorie = props.souscategorie.toSousRubrique;
 
     if(props.rubrique =="agenda"){
         var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterAgenda";
@@ -25,6 +27,9 @@ export default function Filtre(props) {
     }else if(props.rubrique == "article"){
         var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterArticle";
         var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getArticlesListe"
+    }else if(props.rubrique == "boutique"){
+        var url_filter = "https://www.randawilly.ovh/sortez_pro/Api_front_global/filterAnnonce";
+        var url_reset_filter = "https://www.randawilly.ovh/sortez_pro/Api_front_global/getAnnonceListe"
     }
 
     if(typeof(communes) !='undefined'){
@@ -59,6 +64,16 @@ export default function Filtre(props) {
         var bouclecategorie = <Picker.Item label="Selectionner" value="0" />;
     }
 
+    if(typeof(souscategorie) !='undefined'){
+        var bouclesouscategorie = souscategorie.map( (s, i) => {
+            if(s.agenda_categid != "null"){
+            return <Picker.Item key={i} value={s.agenda_categid} label={s.category} />
+            }
+        });   
+    }else{
+        var bouclesouscategorie = <Picker.Item label="Selectionner" value="0" />;
+    }
+
     function onChangeDebut (selectedDate) {
         const currentDate = selectedDate || date;
         setDateDebut(currentDate);
@@ -82,6 +97,7 @@ export default function Filtre(props) {
                 commune: selectedValueCommune,
                 commercant: selectedValueCommercant,
                 categorie:selectedValueCategorie,
+                souscategorie:selectedValueSousCategorie,
                 date_debut:dateDebut,
                 date_fin:dateFin,
                 motcles:motcle,
@@ -102,6 +118,7 @@ export default function Filtre(props) {
         setSelectedValueCommercant('0');
         setSelectedValueMedia('0');
         setSelectedValueCategorie('0');
+        setSelectedValueSousCategorie('0');
         setDateDebut("0000-00-00");
         setDateFin("0000-00-00");
         setmotcle('');
@@ -122,168 +139,280 @@ export default function Filtre(props) {
     function setDate_fin(){
         setDateFin(new Date());
     }
-    return(
+    if(props.rubrique == "boutique"){
+        return(
         
-        <View style={filstreStyle.sub_container}>
-        <View style={filstreStyle.row}>
-        <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-            <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                <Picker
-                    selectedValue={selectedValueCommune}
-                    style={filstreStyle.selectText}
-                    onValueChange={(itemValue, itemIndex) => setSelectedValueCommune(itemValue)}>
-                    <Picker.Item label="Communes" value="0" />
-                    {bouclecommune}
-                </Picker>
-            </View>
-        </View>
-        <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-            <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                <Picker
-                    selectedValue={selectedValueCommercant}
-                    style={filstreStyle.selectText}
-                    onValueChange={(itemValue, itemIndex) => setSelectedValueCommercant(itemValue)}>
-                    <Picker.Item label="Partenaires" value="0" />
-                    {bouclecommercant}
-                </Picker>
-            </View>
-        </View>
-        </View>
-        <View style={filstreStyle.row}>
+            <View style={filstreStyle.sub_container}>
+            <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
                     <Picker
-                        selectedValue={selectedValueMedia}
+                        selectedValue={selectedValueCommune}
                         style={filstreStyle.selectText}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValueMedia(itemValue)}>
-                        <Picker.Item label="Média" value="media" />
-                    
+                        onValueChange={(itemValue, itemIndex) => setSelectedValueCommune(itemValue)}>
+                        <Picker.Item label="Communes" value="0" />
+                        {bouclecommune}
                     </Picker>
                 </View>
             </View>
-            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                    <Picker 
-                        selectedValue={selectedValueCategorie}
-                        style={filstreStyle.selectText}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValueCategorie(itemValue)}>
-                        <Picker.Item label="Catégories" value="0" />
-                        {bouclecategorie}
-                    </Picker>
-                </View>
-            </View>
-        </View>
-        <View style={filstreStyle.row}>
-            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                    <TouchableOpacity onPress={()=>setDate_debut()}>
-                        <View>
-                        {dateDebut =="0000-00-00" ? <Text style={filstreStyle.txt_date}>Date début</Text> : (
-                            <DatePicker
-                                style={{width:"100%"}}
-                                date={dateDebut}
-                                mode="date"
-                                placeholder="Date début"
-                                format="YYYY-MM-DD"
-                                minDate="2016-05-01"
-                                maxDate="2050-06-01"
-                                confirmBtnText="Valider"
-                                cancelBtnText="Annuler"
-                                customStyles={{
-                                dateInput: {
-                                    borderWidth: 0
-                                }
-                                }}
-                                onDateChange={(date) => {onChangeDebut(date)}}
-                        />
-                        )}
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                    <TouchableOpacity onPress={()=>setDate_fin()}>
-                        <View>
-                        {dateFin =="0000-00-00" ? <Text style={filstreStyle.txt_date}>Date Fin</Text> : (
-                            <DatePicker
-                                style={{width:"100%"}}
-                                date={dateFin}
-                                mode="date"
-                                placeholder="Date fin"
-                                format="YYYY-MM-DD"
-                                minDate="2016-05-01"
-                                maxDate="2050-06-01"
-                                confirmBtnText="Valider"
-                                cancelBtnText="Annuler"
-                                customStyles={{
-                                dateInput: {
-                                    borderWidth: 0
-                                }
-                                }}
-                                onDateChange={(date) => {onChangeFin(date)}}
-                        />
-                        )}
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
-        <View style={filstreStyle.row}>
-            <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
-            <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >
-                <TextInput
-                    style={filstreStyle.inputText}
-                    placeholder="Mots clés"
-                    placeholderTextColor="#E40EAB"
-                    onChangeText={(text) => { setmotcle(text);}} />
-                </View>
-            </View>
-        </View>
-        <View style={filstreStyle.row}>
-            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted,filstreStyle.bg_pink]}>
-                    <TouchableOpacity onPress={()=>applyfilters()} style={[filstreStyle.btn_pink]}>
-                    {isLoading ? <ActivityIndicator size="small" color="white" /> : (
-                        <Text style={filstreStyle.btn_text}>Appliquez votre choix</Text>
-                        )}
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted,filstreStyle.bg_pink]}>
-                    <TouchableOpacity onPress={()=>resetfilters()} style={[filstreStyle.btn_pink]}>
-                    {isLoading2 ? <ActivityIndicator size="small" color="white" /> : (
-                        <Text style={filstreStyle.btn_text}>Réinitialisez</Text>
-                        )}
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
-        <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
                     <Picker
-                        selectedValue="list"
+                        selectedValue={selectedValueCommercant}
                         style={filstreStyle.selectText}
-                        // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                        >
-                        <Picker.Item label="Vue liste" value="list" />
+                        onValueChange={(itemValue, itemIndex) => setSelectedValueCommercant(itemValue)}>
+                        <Picker.Item label="Partenaires" value="0" />
+                        {bouclecommercant}
+                    </Picker>
+                </View>
+            </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <Picker 
+                            selectedValue={selectedValueCategorie}
+                            style={filstreStyle.selectText}
+                            onValueChange={(itemValue, itemIndex) => setSelectedValueCategorie(itemValue)}>
+                            <Picker.Item label="Catégories" value="0" />
+                            {bouclecategorie}
+                        </Picker>
+                    </View>
+                </View>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <Picker
+                            selectedValue={selectedValueCommercant}
+                            style={filstreStyle.selectText}
+                            onValueChange={(itemValue, itemIndex) => setSelectedValueSousCategorie(itemValue)}>
+                            <Picker.Item label="Sous categories" value="0" />
+                            {bouclesouscategorie}
+                        </Picker>
+                    </View>
+                </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
+                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >
+                    <TextInput
+                        style={filstreStyle.inputText}
+                        placeholder="Mots clés"
+                        placeholderTextColor="#E40EAB"
+                        onChangeText={(text) => { setmotcle(text);}} />
+                    </View>
+                </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted,filstreStyle.bg_pink]}>
+                        <TouchableOpacity onPress={()=>applyfilters()} style={[filstreStyle.btn_pink]}>
+                        {isLoading ? <ActivityIndicator size="small" color="white" /> : (
+                            <Text style={filstreStyle.btn_text}>Appliquez votre choix</Text>
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted,filstreStyle.bg_pink]}>
+                        <TouchableOpacity onPress={()=>resetfilters()} style={[filstreStyle.btn_pink]}>
+                        {isLoading2 ? <ActivityIndicator size="small" color="white" /> : (
+                            <Text style={filstreStyle.btn_text}>Réinitialisez</Text>
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <Picker
+                            selectedValue="list"
+                            style={filstreStyle.selectText}
+                            // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                            >
+                            <Picker.Item label="Vue liste" value="list" />
+                        </Picker>
+                    </View>
+                </View>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <Picker 
+                            selectedValue="card"
+                            style={filstreStyle.selectText}
+                            // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                            >
+                            <Picker.Item label="Vue carte" value="card" />
+                        </Picker>
+                    </View>
+                </View>
+            </View>
+        </View>
+        )
+    }else{
+        return(
+        
+            <View style={filstreStyle.sub_container}>
+            <View style={filstreStyle.row}>
+            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                    <Picker
+                        selectedValue={selectedValueCommune}
+                        style={filstreStyle.selectText}
+                        onValueChange={(itemValue, itemIndex) => setSelectedValueCommune(itemValue)}>
+                        <Picker.Item label="Communes" value="0" />
+                        {bouclecommune}
                     </Picker>
                 </View>
             </View>
             <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                    <Picker 
-                        selectedValue="card"
+                    <Picker
+                        selectedValue={selectedValueCommercant}
                         style={filstreStyle.selectText}
-                        // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                        >
-                        <Picker.Item label="Vue carte" value="card" />
+                        onValueChange={(itemValue, itemIndex) => setSelectedValueCommercant(itemValue)}>
+                        <Picker.Item label="Partenaires" value="0" />
+                        {bouclecommercant}
                     </Picker>
                 </View>
             </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <Picker
+                            selectedValue={selectedValueMedia}
+                            style={filstreStyle.selectText}
+                            onValueChange={(itemValue, itemIndex) => setSelectedValueMedia(itemValue)}>
+                            <Picker.Item label="Média" value="media" />
+                        
+                        </Picker>
+                    </View>
+                </View>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <Picker 
+                            selectedValue={selectedValueCategorie}
+                            style={filstreStyle.selectText}
+                            onValueChange={(itemValue, itemIndex) => setSelectedValueCategorie(itemValue)}>
+                            <Picker.Item label="Catégories" value="0" />
+                            {bouclecategorie}
+                        </Picker>
+                    </View>
+                </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <TouchableOpacity onPress={()=>setDate_debut()}>
+                            <View>
+                            {dateDebut =="0000-00-00" ? <Text style={filstreStyle.txt_date}>Date début</Text> : (
+                                <DatePicker
+                                    style={{width:"100%"}}
+                                    date={dateDebut}
+                                    mode="date"
+                                    placeholder="Date début"
+                                    format="YYYY-MM-DD"
+                                    minDate="2016-05-01"
+                                    maxDate="2050-06-01"
+                                    confirmBtnText="Valider"
+                                    cancelBtnText="Annuler"
+                                    customStyles={{
+                                    dateInput: {
+                                        borderWidth: 0
+                                    }
+                                    }}
+                                    onDateChange={(date) => {onChangeDebut(date)}}
+                            />
+                            )}
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <TouchableOpacity onPress={()=>setDate_fin()}>
+                            <View>
+                            {dateFin =="0000-00-00" ? <Text style={filstreStyle.txt_date}>Date Fin</Text> : (
+                                <DatePicker
+                                    style={{width:"100%"}}
+                                    date={dateFin}
+                                    mode="date"
+                                    placeholder="Date fin"
+                                    format="YYYY-MM-DD"
+                                    minDate="2016-05-01"
+                                    maxDate="2050-06-01"
+                                    confirmBtnText="Valider"
+                                    cancelBtnText="Annuler"
+                                    customStyles={{
+                                    dateInput: {
+                                        borderWidth: 0
+                                    }
+                                    }}
+                                    onDateChange={(date) => {onChangeFin(date)}}
+                            />
+                            )}
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
+                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >
+                    <TextInput
+                        style={filstreStyle.inputText}
+                        placeholder="Mots clés"
+                        placeholderTextColor="#E40EAB"
+                        onChangeText={(text) => { setmotcle(text);}} />
+                    </View>
+                </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted,filstreStyle.bg_pink]}>
+                        <TouchableOpacity onPress={()=>applyfilters()} style={[filstreStyle.btn_pink]}>
+                        {isLoading ? <ActivityIndicator size="small" color="white" /> : (
+                            <Text style={filstreStyle.btn_text}>Appliquez votre choix</Text>
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted,filstreStyle.bg_pink]}>
+                        <TouchableOpacity onPress={()=>resetfilters()} style={[filstreStyle.btn_pink]}>
+                        {isLoading2 ? <ActivityIndicator size="small" color="white" /> : (
+                            <Text style={filstreStyle.btn_text}>Réinitialisez</Text>
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+            <View style={filstreStyle.row}>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <Picker
+                            selectedValue="list"
+                            style={filstreStyle.selectText}
+                            // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                            >
+                            <Picker.Item label="Vue liste" value="list" />
+                        </Picker>
+                    </View>
+                </View>
+                <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                    <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                        <Picker 
+                            selectedValue="card"
+                            style={filstreStyle.selectText}
+                            // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                            >
+                            <Picker.Item label="Vue carte" value="card" />
+                        </Picker>
+                    </View>
+                </View>
+            </View>
         </View>
-    </View>
-    )
+        )
+    }
+    
 }
