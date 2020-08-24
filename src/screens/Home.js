@@ -24,6 +24,12 @@ export default function Home() {
             txt_rubrique: 'Les bonnes adresses',
         });
     }
+    function DealsFidelity(){
+        navigation.navigate("DealsFidelity",{
+            rubrique: "DealsFidelity",
+            txt_rubrique: 'Deals & Fidelité',
+        });
+    }
     function boutiquePage() {
         navigation.navigate("Boutique",{
             rubrique: "boutique",
@@ -67,7 +73,7 @@ export default function Home() {
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/boutiques_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>boutiques</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
+                <TouchableOpacity onPress={()=>DealsFidelity()} style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/deals_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>deals & fidelité</Text>
                 </TouchableOpacity>
