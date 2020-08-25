@@ -1,15 +1,39 @@
 import React from 'react';
-import { Text, View, Button,Image, ScrollView,TouchableOpacity } from 'react-native';
+import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 export default function Home() {
     
     const navigation = useNavigation();
 
-    function navigateToDashboard() {
-        navigation.navigate("Dashboard",{
-            itemId: 86,
-            message: 'anything you want here',
+    function agendaPage() {
+        navigation.navigate("Agenda",{
+            rubrique: "agenda",
+            txt_rubrique: "L'Agenda événementiel",
+          });
+    }
+    function articlePage() {
+        navigation.navigate("Agenda",{
+            rubrique: "article",
+            txt_rubrique: 'Les actualité',
+        });
+    }
+    function annuaire_page(){
+        navigation.navigate("Annuaire",{
+            rubrique: "annuaire",
+            txt_rubrique: 'Les bonnes adresses',
+        });
+    }
+    function DealsFidelity(){
+        navigation.navigate("DealsFidelity",{
+            rubrique: "DealsFidelity",
+            txt_rubrique: 'Deals & Fidelité',
+        });
+    }
+    function boutiquePage() {
+        navigation.navigate("Boutique",{
+            rubrique: "boutique",
+            txt_rubrique: 'Les annonces',
           });
     }
     
@@ -25,34 +49,34 @@ export default function Home() {
         </View>
         <View style={[styles.sub_container,styles.paddingBottom,styles.back_pink]}>
             <View style={styles.row}>
-                <View style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
+                <TouchableOpacity style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/edition_mois.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>édition du mois</Text>
-                </View>
-                <View style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>articlePage()} style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/article_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>actualité</Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.row}>
-                <View style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
+                <TouchableOpacity onPress={()=>agendaPage()} style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/agenda_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>agenda</Text>
-                </View>
-                <View style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>annuaire_page()} style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/annuaire_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>annuaire</Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.row}>
-                <View style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
+                <TouchableOpacity onPress={()=>boutiquePage()} style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/boutiques_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>boutiques</Text>
-                </View>
-                <View style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>DealsFidelity()} style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/deals_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>deals & fidelité</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
         <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
@@ -91,11 +115,32 @@ export default function Home() {
                 <Image resizeMode={'contain'} style={styles.icon_home} source={require('../../assets/imgs/twitter_home.png')} />
             </View>
             <Text style={[styles.footer_adress]}>PRIVICONCEPT SAS - Le Magazine Sortez
-
-535 Route des Lucioles, 06560 Sophia Antipolis
-
-WWW.SORTEZ.ORG - TÉL. 04 22 32 70 80</Text>
-<Text style={[styles.contact_footer]}>RCS Nice  : 820 043 693 - Siret : 820 043 693 00010 - Code NAF : 6201Z</Text>
+            535 Route des Lucioles, 06560 Sophia Antipolis
+            WWW.SORTEZ.ORG - TÉL. 04 22 32 70 80</Text>
+            <Text style={[styles.contact_footer]}>RCS Nice  : 820 043 693 - Siret : 820 043 693 00010 - Code NAF : 6201Z</Text>
+        </View>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+            <ImageBackground source={require('../../assets/imgs/bg_contact_home.jpg')} style={styles.contact_bg}>
+                <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/contact_logo.png')} />
+                <View style={styles.inputView} >
+                <TextInput
+                    style={styles.inputText}
+                    placeholder="Votre identifiant"
+                    placeholderTextColor="#003f5c"
+                    /*onChangeText={(text) => { setEmail(text);}}*/ />
+            </View>
+            <View style={styles.inputView} >
+                <TextInput
+                    secureTextEntry
+                    style={styles.inputText}
+                    placeholder="Votre mot de passe"
+                    placeholderTextColor="#003f5c"
+                    /*onChangeText={text => setPassword(text)}*/ />
+            </View>
+            <TouchableOpacity style={styles.bouton_rose_contact}>
+                <Text style={styles.text_bouton}>Envoyer</Text>
+            </TouchableOpacity>
+            </ImageBackground>
         </View>
     </View>
     </ScrollView>

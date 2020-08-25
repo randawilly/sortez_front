@@ -85,6 +85,19 @@ import { StyleSheet } from 'react-native';
             marginTop:10,
             marginBottom: 10
         },
+        bouton_rose_contact: {
+            width: "80%",
+            backgroundColor: "#DC1A95",
+            borderRadius: 0,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop:10,
+            marginBottom: 10
+        },
+        paddingTop_10:{
+            paddingTop:10,
+        },
         text_bouton:{
             color:"white",
             fontSize:15
@@ -97,6 +110,42 @@ import { StyleSheet } from 'react-native';
             paddingTop:20
         },
         contact_footer:{
+            
+        },
+        contact_bg:{
+            flex: 1,
+            resizeMode: "cover",
+            alignItems: 'center',
+            width:"100%",
+            paddingBottom:20,
+            paddingTop:20
+        },
+        inputView: {
+            width: "80%",
+            backgroundColor: "white",
+            borderWidth: 1,
+            borderRadius: 0,
+            height: 50,
+            marginBottom: 10,
+            justifyContent: "center",
+            padding: 20
+        },
+        inputText: {
+            height: 50,
+            color: "black"
+        },
+        Pabsolute:{
+            position:"absolute",
+            bottom:0,
+            paddingTop:10,
+            height:50,
+        },
+        categ_bg:{
+            backgroundColor: "black",
+            opacity:0.6,
+        },
+        title_rubrique:{
+            fontSize:20,
             
         }
  });
