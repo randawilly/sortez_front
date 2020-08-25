@@ -3,13 +3,14 @@ import {
   View,
   Platform,
   TextInput,
-  Text
+  Text,
+  Image
 } from 'react-native';
-
+import {styles} from '../style/Style';
 export default class Header extends Component {
   render() {
       return(
-          <Text>fsgsdgd</Text>
+          <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/header_rapide.png')} />
       )
     }
 }

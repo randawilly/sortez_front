@@ -8,13 +8,12 @@ export default function FiltreDealsFidelity(props) {
 
     const [selectedValueCommune, setSelectedValueCommune] = useState("0");
     const [selectedValueCommercant, setSelectedValueCommercant] = useState("0");
-    const [selectedValueMedia, setSelectedValueMedia] = useState("0");
+    const [selectedValueType, setSelectedValueType] = useState("df");
     const [selectedValueCategorie, setSelectedValueCategorie] = useState("0");
-    const [selectedValueSubcateg, setSelectedValueSubcateg] = useState("0");
+
     const [isLoading, setLoading] = useState(false);
     const [isLoading2, setLoading2] = useState(false);
-    const [dateDebut, setDateDebut] = useState("0000-00-00");
-    const [dateFin, setDateFin] = useState("0000-00-00");
+    
     const [motcle, setmotcle] = useState("");
     const [subcateg, setSubcateg] = useState("");
     const communes = props.commune.toVille;
@@ -30,24 +29,12 @@ export default function FiltreDealsFidelity(props) {
     }
     const categorie = props.categorie.toCategorie_principale;
 
-    if(props.rubrique =="agenda"){
-        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterAgenda";
-        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getAgendasListe";
-    }else if(props.rubrique == "article"){
-        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterArticle";
-        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getArticlesListe"
-    }else if(props.rubrique =="annuaire"){
-        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterAnnuaire";
-        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getAnnuaireListe"
-    }
+        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterDealsFidelity";
+        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getBonplanFidelityListe";
 
     if(typeof(communes) !='undefined'){
         var bouclecommune = communes.map( (s, i) => {
-            if(typeof(s.Nom) !='undefined'){
-            return <Picker.Item key={i} value={s.IdVille} label={s.Nom} />
-            }else{
             return <Picker.Item key={i} value={s.IdVille} label={s.ville_nom} />
-            }
         });   
     }else{
         var bouclecommune = <Picker.Item label="Selectionner" value="0" />;
@@ -86,7 +73,6 @@ export default function FiltreDealsFidelity(props) {
     }
 
     function applyfilters(){
-        
             setLoading(true)
             fetch(url_filter, {
             method: 'POST',
@@ -98,9 +84,7 @@ export default function FiltreDealsFidelity(props) {
                 commune: selectedValueCommune,
                 commercant: selectedValueCommercant,
                 categorie:selectedValueCategorie,
-                souscategorie:selectedValueSubcateg,
-                date_debut:dateDebut,
-                date_fin:dateFin,
+                type:selectedValueType,
                 motcles:motcle,
             })
             })
@@ -117,10 +101,8 @@ export default function FiltreDealsFidelity(props) {
     function resetall(){
         setSelectedValueCommune('0');
         setSelectedValueCommercant('0');
-        setSelectedValueMedia('0');
+        setSelectedValueType('df');
         setSelectedValueCategorie('0');
-        setDateDebut("0000-00-00");
-        setDateFin("0000-00-00");
         setmotcle('');
         setLoading2(false)
     }
@@ -187,7 +169,7 @@ export default function FiltreDealsFidelity(props) {
         </View>
         
         <View style={filstreStyle.row}>
-            <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
+            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
                     <Picker 
                         selectedValue={selectedValueCategorie}
@@ -198,11 +180,24 @@ export default function FiltreDealsFidelity(props) {
                     </Picker>
                 </View>
             </View>
+            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
+                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                    <Picker 
+                        selectedValue={selectedValueType}
+                        style={filstreStyle.selectText}
+                        onValueChange={(itemValue, itemIndex) => setSelectedValueType(itemValue)}>
+                        <Picker.Item label="Deals et fidelité" value="df" />
+                        <Picker.Item label="Deals" value="d" />
+                        <Picker.Item label="FIdelité" value="f" />
+                    </Picker>
+                </View>
+            </View>
         </View>
         <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
             <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >
                 <TextInput
+                    value={motcle}
                     style={filstreStyle.inputText}
                     placeholder="Mots clés"
                     placeholderTextColor="#E40EAB"
