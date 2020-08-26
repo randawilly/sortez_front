@@ -147,6 +147,21 @@ import { StyleSheet } from 'react-native';
         title_rubrique:{
             fontSize:20,
             
+        },
+        border_solid:{
+            borderWidth:1,
+        },
+        padding_5:{
+            padding:5,
+        },
+        txt_underline:{
+            textDecorationLine:"underline"
+        },
+        bold:{
+            fontWeight:"700",
+        },
+        marginTop_10:{
+            marginTop:10
         }
  });
 export {styles}

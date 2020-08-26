@@ -24,7 +24,8 @@
     "react-native-moment-countdown": "0.0.2",
     "react-native-reanimated": "^1.13.0",
     "react-native-safe-area-context": "^3.1.4",
-    "react-native-screens": "^2.10.1"
+    "react-native-screens": "^2.10.1",
+    "react-native-webview": "^10.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
