@@ -9,6 +9,15 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
     const base_dir = "https://www.sortez.org/";
     const image_dir = base_dir+"application/resources/front/photoCommercant/imagesbank/";
     const agenda = props.agenda.toDealsFidelity;
+    
+function resetfilters(){
+    setLoading2(true)
+    fetch(url_reset_filter)
+        .then((response) => response.json())
+        .then((json) => changeAgenda(json))
+        .catch((error) => console.error(error))
+        .finally(() => resetall(false));
+}
 
     if(typeof(agenda) !='undefined'){
         var bouclecommune = 
@@ -18,7 +27,7 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
                     <View style={[filstreStyle.w_100,styles.paddingTop_10]}>
                         <View style={[filstreStyle.w_100]} >
                             <Image  style={{height: 250, width: "100%"}}
-                                source={{uri: base_dir+item.photo_link}}
+                                source={{uri: item.image}}
                             />
                             <View style={[styles.textCenter,styles.Pabsolute,filstreStyle.w_100,styles.categ_bg]}>
                             
@@ -28,22 +37,22 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
                             </View>
                         </View>
                         <View style={[filstreStyle.w_100,styles.paddingTop_10]}>
-                            <Text style={ListeStyle.ville_txt}>{item.NomSociete}</Text>
+                            <Text style={ListeStyle.titre_event}>{item.NomSociete}</Text>
                             <Text style={ListeStyle.ville_txt}>{item.ville_nom}</Text>
-                            <Text style={ListeStyle.adresse_txt}>{item.description}</Text>
-                            <Text style={ListeStyle.ville_txt}>{item.remise} € {item.prix_normal} € </Text>
-                            
+                            <Text style={ListeStyle.desc_txt}>{item.description}</Text>
+                            <Text style={ListeStyle.price_now}>{item.remise} € <Text style={ListeStyle.price_normal}>{item.prix_normal} € </Text> </Text>
+                            <Text style={ListeStyle.label_date}>Il reste:</Text>
                             <CountDown
-                                size={30}
-                                until={1000}
-                                onFinish={() => alert('Finished')}
-                                digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1CC625'}}
-                                digitTxtStyle={{color: '#1CC625'}}
-                                timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
-                                separatorStyle={{color: '#1CC625'}}
-                                timeToShow={['H', 'M', 'S']}
-                                timeLabels={{m: null, s: null}}
-                                showSeparator
+                                size={20}
+                                until={new Number((Math.round(new Date(item.date_fin).getTime()/ 1000)) - (Math.round(new Date().getTime()/ 1000)))}
+                                onFinish={() => reinit_filter()}
+                                digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#DC1A95'}}
+                                digitTxtStyle={{color: '#DC1A95'}}
+                                timeLabelStyle={{color: '#DC1A95', fontWeight: 'bold'}}
+                                separatorStyle={{color: '#DC1A95'}}
+                                timeToShow={['D','H', 'M', 'S']}
+                                timeLabels={{d:"Jours",h:"Heures",m: "Minutes", s: "secondes"}}
+            
                             />
                             <TouchableOpacity style={[styles.paddingTop_10]}>
                                 <Image style={[ListeStyle.btn_details]} source={{uri:"https://www.sortez.org/mobile-test/wpimages/wp0958361f_06.png"}} />

@@ -17,7 +17,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                     <View style={[filstreStyle.w_100,styles.paddingTop_10]}>
                         <View style={[filstreStyle.w_100]} >
                             <Image  style={{height: 250, width: "100%"}}
-                                source={{uri: image_dir+item.user_ionauth_id+"/"+item.Photo1}}
+                                source={{uri:item.Photo1}}
                             />
                             <View style={[styles.textCenter,styles.Pabsolute,filstreStyle.w_100,styles.categ_bg]}>
                             

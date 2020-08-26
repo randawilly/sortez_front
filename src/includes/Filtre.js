@@ -13,16 +13,19 @@ export default function Filtre(props) {
     const [selectedValueSubcateg, setSelectedValueSubcateg] = useState("0");
     const [isLoading, setLoading] = useState(false);
     const [isLoading2, setLoading2] = useState(false);
+    const [isLoading3, setLoading3] = useState(false);
     const [dateDebut, setDateDebut] = useState("0000-00-00");
     const [dateFin, setDateFin] = useState("0000-00-00");
     const [motcle, setmotcle] = useState("");
     const [subcateg, setSubcateg] = useState("");
     const communes = props.commune.toVille;
 
-    if(subcateg != ''){
+    if(subcateg != '' && subcateg != null && typeof(subcateg) != undefined){
+        if(subcateg.toSubcateg !=null && subcateg.toSubcateg !="" && typeof(subcateg.toSubcateg) !="undefined" ){
         var bouclesubcateg = subcateg.toSubcateg.map( (s, i) => {
-            return <Picker.Item key={i} value={s.IdRubrique} label={s.Nom} />
+            return <Picker.Item key={i} value={s.IdSousRubrique} label={s.Nom} />
         }); 
+    }
     }
 
     if(typeof(props.commercant) !="undefined"){
@@ -145,7 +148,7 @@ export default function Filtre(props) {
     }
     function changecateg(id_categ){
         setSelectedValueCategorie(id_categ);
-        setLoading(true)
+        setLoading3(true)
             fetch("https://www.sortez.org/sortez_pro/Api_front_global/getsubcategby_categid", {
             method: 'POST',
             headers: {
@@ -159,7 +162,7 @@ export default function Filtre(props) {
             .then((response) => response.json())
             .then((json) => setSubcateg(json))
             .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
+            .finally(() => setLoading3(false));
     }
     return(
         
@@ -207,6 +210,7 @@ export default function Filtre(props) {
         <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
+                {isLoading3 ? <ActivityIndicator style={{paddingTop:11}} size="small" color="#DC1A95" /> : (
                     <Picker
                         selectedValue={selectedValueSubcateg}
                         style={filstreStyle.selectText}
@@ -214,6 +218,7 @@ export default function Filtre(props) {
                         <Picker.Item label="Sous-catégories" value="0" />
                         {bouclesubcateg}
                     </Picker>
+                )}
                 </View>
             </View>
         </View>
@@ -306,12 +311,13 @@ export default function Filtre(props) {
         )}
         <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
-            <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >
-                <TextInput
-                    style={filstreStyle.inputText}
-                    placeholder="Mots clés"
-                    placeholderTextColor="#E40EAB"
-                    onChangeText={(text) => { setmotcle(text);}} />
+                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >
+                    <TextInput
+                        value={motcle}
+                        style={filstreStyle.inputText}
+                        placeholder="Mots clés"
+                        placeholderTextColor="#E40EAB"
+                        onChangeText={(text) => { setmotcle(text);}} />
                 </View>
             </View>
         </View>
