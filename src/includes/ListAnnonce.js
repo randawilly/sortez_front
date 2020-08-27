@@ -1,5 +1,5 @@
 import React, { Component,useState } from 'react';
-import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList} from 'react-native';
+import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator} from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import{ListeStyle} from '../style/ListeStyle';
@@ -52,6 +52,8 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                    )}
                    keyExtractor={item => item.id}
             />   
+    }else{
+        var bouclecommune = <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" />
     }
     
     return(

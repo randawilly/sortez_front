@@ -3,26 +3,22 @@ import { Text, View, Button,ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 import Header from '../includes/Header';
-import DetailsContent from '../includes/DetailsContent';
+import DetailsContentDealsFidelity from '../includes/DetailsContentDealsFidelity';
 
 
-export default function DetailsArtAg({route}) {
+export default function DetailsDealsFidelite({route}) {
 
-    const rubrique = route.params.rubrique;
     const idEvent = route.params.idEvent;
-    const txt_rubrique = route.params.txt_rubrique;
+    const type = route.params.type;
 
-    if(rubrique == "agenda"){
-        var url_details = 'https://www.sortez.org/sortez_pro/Api_front_global/get_ag_details';
-    }else if(rubrique == "article"){
-        var url_details = 'https://www.sortez.org/sortez_pro/Api_front_global/get_art_details';
-    }
+    var url_details = 'https://www.sortez.org/sortez_pro/Api_front_global/get_deals_details';
 
     const [data, setData] = useState("");
 
     const [isLoading, setLoading] = useState(true);
 
     const navigation = useNavigation();
+
     function navigateToDashboard() {
         navigation.navigate("Dashboard",{
             itemId: 86,
@@ -39,6 +35,7 @@ export default function DetailsArtAg({route}) {
             },
             body: JSON.stringify({
                 id: idEvent,
+                type: type,
             })
             })
               .then((response) => response.json())
@@ -55,7 +52,7 @@ export default function DetailsArtAg({route}) {
         <ScrollView>
             <View style={[styles.container]}>
                 <Header />
-                <DetailsContent rubrique = {rubrique} agenda = {data} />
+                <DetailsContentDealsFidelity typeDeals = {type}  agenda = {data} />
             </View>
         </ScrollView>
     );

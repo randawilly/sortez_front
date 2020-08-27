@@ -42,23 +42,22 @@ export default function DetailsContent(props) {const [selectedValue, setSelected
             <View style={[styles.border_solid,styles.padding_5,styles.marginTop_10]}>
                 <Text style={[styles.textCenter,styles.txt_underline,styles.bold]}>ADRESSE & PLAN D'ACCÈS:</Text>
                 <Text style={[styles.textCenter]}>{agenda.organiser_name} ({agenda.ville}) - {agenda.adresse_localisation} - {agenda.codepostal_localisation} - {agenda.ville} </Text>
-                <WebView
+                {/* <WebView
                 source={{html: '<iframe src="'+src_iframa+'" width="100%" height="100%"></iframe>'}}
                 style={{marginTop: 20,width:"100%",height:250}}
-                />
+                /> */}
             </View>
         </View>
     }else{
         var details = 
         <View>
-            <ActivityIndicator style={{paddingTop:11}} size="small" color="#DC1A95" />
+            <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" />
         </View>
     }
     return(
         <View style={[filstreStyle.sub_container,styles.paddingTop]}>
             <View style={filstreStyle.row}>
                 <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
-                <Text>Details</Text>
                 {details}
                 </View>
             </View>

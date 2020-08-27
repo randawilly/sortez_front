@@ -162,6 +162,13 @@ import { StyleSheet } from 'react-native';
         },
         marginTop_10:{
             marginTop:10
+        },
+        slideImgAnnonce:{
+            width:"90%",
+            height:300,
+        },
+        colorBlack:{
+            color:"black",
         }
  });
 export {styles}

@@ -57,7 +57,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                    keyExtractor={item => item.id}
             />   
     }else{
-        var bouclecommune = <ActivityIndicator style={{paddingTop:11}} size="small" color="#DC1A95" />
+        var bouclecommune = <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" />
     }
     
     return(
