@@ -81,9 +81,9 @@ export default function DealsFidelity({route}) {
     }
     return (
         <ScrollView>
+         <Header />
             <View style={[styles.container]}>
-                <Header />
-                <Text>{txt_rubrique}</Text>
+                <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
                 <Filtre rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie} />
                 <ListAnnonce rubrique = {rubrique} agenda = {agendas} />
             </View>

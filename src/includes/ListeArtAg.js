@@ -48,7 +48,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                             )}
                             <Text style={ListeStyle.adresse_txt}>{item.adresse_localisation}</Text>
                             <Text style={ListeStyle.ville_txt}>{item.ville}</Text>
-                            <TouchableOpacity onPress={()=>goDetails(item.id)} style={[styles.paddingTop_10]}>
+                            <TouchableOpacity onPress={()=>goDetails(item.id)} style={[styles.paddingTop_10,styles.paddingBottom10]}>
                                 <Image style={[ListeStyle.btn_details]} source={{uri:"https://www.sortez.org/mobile-test/wpimages/wp0958361f_06.png"}} />
                             </TouchableOpacity>
                         </View>

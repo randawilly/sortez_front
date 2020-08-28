@@ -7,6 +7,13 @@ import { StyleSheet } from 'react-native';
             padding:20,
             width:"100%"
         },
+        containerNopadding: {
+            flex: 1,
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            padding:0,
+            width:"100%"
+        },
         logo_home:{
             width:"100%",
         },
@@ -23,6 +30,9 @@ import { StyleSheet } from 'react-native';
         },
         paddingBottom:{
             paddingBottom:20,
+        },
+        paddingBottom10:{
+            paddingBottom:10,
         },
         row:{
             flex: 1,
@@ -169,6 +179,38 @@ import { StyleSheet } from 'react-native';
         },
         colorBlack:{
             color:"black",
+        },
+        txt_fidelity1:{
+            color:"#3653a2",
+            fontSize:20,
+            textAlign:"center"
+        },
+        txt_fidelity2:{
+            fontSize:18,
+            textAlign:"center"
+        },
+        btnHomeMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:10,
+            top:"30%"
+        },
+        btnBack:{
+            textAlign:"center",
+            width:"100%",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingBottom:20
+        },
+        btnBackTxt:{
+            backgroundColor:"#DC1A95",
+            width:"30%",
+            padding:10,
+            color:"white",
+            margin:"auto",
+            textAlign:"center",
         }
  });
 export {styles}

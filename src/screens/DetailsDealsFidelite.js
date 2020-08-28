@@ -50,8 +50,8 @@ export default function DetailsDealsFidelite({route}) {
 
     return (
         <ScrollView>
+         <Header />
             <View style={[styles.container]}>
-                <Header />
                 <DetailsContentDealsFidelity typeDeals = {type}  agenda = {data} />
             </View>
         </ScrollView>

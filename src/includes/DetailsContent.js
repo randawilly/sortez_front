@@ -22,10 +22,16 @@ export default function DetailsContent(props) {const [selectedValue, setSelected
             });
         }
     }
+    function goBack(){
+        navigation.goBack();
+    }
     if(typeof(agenda) != "undefined"){
         const src_iframa = "https://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q="+agenda.organiser_name+" ("+agenda.ville+")  "+agenda.adresse_localisation+", "+agenda.codepostal_localisation+" &nbsp;&amp;aq=0&amp;ie=UTF8&amp;hq=&amp;hnear="+agenda.adresse_localisation+", "+agenda.codepostal_localisation+" &nbsp;&amp;t=m&amp;vpsrc=0&amp;output=embed"
         var details = 
         <View>
+            <TouchableOpacity style={[styles.btnBack]} onPress={()=>goBack()}>
+                <Text style={[styles.btnBackTxt]}>Retour Liste</Text>
+            </TouchableOpacity>
             <Image style={{height: 250, width: "100%"}} source={{uri:agenda.photo1}} />
             <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>{agenda.nom_manifestation}</Text>
             <Text style={[styles.paddingTop_10,styles.textCenter]}>{agenda.date_debut}</Text>

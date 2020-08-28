@@ -50,8 +50,8 @@ export default function DetailsBoutique({route}) {
 
     return (
         <ScrollView>
+        <Header />
             <View style={[styles.container]}>
-                <Header />
                 <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
                 <DetailsContentBoutique rubrique = {rubrique} agenda = {data} />
             </View>

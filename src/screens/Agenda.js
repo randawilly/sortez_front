@@ -77,8 +77,8 @@ export default function Agenda({route}) {
     }
     return (
         <ScrollView>
+        <Header />
             <View style={[styles.container]}>
-                <Header />
                 <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
                 <Filtre rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie}  />
                 <ListeArtAg rubrique = {rubrique} agenda = {agendas} />

@@ -11,7 +11,7 @@ import CountDown from 'react-native-countdown-component';
 export default function DetailsContentDealsFidelity(props) {const [selectedValue, setSelectedValue] = useState("java");
     const dealsF = props.agenda.details;
     const typeDeals = props.typeDeals;
-    
+    const navigation = useNavigation();
     if(typeof(dealsF) != "undefined"){
 
         if(typeDeals == "bonplan"){
@@ -27,11 +27,26 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
             var img = dealsF.image;
             var titre = dealsF.titre;
             var txt_prix = <Text style={[styles.title_info,styles.textCenter]}>Valeur: {dealsF.prix}</Text>
-            var description = <TouchableOpacity></TouchableOpacity>;
+            var description = <View>
+                <Text style={styles.txt_fidelity1}>
+                Avant de bénéficier de cette offre de fidélisation
+                le consommateur doit posséder
+                la carte privilège Sortez ©.
+                </Text>
+                <Text style={styles.txt_fidelity2}>
+                Notre établissement est partenaire de la carte
+                de fidélité multi-commerce Sortez©.
+                Un concept fédérateur pour la dynamisation
+                et la fidélisation du commerce et de l'artisanat
+                </Text>
+            </View>;
         }
 
         var details = 
         <View style={styles.w_100}>
+            <TouchableOpacity style={[styles.btnBack]} onPress={()=>goBack()}>
+                <Text style={[styles.btnBackTxt]}>Retour Liste</Text>
+            </TouchableOpacity>
             <Image style={{height: 250, width: "100%"}} source={{uri:img}} />
             <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>{titre}</Text>
             {description}
@@ -55,6 +70,9 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
         <View>
             <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" />
         </View>
+    }
+    function goBack(){
+        navigation.goBack();
     }
     return(
         <View style={[filstreStyle.sub_container,styles.paddingTop]}>

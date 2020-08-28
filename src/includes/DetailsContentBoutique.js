@@ -44,9 +44,14 @@ export default function DetailsContentBoutique(props) {const [selectedValue, set
         }else{
             var btn_pay = "Paypal non disponible";
         }
-
+        function goBack(){
+            navigation.goBack();
+        }
         var details = 
         <View style={styles.w_100}>
+            <TouchableOpacity style={[styles.btnBack]} onPress={()=>goBack()}>
+                <Text style={[styles.btnBackTxt]}>Retour Liste</Text>
+            </TouchableOpacity>
             {/* <Image style={{height: 250, width: "100%"}} source={{uri:agenda.photo1}} /> */}
             <SliderBox circleLoop={true} autoplay={true} style={styles.slideImgAnnonce} resizeMode={'contain'} images={slides} />
             <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Désignation: {agenda.texte_courte}</Text>

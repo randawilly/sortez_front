@@ -52,7 +52,9 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
                             <Text style={ListeStyle.titre_event}>{item.NomSociete}</Text>
                             <Text style={ListeStyle.ville_txt}>{item.ville_nom}</Text>
                             <Text style={ListeStyle.desc_txt}>{item.description}</Text>
-                            <Text style={ListeStyle.price_now}>{item.remise} € <Text style={ListeStyle.price_normal}>{item.prix_normal} € </Text> </Text>
+                            {item.remise !="0" ? <Text style={ListeStyle.price_now}>{item.prix_normal} € <Text style={ListeStyle.price_normal}>{item.remise} € </Text> </Text> : (
+                                <Text style={ListeStyle.price_now}>Valeur: {item.prix_normal}  </Text>
+                            )}
                             <Text style={ListeStyle.label_date}>Il reste:</Text>
                             <CountDown
                                 size={20}
@@ -66,7 +68,7 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
                                 timeLabels={{d:"Jours",h:"Heures",m: "Minutes", s: "secondes"}}
             
                             />
-                            <TouchableOpacity onPress={()=>goDetailsDealsFideliye(item.id,item.type)} style={[styles.paddingTop_10]}>
+                            <TouchableOpacity onPress={()=>goDetailsDealsFideliye(item.id,item.type)} style={[styles.paddingTop_10,styles.paddingBottom10]}>
                                 <Image style={[ListeStyle.btn_details]} source={{uri:"https://www.sortez.org/mobile-test/wpimages/wp0958361f_06.png"}} />
                             </TouchableOpacity>
                         </View>

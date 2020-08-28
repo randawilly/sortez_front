@@ -37,7 +37,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                             {item.description != null ? <Text numberOfLines={4} style={ListeStyle.ville_txt}>{item.description}</Text>: (
                             <Text style={ListeStyle.ville_txt}>Pas de contenue</Text>
                             )}
-                            <TouchableOpacity onPress={()=>go_redirect(item.nom_url)} style={[styles.paddingTop_10]}>
+                            <TouchableOpacity onPress={()=>go_redirect(item.nom_url)} style={[styles.paddingTop_10,styles.paddingBottom10]}>
                                 <Image style={[ListeStyle.btn_details]} source={{uri:"https://www.sortez.org/mobile-test/wpimages/wp0958361f_06.png"}} />
                             </TouchableOpacity>
                         </View>

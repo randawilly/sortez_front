@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput } from 'react-native';
+import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput,Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 export default function Home() {
@@ -36,6 +36,11 @@ export default function Home() {
             txt_rubrique: 'Les annonces',
           });
     }
+
+    function editioMois(){
+        var url = "http://online.fliphtml5.com/ugbv/uguz/";
+        Linking.openURL(url).catch((err) => console.error('An error occurred', err));
+    }
     
     return (    
         <ScrollView>
@@ -49,7 +54,7 @@ export default function Home() {
         </View>
         <View style={[styles.sub_container,styles.paddingBottom,styles.back_pink]}>
             <View style={styles.row}>
-                <TouchableOpacity style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
+                <TouchableOpacity onPress={()=>editioMois()} style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/edition_mois.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>édition du mois</Text>
                 </TouchableOpacity>
