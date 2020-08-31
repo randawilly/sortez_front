@@ -12,6 +12,66 @@ export default function Agenda({route}) {
     const rubrique = route.params.rubrique;
     const txt_rubrique = route.params.txt_rubrique;
 
+
+    const [selectedValueCommune, setSelectedValueCommune] = useState("0");
+    const [selectedValueCommercant, setSelectedValueCommercant] = useState("0");
+    const [selectedValueMedia, setSelectedValueMedia] = useState("0");
+    const [selectedValueCategorie, setSelectedValueCategorie] = useState("0");
+    const [selectedValueSubcateg, setSelectedValueSubcateg] = useState("0");
+    const [dateDebut, setDateDebut] = useState("0000-00-00");
+    const [dateFin, setDateFin] = useState("0000-00-00");
+    const [motcle, setmotcle] = useState("");
+    const [subcateg, setSubcateg] = useState("");
+
+    function setcommune(commune){
+        setSelectedValueCommune(commune);
+    }
+
+    function setcommercant(commercant){
+        setSelectedValueCommercant(commercant);
+    }
+
+    function setCateg(categ){
+        setSelectedValueCategorie(categ);
+    }
+    function setSubcategs(subcateg){
+        setSelectedValueSubcateg(subcateg);
+    }
+    function setdatedebut(date_debut){
+        setDateDebut(date_debut);
+    }
+    function setdatefin(date_debut){
+        setDateFin(date_debut);
+    }
+    function setmotscles(mot){
+        setmotcle(mot)
+    }
+
+    function loadArticle(){
+        alert(selectedValueCommune);
+        setLoading(true)
+        fetch(url_filter, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            commune: selectedValueCommune,
+            commercant: selectedValueCommercant,
+            categorie:selectedValueCategorie,
+            souscategorie:selectedValueSubcateg,
+            date_debut:dateDebut,
+            date_fin:dateFin,
+            motcles:motcle,
+        })
+        })
+        .then((response) => response.json())
+        .then((json) => changeAgenda(json))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+    }
+
     if(rubrique == "agenda"){
         var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/get_communes";
         var url_commercant = "https://www.sortez.org/sortez_pro/Api_front_global/getCommercantsAgenda";
@@ -75,13 +135,14 @@ export default function Agenda({route}) {
     function changeAgenda(new_valeur){
         setAgendas(new_valeur);
     }
+
     return (
         <ScrollView>
         <Header />
             <View style={[styles.container]}>
                 <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
-                <Filtre rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie}  />
-                <ListeArtAg rubrique = {rubrique} agenda = {agendas} />
+                <Filtre setmotscles={setmotscles} setdatefin={setdatefin} setcommune = {setcommune} setcommercant={setcommercant} setCateg={setCateg} setSubcategs={setSubcategs} setdatedebut={setdatedebut} rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie}  />
+                <ListeArtAg loadArticle={loadArticle} changeAgenda = {changeAgenda} rubrique = {rubrique} agenda = {agendas} />
             </View>
         </ScrollView>
     );

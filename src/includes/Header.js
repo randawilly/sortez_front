@@ -17,7 +17,7 @@ export default function Header() {
         rubrique: "agenda",
         txt_rubrique: "L'Agenda événementiel",
       });
-}
+  }
   return (
         <View style={[styles.containerNopadding]}>
           <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/header_rapide.png')} />

@@ -18,6 +18,7 @@ export default function Filtre(props) {
     const [dateFin, setDateFin] = useState("0000-00-00");
     const [motcle, setmotcle] = useState("");
     const [subcateg, setSubcateg] = useState("");
+
     const communes = props.commune.toVille;
 
     if(subcateg != '' && subcateg != null && typeof(subcateg) != undefined){
@@ -93,6 +94,16 @@ export default function Filtre(props) {
     }
 
     function applyfilters(){
+
+
+            props.setmotscles(motcle);
+            props.setdatefin(dateFin);
+            props.setcommune(selectedValueCommune);
+            props.setcommercant(selectedValueCommercant);
+            props.setCateg(selectedValueCategorie);
+            props.setSubcategs(selectedValueSubcateg);
+            props.setdatedebut(dateDebut);
+
         
             setLoading(true)
             fetch(url_filter, {

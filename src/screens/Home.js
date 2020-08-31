@@ -1,11 +1,13 @@
-import React from 'react';
-import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput,Linking } from 'react-native';
+import React,{ Component,useState } from 'react';
+import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput,Linking,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 export default function Home() {
     
     const navigation = useNavigation();
-
+    const [Email, setEmail] = useState("");
+    const [Message, setMessage] = useState("");
+    const [isLoading, setLoading] = useState(false);
     function agendaPage() {
         navigation.navigate("Agenda",{
             rubrique: "agenda",
@@ -41,6 +43,26 @@ export default function Home() {
         var url = "http://online.fliphtml5.com/ugbv/uguz/";
         Linking.openURL(url).catch((err) => console.error('An error occurred', err));
     }
+
+    function contact_us(){
+        setLoading(true);
+        var url_contact = "https://www.sortez.org/sortez_pro/Api_front_global/contact_us";
+        fetch(url_contact, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Email: Email,
+                Message: Message,
+            })
+            })
+            .then((response) => response.json())
+            .then((json) => alert(json.sent))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }
     
     return (    
         <ScrollView>
@@ -49,7 +71,7 @@ export default function Home() {
             <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/logo_home.png')} />
             <Text style={styles.slogan}>DÉCOUVREZ L’ESSENTIEL DES SORTIES ET DES LOISIRS DE FRÉJUS À MENTON ET BIEN PLUS ENCORE !…</Text>
         </View>
-        <View style={[styles.sub_container,styles.paddingTop]}>
+        <View style={[styles.sub_container]}>
             <Image resizeMode={'contain'} style={styles.img_nb_lecteur} source={require('../../assets/imgs/nb_lecteur.png')} />
         </View>
         <View style={[styles.sub_container,styles.paddingBottom,styles.back_pink]}>
@@ -130,24 +152,28 @@ export default function Home() {
                 <View style={styles.inputView} >
                 <TextInput
                     style={styles.inputText}
-                    placeholder="Votre identifiant"
+                    placeholder="Votre Email"
                     placeholderTextColor="#003f5c"
-                    /*onChangeText={(text) => { setEmail(text);}}*/ />
+                    onChangeText={(text) => { setEmail(text);}} />
             </View>
-            <View style={styles.inputView} >
+            <View style={styles.inputViewText} >
                 <TextInput
                     secureTextEntry
-                    style={styles.inputText}
-                    placeholder="Votre mot de passe"
+                    style={styles.inputTextArea}
+                    placeholder="Votre Message"
+                    multiline = {true}
                     placeholderTextColor="#003f5c"
-                    /*onChangeText={text => setPassword(text)}*/ />
+                    onChangeText={text => setMessage(text)} />
             </View>
-            <TouchableOpacity style={styles.bouton_rose_contact}>
+            <TouchableOpacity onPress={()=>contact_us()} style={styles.bouton_rose_contact}>
+            {isLoading ? <ActivityIndicator size="small" color="white" /> : (
                 <Text style={styles.text_bouton}>Envoyer</Text>
+            )}
             </TouchableOpacity>
             </ImageBackground>
         </View>
     </View>
     </ScrollView>
+
     );
 }
