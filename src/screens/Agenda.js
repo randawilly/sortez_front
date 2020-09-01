@@ -1,10 +1,11 @@
 import React,{useEffect,useState} from 'react';
-import { Text, View, Button,ScrollView } from 'react-native';
+import { Text, View, Button,ScrollView,Dimensions,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 import Header from '../includes/Header';
 import Filtre from '../includes/Filtre';
 import ListeArtAg from '../includes/ListeArtAg';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default function Agenda({route}) {
@@ -22,7 +23,8 @@ export default function Agenda({route}) {
     const [dateFin, setDateFin] = useState("0000-00-00");
     const [motcle, setmotcle] = useState("");
     const [subcateg, setSubcateg] = useState("");
-
+    const [nbPage, setNbPage] = useState(1);
+    const [isLoadingList, setLoadingList] = useState(false);
     function setcommune(commune){
         setSelectedValueCommune(commune);
     }
@@ -47,10 +49,29 @@ export default function Agenda({route}) {
         setmotcle(mot)
     }
 
+
+    if(rubrique == "agenda"){
+        var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/get_communes";
+        var url_commercant = "https://www.sortez.org/sortez_pro/Api_front_global/getCommercantsAgenda";
+        var url_categorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getCategorieAgenda';
+        var url_rubrique = 'https://www.sortez.org/sortez_pro/Api_front_global/getAgendasListe/'+nbPage;
+        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterAgenda/"+nbPage;
+    }else if(rubrique == "article"){
+        var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/get_communesArticle";
+        var url_commercant = "https://www.sortez.org/sortez_pro/Api_front_global/getCommercantsArticle";
+        var url_categorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getCategorieArticle';
+        var url_rubrique = 'https://www.sortez.org/sortez_pro/Api_front_global/getArticlesListe/'+nbPage;
+        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterArticle/"+nbPage;
+    }
     function loadArticle(){
-        alert(selectedValueCommune);
-        setLoading(true)
-        fetch(url_filter, {
+        setNbPage(nbPage+1);
+        if(selectedValueCommune == "0" && selectedValueCommercant == "0" && selectedValueCategorie == "0" && selectedValueSubcateg == "0" && dateDebut == "0000-00-00" && dateFin == "0000-00-00" && motcle == "" ){
+            var url_to = url_rubrique;
+        }else{
+            var url_to = url_filter;
+        }
+        setLoadingList(true);
+        fetch(url_to, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -64,26 +85,14 @@ export default function Agenda({route}) {
             date_debut:dateDebut,
             date_fin:dateFin,
             motcles:motcle,
+            nbPage:nbPage
         })
         })
         .then((response) => response.json())
         .then((json) => changeAgenda(json))
         .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
+        .finally(() => setLoadingList(false));
     }
-
-    if(rubrique == "agenda"){
-        var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/get_communes";
-        var url_commercant = "https://www.sortez.org/sortez_pro/Api_front_global/getCommercantsAgenda";
-        var url_categorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getCategorieAgenda';
-        var url_rubrique = 'https://www.sortez.org/sortez_pro/Api_front_global/getAgendasListe';
-    }else if(rubrique == "article"){
-        var url_communes = "https://www.sortez.org/sortez_pro/Api_front_global/get_communesArticle";
-        var url_commercant = "https://www.sortez.org/sortez_pro/Api_front_global/getCommercantsArticle";
-        var url_categorie = 'https://www.sortez.org/sortez_pro/Api_front_global/getCategorieArticle';
-        var url_rubrique = 'https://www.sortez.org/sortez_pro/Api_front_global/getArticlesListe';
-    }
-
     const [commune, setCommune] = useState("");
     const [commercant, setCommercant] = useState("");
     const [categorie, setCategorie] = useState("");
@@ -91,7 +100,6 @@ export default function Agenda({route}) {
     const [agendas, setAgendas] = useState("");
 
 
-    const [isLoading, setLoading] = useState(true);
 
     const navigation = useNavigation();
     function navigateToDashboard() {
@@ -135,14 +143,28 @@ export default function Agenda({route}) {
     function changeAgenda(new_valeur){
         setAgendas(new_valeur);
     }
-
+    const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+        const paddingToBottom = 20;
+        return layoutMeasurement.height + contentOffset.y >=
+          contentSize.height - paddingToBottom;
+      };
     return (
-        <ScrollView>
+        <ScrollView 
+        onScroll={({nativeEvent}) => {
+            if (isCloseToBottom(nativeEvent) && isLoadingList == false ) {
+                loadArticle();
+            }
+        }}
+        scrollEventThrottle={400}
+        >
         <Header />
             <View style={[styles.container]}>
                 <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
                 <Filtre setmotscles={setmotscles} setdatefin={setdatefin} setcommune = {setcommune} setcommercant={setcommercant} setCateg={setCateg} setSubcategs={setSubcategs} setdatedebut={setdatedebut} rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie}  />
-                <ListeArtAg loadArticle={loadArticle} changeAgenda = {changeAgenda} rubrique = {rubrique} agenda = {agendas} />
+                <ListeArtAg changeAgenda = {changeAgenda} rubrique = {rubrique} agenda = {agendas} />
+                {isLoadingList ? <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" /> : (
+                    <TouchableOpacity></TouchableOpacity>
+                )}
             </View>
         </ScrollView>
     );

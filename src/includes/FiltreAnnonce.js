@@ -75,7 +75,11 @@ export default function Filtre(props) {
     }
 
     function applyfilters(){
-            setLoading(true)
+            setLoading(true);
+            props.setcommune(selectedValueCommune);
+            props.setCateg(selectedValueCategorie);
+            props.setmotscles(motcle);
+            props.setCommercants(selectedValueCommercant);
             fetch(url_filter, {
             method: 'POST',
             headers: {
@@ -106,7 +110,11 @@ export default function Filtre(props) {
         setSelectedValueCategorie('0');
         setSelectedValueSousCategorie('0');
         setmotcle('');
-        setLoading2(false)
+        setLoading2(false);
+        props.setcommune(selectedValueCommune);
+        props.setCateg(selectedValueCategorie);
+        props.setmotscles(motcle);
+        props.setCommercants(selectedValueCommercant);
     }
 
     function resetfilters(){

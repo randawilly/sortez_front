@@ -1,5 +1,5 @@
 import React, { Component,useState } from 'react';
-import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator} from 'react-native';
+import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator } from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import{ListeStyle} from '../style/ListeStyle';
@@ -135,9 +135,10 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
     }
 
     }
-
+    
 
     if(typeof(agenda) !='undefined'){
+    
         var bouclecommune = 
             <FlatList style={[filstreStyle.w_100]}
                     data={agenda}
@@ -168,10 +169,6 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                     </View>
                    )}
                    keyExtractor={item => item.id}
-                   onEndReachedThreshold={0.5}
-                    onEndReached={() => {
-                            props.loadArticle()
-                    }}
             />   
     }else{
         var bouclecommune = <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" />

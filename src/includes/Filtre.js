@@ -97,12 +97,14 @@ export default function Filtre(props) {
 
 
             props.setmotscles(motcle);
-            props.setdatefin(dateFin);
             props.setcommune(selectedValueCommune);
-            props.setcommercant(selectedValueCommercant);
             props.setCateg(selectedValueCategorie);
             props.setSubcategs(selectedValueSubcateg);
-            props.setdatedebut(dateDebut);
+            if(props.rubrique !="annuaire"){
+                props.setdatedebut(dateDebut);
+                props.setdatefin(dateFin);
+                props.setcommercant(selectedValueCommercant);
+            }
 
         
             setLoading(true)
@@ -150,6 +152,18 @@ export default function Filtre(props) {
             .then((json) => changeAgenda(json))
             .catch((error) => console.error(error))
             .finally(() => resetall(false));
+        props.setmotscles(motcle);
+        
+        props.setcommune(selectedValueCommune);
+        
+        props.setCateg(selectedValueCategorie);
+        props.setSubcategs(selectedValueSubcateg);
+        
+        if(props.rubrique !="annuaire"){
+            props.setdatefin(dateFin);
+            props.setdatedebut(dateDebut);
+            props.setcommercant(selectedValueCommercant);
+        }
     }
     function setDate_debut(){
         setDateDebut(new Date());

@@ -10,11 +10,12 @@ export default function FiltreDealsFidelity(props) {
     const [selectedValueCommercant, setSelectedValueCommercant] = useState("0");
     const [selectedValueType, setSelectedValueType] = useState("df");
     const [selectedValueCategorie, setSelectedValueCategorie] = useState("0");
+    const [motcle, setmotcle] = useState("");
 
     const [isLoading, setLoading] = useState(false);
     const [isLoading2, setLoading2] = useState(false);
     
-    const [motcle, setmotcle] = useState("");
+    
     const [subcateg, setSubcateg] = useState("");
     const communes = props.commune.toVille;
 
@@ -73,7 +74,12 @@ export default function FiltreDealsFidelity(props) {
     }
 
     function applyfilters(){
-            setLoading(true)
+            setLoading(true);
+            props.setcommune(selectedValueCommune);
+            props.setCateg(selectedValueCategorie);
+            props.setType(selectedValueType);
+            props.setmotscles(motcle);
+            props.setCommercants(selectedValueCommercant);
             fetch(url_filter, {
             method: 'POST',
             headers: {
@@ -104,7 +110,12 @@ export default function FiltreDealsFidelity(props) {
         setSelectedValueType('df');
         setSelectedValueCategorie('0');
         setmotcle('');
-        setLoading2(false)
+        setLoading2(false);
+        props.setcommune(selectedValueCommune);
+            props.setCateg(selectedValueCategorie);
+            props.setType(selectedValueType);
+            props.setmotscles(motcle);
+            props.setCommercants(selectedValueCommercant);
     }
 
     function resetfilters(){

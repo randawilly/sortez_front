@@ -17,7 +17,7 @@ export default function Home() {
     function articlePage() {
         navigation.navigate("Agenda",{
             rubrique: "article",
-            txt_rubrique: 'Les actualité',
+            txt_rubrique: 'L\'actualité & la revue de presse',
         });
     }
     function annuaire_page(){
@@ -29,13 +29,13 @@ export default function Home() {
     function DealsFidelity(){
         navigation.navigate("DealsFidelity",{
             rubrique: "DealsFidelity",
-            txt_rubrique: 'Deals & Fidelité',
+            txt_rubrique: 'Les deals & Fidélité',
         });
     }
     function boutiquePage() {
         navigation.navigate("Boutique",{
             rubrique: "boutique",
-            txt_rubrique: 'Les annonces',
+            txt_rubrique: 'Les boutiques en ligne',
           });
     }
 
