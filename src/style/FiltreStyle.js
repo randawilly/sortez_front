@@ -28,6 +28,11 @@ import { StyleSheet } from 'react-native';
             fontSize:15,
             fontFamily:"futuraMd"
         },
+        selectTextWhite:{
+            color:"black",
+            fontSize:15,
+            fontFamily:"futuraMd"
+        },
         heighted:{
             height:50,
         },

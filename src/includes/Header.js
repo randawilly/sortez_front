@@ -5,6 +5,7 @@ import {
   TextInput,
   Text,
   Image,
+  AsyncStorage 
 } from 'react-native';
 import {styles} from '../style/Style';
 import{filstreStyle} from '../style/FiltreStyle';
@@ -16,13 +17,59 @@ export default function Header() {
     navigation.navigate("Home",{
         rubrique: "agenda",
         txt_rubrique: "L'Agenda événementiel",
+    });
+  }
+
+  function goDashboard(data){
+    navigation.navigate("Dashboard",{
+        rubrique: "DealsFidelity",
+        UserInfo: data,
+    });
+  }
+  async function setSession (id_user,username,nom,prenom){
+    await AsyncStorage.setItem('id_user', id_user);
+    await AsyncStorage.setItem('username', username);
+    await AsyncStorage.setItem('Nom', nom);
+    await AsyncStorage.setItem('Prenom', prenom);
+  }
+  async function goAccount(){
+    const username = await AsyncStorage.getItem('username');
+    if (username != null) {
+        fetch('https://www.sortez.org/sortez_pro/Api_particulier/get_user_info_by_username',
+                    {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            login: username
+                        })
+                    }).then((response) => response.json())
+                    .then((responseData) => {
+                        setSession(responseData.user.IdUser,responseData.user.Login,responseData.user.Nom,responseData.user.Prenom);
+                        // setLoading(false);
+                        goDashboard(responseData);
+                    })
+                    .catch((error) => {
+                        // setLoading(false);
+                        console.log(error);
+                    });
+    }else{
+      navigation.navigate("Login",{
+        rubrique: "agenda",
+        txt_rubrique: "L'Agenda événementiel",
       });
+    }
   }
   return (
         <View style={[styles.containerNopadding]}>
           <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/header_rapide.png')} />
           <View style={[styles.btnHomeMenu]}>
             <TouchableOpacity onPress={()=>goMenu()} style={[filstreStyle.w_100,filstreStyle.heighted]}></TouchableOpacity>
+          </View>
+          <View style={[styles.btnAccountMenu]}>
+            <TouchableOpacity onPress={()=>goAccount()} style={[filstreStyle.w_100,filstreStyle.heighted]}></TouchableOpacity>
           </View>
         </View>
       )

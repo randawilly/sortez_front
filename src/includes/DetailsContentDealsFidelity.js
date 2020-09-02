@@ -1,24 +1,48 @@
-import React, { Component,useState } from 'react';
-import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator} from 'react-native';
+import React, { useEffect,Component,useState } from 'react';
+import {Alert,Modal,View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator,AsyncStorage} from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import{ListeStyle} from '../style/ListeStyle';
 import{styles} from '../style/Style';
 import { useNavigation } from '@react-navigation/native';
 import CountDown from 'react-native-countdown-component';
-
+import DatePicker from 'react-native-datepicker';
 // import { Icon } from 'react-native-elements'
 export default function DetailsContentDealsFidelity(props) {const [selectedValue, setSelectedValue] = useState("java");
     const dealsF = props.agenda.details;
     const typeDeals = props.typeDeals;
     const navigation = useNavigation();
+    const [isLogged, setIsLogged] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [dateNow, setDateNow] = useState(new Date());
+    const [nbPlace, setNbPlace] = useState("1");
+    async function getSession(){
+        var username = await AsyncStorage.getItem('username');
+        setIsLogged(username);
+    }
+    function onChangeDate(date){
+        setDateNow(date);
+    }
+    function validateRes(id){
+        alert(isLogged);
+    }
+    useEffect(() => {
+        getSession();
+    }, []);
+    // alert(isLogged)
     if(typeof(dealsF) != "undefined"){
-
         if(typeDeals == "bonplan"){
+            var array_picker = [];
+            for(let a = 1;a<=parseInt(dealsF.nbMax);a++){
+                array_picker.push(a);
+            }
+            var bouclenbVisit = array_picker.map( (s, i) => {
+                return <Picker.Item key={i} value={s} label={""+s} />
+            });
             var img = dealsF.bonplan_photo1;
+            var id = dealsF.bonplan_id;
             var titre = dealsF.bonplan_titre;
             var description = <Text style={[styles.colorBlack,styles.textCenter,styles.paddingTop_10]}>{dealsF.bonplan_texte}</Text>;
-            var txt_prix = <View>
+            var txt_prix =  <View>
                                 <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Prix: {dealsF.prix_normbp}</Text>
                                 <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Valeur: {dealsF.prix_remisebp}</Text>
                                 <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Economie: {parseInt(dealsF.prix_remisebp)-parseInt(dealsF.prix_normbp)}</Text>
@@ -26,6 +50,7 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
         }else{
             var img = dealsF.image;
             var titre = dealsF.titre;
+            var id = dealsF.id;
             var txt_prix = <Text style={[styles.title_info,styles.textCenter]}>Valeur: {dealsF.prix}</Text>
             var description = <View>
                 <Text style={styles.txt_fidelity1}>
@@ -64,7 +89,77 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
                 timeLabels={{d:"Jours",h:"Heures",m: "Minutes", s: "secondes"}}
 
             />
+            
+            {isLogged != null && typeof(isLogged) != "undefined" && isLogged !="" && typeDeals =="bonplan" ? <View>
+                <TouchableOpacity onPress={() => {
+                    setModalVisible(true);
+                    }} style={[styles.bouton_vert]}>
+                    <Text style={[styles.text_bouton]}>Reserver cet offre</Text>
+                </TouchableOpacity>
+            </View>
+            : (
+            <TouchableOpacity></TouchableOpacity>
+            )}
+
+            <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <Text style={[styles.title_info,styles.paddingBottom10]}>Je reserve</Text>
+          <Text style={[styles.labelInput]}>Nombre de Place:</Text>
+            <View style={[styles.inputView,styles.w_100]} >
+                <Picker
+                    style={filstreStyle.selectTextWhite}
+                    onValueChange={(itemValue, itemIndex) => setNbPlace(itemValue)}
+                    >
+                    {bouclenbVisit}
+                </Picker>
+            </View>
+            <Text style={[styles.labelInput]}>Nombre de Place:</Text>
+            <View style={styles.inputView} >
+            <DatePicker
+                style={{width:"100%"}}
+                date={dateNow}
+                mode="date"
+                placeholder="Date début"
+                format="YYYY-MM-DD"
+                minDate="2016-05-01"
+                maxDate="2050-06-01"
+                confirmBtnText="Valider"
+                cancelBtnText="Annuler"
+                customStyles={{
+                dateInput: {
+                    borderWidth: 0
+                }
+                }}
+                onDateChange={(date) => {onChangeDate(date)}}
+                        />
+                    </View>
+            <TouchableOpacity
+              style={[styles.bouton_vert,styles.w_80]}
+              onPress={() => {
+                validateRes(id);
+              }}
+            >
+              <Text style={styles.text_bouton}>Valider</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.bouton_red,styles.w_80]}
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.text_bouton}>Annuler</Text>
+            </TouchableOpacity>
+          </View>
         </View>
+      </Modal>
+    </View>
+            </View>
     }else{
         var details = 
         <View>

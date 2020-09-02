@@ -103,6 +103,17 @@ import { StyleSheet } from 'react-native';
             marginBottom: 10,
             fontFamily:"futuraMd"
         },
+        bouton_red: {
+            width: "100%",
+            backgroundColor: "red",
+            borderRadius: 0,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop:10,
+            marginBottom: 10,
+            fontFamily:"futuraMd"
+        },
         bouton_rose_contact: {
             width: "80%",
             backgroundColor: "#DC1A95",
@@ -243,6 +254,60 @@ import { StyleSheet } from 'react-native';
             margin:"auto",
             textAlign:"center",
             fontFamily:"futuraMd"
-        }
+        },
+        btnAccountMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:"20%",
+            top:"30%",
+        },
+        centeredView: {
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 22,
+          },
+          modalView: {
+            margin: 20,
+            backgroundColor: "white",
+            borderRadius: 20,
+            padding: 35,
+            alignItems: "center",
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 2
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+            width:"90%"
+          },
+          openButton: {
+            backgroundColor: "#F194FF",
+            borderRadius: 20,
+            padding: 10,
+            elevation: 2
+          },
+          textStyle: {
+            color: "white",
+            fontWeight: "bold",
+            textAlign: "center"
+          },
+          modalText: {
+            marginBottom: 15,
+            textAlign: "center"
+          },
+          labelInput:{
+            fontFamily:"futuraMd",
+            paddingBottom:10,
+            color:"black"
+          },
+          w_80:{
+              width:"80%"
+          }
+
  });
 export {styles}
