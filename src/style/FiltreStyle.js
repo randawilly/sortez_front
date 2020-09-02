@@ -25,7 +25,8 @@ import { StyleSheet } from 'react-native';
         },
         selectText:{
             color:"#E40EAB",
-            fontSize:15
+            fontSize:15,
+            fontFamily:"futuraMd"
         },
         heighted:{
             height:50,
@@ -34,29 +35,34 @@ import { StyleSheet } from 'react-native';
             paddingTop:12,
             color:"#E40EAB",
             paddingLeft:10,
-            fontSize:15
+            fontSize:15,
+            fontFamily:"futuraMd"
         },
         inputText:{
             color:"#E40EAB",
             fontSize:15,
             paddingLeft:10,
+            fontFamily:"futuraMd"
         },
         btn_pink:{
             alignItems:"center",
             paddingTop:12,
+            fontFamily:"futuraMd"
         },
         bg_pink:{
             backgroundColor:"#E40EAB"
         },
         btn_text:{
             color: "white",
-            fontSize:15
+            fontSize:15,
+            fontFamily:"futuraMd"
         },
         txt_date:{
             textAlign:"center",
             fontSize:15,
             paddingTop:10,
-            color:"#E40EAB"
+            color:"#E40EAB",
+            fontFamily:"futuraMd"
         }
  });
 export {filstreStyle}

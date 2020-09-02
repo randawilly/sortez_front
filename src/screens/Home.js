@@ -1,11 +1,13 @@
-import React from 'react';
-import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput } from 'react-native';
+import React,{ Component,useState } from 'react';
+import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput,Linking,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 export default function Home() {
     
     const navigation = useNavigation();
-
+    const [Email, setEmail] = useState("");
+    const [Message, setMessage] = useState("");
+    const [isLoading, setLoading] = useState(false);
     function agendaPage() {
         navigation.navigate("Agenda",{
             rubrique: "agenda",
@@ -15,7 +17,7 @@ export default function Home() {
     function articlePage() {
         navigation.navigate("Agenda",{
             rubrique: "article",
-            txt_rubrique: 'Les actualité',
+            txt_rubrique: 'L\'actualité & la revue de presse',
         });
     }
     function annuaire_page(){
@@ -27,14 +29,39 @@ export default function Home() {
     function DealsFidelity(){
         navigation.navigate("DealsFidelity",{
             rubrique: "DealsFidelity",
-            txt_rubrique: 'Deals & Fidelité',
+            txt_rubrique: 'Les deals & Fidélité',
         });
     }
     function boutiquePage() {
         navigation.navigate("Boutique",{
             rubrique: "boutique",
-            txt_rubrique: 'Les annonces',
+            txt_rubrique: 'Les boutiques en ligne',
           });
+    }
+
+    function editioMois(){
+        var url = "http://online.fliphtml5.com/ugbv/uguz/";
+        Linking.openURL(url).catch((err) => console.error('An error occurred', err));
+    }
+
+    function contact_us(){
+        setLoading(true);
+        var url_contact = "https://www.sortez.org/sortez_pro/Api_front_global/contact_us";
+        fetch(url_contact, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Email: Email,
+                Message: Message,
+            })
+            })
+            .then((response) => response.json())
+            .then((json) => alert(json.sent))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
     }
     
     return (    
@@ -44,12 +71,12 @@ export default function Home() {
             <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/logo_home.png')} />
             <Text style={styles.slogan}>DÉCOUVREZ L’ESSENTIEL DES SORTIES ET DES LOISIRS DE FRÉJUS À MENTON ET BIEN PLUS ENCORE !…</Text>
         </View>
-        <View style={[styles.sub_container,styles.paddingTop]}>
+        <View style={[styles.sub_container]}>
             <Image resizeMode={'contain'} style={styles.img_nb_lecteur} source={require('../../assets/imgs/nb_lecteur.png')} />
         </View>
         <View style={[styles.sub_container,styles.paddingBottom,styles.back_pink]}>
             <View style={styles.row}>
-                <TouchableOpacity style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
+                <TouchableOpacity onPress={()=>editioMois()} style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/edition_mois.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>édition du mois</Text>
                 </TouchableOpacity>
@@ -125,24 +152,28 @@ export default function Home() {
                 <View style={styles.inputView} >
                 <TextInput
                     style={styles.inputText}
-                    placeholder="Votre identifiant"
+                    placeholder="Votre Email"
                     placeholderTextColor="#003f5c"
-                    /*onChangeText={(text) => { setEmail(text);}}*/ />
+                    onChangeText={(text) => { setEmail(text);}} />
             </View>
-            <View style={styles.inputView} >
+            <View style={styles.inputViewText} >
                 <TextInput
                     secureTextEntry
-                    style={styles.inputText}
-                    placeholder="Votre mot de passe"
+                    style={styles.inputTextArea}
+                    placeholder="Votre Message"
+                    multiline = {true}
                     placeholderTextColor="#003f5c"
-                    /*onChangeText={text => setPassword(text)}*/ />
+                    onChangeText={text => setMessage(text)} />
             </View>
-            <TouchableOpacity style={styles.bouton_rose_contact}>
+            <TouchableOpacity onPress={()=>contact_us()} style={styles.bouton_rose_contact}>
+            {isLoading ? <ActivityIndicator size="small" color="white" /> : (
                 <Text style={styles.text_bouton}>Envoyer</Text>
+            )}
             </TouchableOpacity>
             </ImageBackground>
         </View>
     </View>
     </ScrollView>
+
     );
 }

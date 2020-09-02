@@ -1,14 +1,26 @@
 import React, { Component,useState } from 'react';
-import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList} from 'react-native';
+import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator} from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import{ListeStyle} from '../style/ListeStyle';
 import{styles} from '../style/Style';
+import { useNavigation } from '@react-navigation/native';
+
 // import { Icon } from 'react-native-elements'
 export default function Filtre(props) {const [selectedValue, setSelectedValue] = useState("java");
     const base_dir = "https://www.sortez.org/";
     const image_dir = base_dir+"application/resources/front/photoCommercant/imagesbank/";
     const agenda = props.agenda.toAnnonce;
+    const navigation = useNavigation();
+
+    function goDetails(id){
+        if(parseInt(id)>0){
+            navigation.navigate("DetailsBoutique",{
+                idEvent: id,
+                rubrique: props.rubrique,
+            });
+        }
+    }
     if(typeof(agenda) !='undefined'){
         var bouclecommune = 
             <FlatList style={[filstreStyle.w_100]}
@@ -32,7 +44,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                             <Text style={ListeStyle.adresse_txt}>{item.quartier}</Text>
                             <Text style={ListeStyle.ville_txt}>{item.NomSociete} , {item.ville}</Text>
                             <Text style={ListeStyle.ville_txt}>{item.count}</Text>
-                            <TouchableOpacity style={[styles.paddingTop_10]}>
+                            <TouchableOpacity onPress={()=>goDetails(item.annonce_id)} style={[styles.paddingTop_10,styles.paddingBottom10]}>
                                 <Image style={[ListeStyle.btn_details]} source={{uri:"https://www.sortez.org/mobile-test/wpimages/wp0958361f_06.png"}} />
                             </TouchableOpacity>
                         </View>
@@ -40,6 +52,8 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                    )}
                    keyExtractor={item => item.id}
             />   
+    }else{
+        var bouclecommune = <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" />
     }
     
     return(

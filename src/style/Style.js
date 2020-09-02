@@ -5,24 +5,38 @@ import { StyleSheet } from 'react-native';
             backgroundColor: '#fff',
             alignItems: 'center',
             padding:20,
-            width:"100%"
+            width:"100%",
+            fontFamily:"futuraMd"
+        },
+        containerNopadding: {
+            flex: 1,
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            padding:0,
+            width:"100%",
+            fontFamily:"futuraMd"
         },
         logo_home:{
             width:"100%",
         },
         sub_container:{
-            width:"100%"
+            width:"100%",
+            fontFamily:"futuraMd"
         },
         slogan:{
             fontSize:25,
             textAlign:"center",
             paddingTop:20,
+            fontFamily:"futuraMd"
         },
         img_nb_lecteur:{
             width:"100%"
         },
         paddingBottom:{
             paddingBottom:20,
+        },
+        paddingBottom10:{
+            paddingBottom:10,
         },
         row:{
             flex: 1,
@@ -57,6 +71,7 @@ import { StyleSheet } from 'react-native';
             fontSize:20,
             color:"white",
             textTransform:"uppercase",
+            fontFamily:"futuraMd",
         },
         textCenter:{
             textAlign:"center",
@@ -71,9 +86,11 @@ import { StyleSheet } from 'react-native';
             fontSize:20,
             color:"#E80EAE",
             textTransform:"uppercase",
+            fontFamily:"futuraMd"
         },
         subtitle_info:{
             fontSize:15,
+            fontFamily:"futuraMd"
         },
         bouton_vert: {
             width: "100%",
@@ -83,7 +100,8 @@ import { StyleSheet } from 'react-native';
             alignItems: "center",
             justifyContent: "center",
             marginTop:10,
-            marginBottom: 10
+            marginBottom: 10,
+            fontFamily:"futuraMd"
         },
         bouton_rose_contact: {
             width: "80%",
@@ -93,21 +111,24 @@ import { StyleSheet } from 'react-native';
             alignItems: "center",
             justifyContent: "center",
             marginTop:10,
-            marginBottom: 10
+            marginBottom: 10,
+            fontFamily:"futuraMd"
         },
         paddingTop_10:{
             paddingTop:10,
         },
         text_bouton:{
             color:"white",
-            fontSize:15
+            fontSize:15,
+            fontFamily:"futuraMd"
         },
         icon_home:{
             margin:5
         },
         footer_adress:{
             fontSize:20,
-            paddingTop:20
+            paddingTop:20,
+            fontFamily:"futuraMd"
         },
         contact_footer:{
             
@@ -130,9 +151,25 @@ import { StyleSheet } from 'react-native';
             justifyContent: "center",
             padding: 20
         },
+        inputViewText: {
+            width: "80%",
+            backgroundColor: "white",
+            borderWidth: 1,
+            borderRadius: 0,
+            height: 100,
+            marginBottom: 10,
+            justifyContent: "center",
+            padding: 20
+        },
         inputText: {
             height: 50,
-            color: "black"
+            color: "black",
+            fontFamily:"futuraMd"
+        },
+        inputTextArea: {
+            height: 200,
+            color: "black",
+            fontFamily:"futuraMd"
         },
         Pabsolute:{
             position:"absolute",
@@ -146,7 +183,66 @@ import { StyleSheet } from 'react-native';
         },
         title_rubrique:{
             fontSize:20,
+            fontFamily:"futuraMd"
             
+        },
+        border_solid:{
+            borderWidth:1,
+        },
+        padding_5:{
+            padding:5,
+        },
+        txt_underline:{
+            textDecorationLine:"underline"
+        },
+        bold:{
+            fontWeight:"700",
+        },
+        marginTop_10:{
+            marginTop:10
+        },
+        slideImgAnnonce:{
+            width:"90%",
+            height:300,
+        },
+        colorBlack:{
+            color:"black",
+        },
+        txt_fidelity1:{
+            color:"#3653a2",
+            fontSize:20,
+            textAlign:"center",
+            fontFamily:"futuraMd"
+        },
+        txt_fidelity2:{
+            fontSize:18,
+            textAlign:"center",
+            fontFamily:"futuraMd"
+        },
+        btnHomeMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:10,
+            top:"30%"
+        },
+        btnBack:{
+            textAlign:"center",
+            width:"100%",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingBottom:20,
+            fontFamily:"futuraMd"
+        },
+        btnBackTxt:{
+            backgroundColor:"#DC1A95",
+            width:"30%",
+            padding:10,
+            color:"white",
+            margin:"auto",
+            textAlign:"center",
+            fontFamily:"futuraMd"
         }
  });
 export {styles}

@@ -18,6 +18,7 @@ export default function Filtre(props) {
     const [dateFin, setDateFin] = useState("0000-00-00");
     const [motcle, setmotcle] = useState("");
     const [subcateg, setSubcateg] = useState("");
+
     const communes = props.commune.toVille;
 
     if(subcateg != '' && subcateg != null && typeof(subcateg) != undefined){
@@ -93,6 +94,18 @@ export default function Filtre(props) {
     }
 
     function applyfilters(){
+
+
+            props.setmotscles(motcle);
+            props.setcommune(selectedValueCommune);
+            props.setCateg(selectedValueCategorie);
+            props.setSubcategs(selectedValueSubcateg);
+            if(props.rubrique !="annuaire"){
+                props.setdatedebut(dateDebut);
+                props.setdatefin(dateFin);
+                props.setcommercant(selectedValueCommercant);
+            }
+
         
             setLoading(true)
             fetch(url_filter, {
@@ -139,6 +152,18 @@ export default function Filtre(props) {
             .then((json) => changeAgenda(json))
             .catch((error) => console.error(error))
             .finally(() => resetall(false));
+        props.setmotscles(motcle);
+        
+        props.setcommune(selectedValueCommune);
+        
+        props.setCateg(selectedValueCategorie);
+        props.setSubcategs(selectedValueSubcateg);
+        
+        if(props.rubrique !="annuaire"){
+            props.setdatefin(dateFin);
+            props.setdatedebut(dateDebut);
+            props.setcommercant(selectedValueCommercant);
+        }
     }
     function setDate_debut(){
         setDateDebut(new Date());

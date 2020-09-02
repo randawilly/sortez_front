@@ -1,5 +1,5 @@
 import React, { Component,useState } from 'react';
-import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList} from 'react-native';
+import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList, ActivityIndicator,Linking } from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import{ListeStyle} from '../style/ListeStyle';
@@ -9,6 +9,10 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
     const base_dir = "https://www.sortez.org/";
     const image_dir = base_dir+"application/resources/front/photoCommercant/imagesbank/";
     const commercant = props.commercant.toCommercant;
+    function go_redirect(nom_url){
+        var url_complete = base_dir+nom_url+"/presentation_commercants";
+        Linking.openURL(url_complete).catch((err) => console.error('An error occurred', err));
+    }
     if(typeof(commercant) !='undefined'){
         var bouclecommune = 
             <FlatList style={[filstreStyle.w_100]}
@@ -33,7 +37,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                             {item.description != null ? <Text numberOfLines={4} style={ListeStyle.ville_txt}>{item.description}</Text>: (
                             <Text style={ListeStyle.ville_txt}>Pas de contenue</Text>
                             )}
-                            <TouchableOpacity style={[styles.paddingTop_10]}>
+                            <TouchableOpacity onPress={()=>go_redirect(item.nom_url)} style={[styles.paddingTop_10,styles.paddingBottom10]}>
                                 <Image style={[ListeStyle.btn_details]} source={{uri:"https://www.sortez.org/mobile-test/wpimages/wp0958361f_06.png"}} />
                             </TouchableOpacity>
                         </View>
@@ -41,6 +45,8 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                    )}
                    keyExtractor={item => item.id}
             />   
+    }else{
+        var bouclecommune = <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" />
     }
     
     return(
