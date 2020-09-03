@@ -110,7 +110,7 @@ export default function Home() {
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/magazine_img.png')} />
             <Text style={[styles.title_info,styles.textCenter]}>le magazine sortez</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>Présentation, diffusion, audience, lectorat, archives</Text>
-            <TouchableOpacity style={styles.bouton_vert}>
+            <TouchableOpacity onPress={()=>goLink('https://www.sortez.org')} style={styles.bouton_vert}>
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>
@@ -119,7 +119,7 @@ export default function Home() {
             <Text style={[styles.title_info,styles.textCenter]}>les avantages des consommateurs</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>les bons plans, la fidélisation, la carte privilège, newsletter, alertes, tirages au sort ...</Text>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/newsletter_home.png')} />
-            <TouchableOpacity style={styles.bouton_vert}>
+            <TouchableOpacity onPress={()=>goLink('https://www.sortez.org')} style={styles.bouton_vert}>
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>

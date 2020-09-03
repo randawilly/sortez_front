@@ -1,5 +1,5 @@
-import React,{ Component,useState } from 'react';
-import { AsyncStorage ,Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput,Linking,ActivityIndicator } from 'react-native';
+import React,{ useState } from 'react';
+import { ToastAndroid,AsyncStorage ,Text, View,ScrollView,TouchableOpacity,TextInput,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 export default function Login() {
@@ -8,7 +8,9 @@ export default function Login() {
     const [Email, setEmail] = useState("");
     const [Message, setPassword] = useState("");
     const [isLoading, setLoading] = useState(false);
-
+    function showToast (text) {
+        ToastAndroid.showWithGravity(text, ToastAndroid.LONG,ToastAndroid.CENTER);
+      };
     function goBack(){
         navigation.goBack();
     }
@@ -24,13 +26,18 @@ export default function Login() {
             txt_rubrique: 'Les deals & Fidélité',
         });
     }
-   async function setSession (id_user,username,nom,prenom){
+
+   async function setSession (id_user,username,nom,prenom,ion_auth_id){
         await AsyncStorage.setItem('id_user', id_user);
         await AsyncStorage.setItem('username', username);
         await AsyncStorage.setItem('Nom', nom);
         await AsyncStorage.setItem('Prenom', prenom);
+        await AsyncStorage.setItem('ion_auth_id', ion_auth_id);
+        showToast("Vous êtes connecté");
     }
+
     function login(){
+        
         setLoading(true);
         var url_contact = "https://www.sortez.org/auth/login_sortez_pro";
         fetch(url_contact, {
@@ -59,7 +66,7 @@ export default function Login() {
                         })
                     }).then((response) => response.json())
                     .then((responseData) => {
-                        setSession(responseData.user.IdUser,responseData.user.Login,responseData.user.Nom,responseData.user.Prenom);
+                        setSession(responseData.user.IdUser,responseData.user.Login,responseData.user.Nom,responseData.user.Prenom,responseData.user.user_ionauth_id);
                         setLoading(false);
                         // goBack();
                         goDashboard(responseData);
@@ -101,6 +108,9 @@ export default function Login() {
                 {isLoading ? <ActivityIndicator size="small" color="white" /> : (
                     <Text style={styles.text_bouton}>Valider</Text>
                 )}
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>goBack()} style={styles.bouton_rose_contact}>
+                    <Text style={styles.text_bouton}>Retour</Text>
                 </TouchableOpacity>
             </View>
         </View>

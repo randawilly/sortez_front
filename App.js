@@ -12,6 +12,7 @@ import DetailsBoutique from './src/screens/DetailsBoutique';
 import DetailsDealsFidelite from './src/screens/DetailsDealsFidelite';
 import Login from './src/screens/Login';
 import Dashboard from './src/screens/Dashboard';
+import Card from './src/screens/Card';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
       <Stack.Screen name="DetailsDealsFidelite" component={DetailsDealsFidelite} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Card" component={Card} />
     </Stack.Navigator>
   </NavigationContainer>
   );

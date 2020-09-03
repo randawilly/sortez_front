@@ -61,7 +61,7 @@ export default function DetailsContent(props) {const [selectedValue, setSelected
         </View>
     }
     return(
-        <View style={[filstreStyle.sub_container,styles.paddingTop]}>
+        <View style={[filstreStyle.sub_container]}>
             <View style={filstreStyle.row}>
                 <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
                 {details}

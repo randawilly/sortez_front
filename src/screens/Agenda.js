@@ -114,7 +114,7 @@ export default function Agenda({route}) {
               .then((response) => response.json())
               .then((json) => setCommune(json))
               .catch((error) => console.error(error))
-              .finally(() => setLoading(false));
+              .finally(() => console.log("ok"));
     }, []);  
           
     useEffect(() => {
@@ -122,7 +122,7 @@ export default function Agenda({route}) {
         .then((response) => response.json())
         .then((json) => setCommercant(json))
         .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
+        .finally(() => console.log("ok"));
     }, []);
     
     useEffect(() => {
@@ -130,7 +130,7 @@ export default function Agenda({route}) {
             .then((response) => response.json())
             .then((json) => setCategorie(json))
             .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
+            .finally(() => console.log("ok"));
     }, []);  
 
     useEffect(() => {
@@ -138,7 +138,7 @@ export default function Agenda({route}) {
             .then((response) => response.json())
             .then((json) => setAgendas(json))
             .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
+            .finally(() => console.log("ok"));
     }, []);
     function changeAgenda(new_valeur){
         setAgendas(new_valeur);
@@ -149,6 +149,10 @@ export default function Agenda({route}) {
           contentSize.height - paddingToBottom;
       };
     return (
+        <View style={{flex: 1,}}>
+        <View style={styles.headerHeight}>
+        <Header />
+        </View>
         <ScrollView 
         onScroll={({nativeEvent}) => {
             if (isCloseToBottom(nativeEvent) && isLoadingList == false ) {
@@ -157,9 +161,9 @@ export default function Agenda({route}) {
         }}
         scrollEventThrottle={400}
         >
-        <Header />
+        
             <View style={[styles.container]}>
-                <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
+                <Text style={[styles.title_rubrique,styles.paddingBottom10]}>{txt_rubrique}</Text>
                 <Filtre setmotscles={setmotscles} setdatefin={setdatefin} setcommune = {setcommune} setcommercant={setcommercant} setCateg={setCateg} setSubcategs={setSubcategs} setdatedebut={setdatedebut} rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie}  />
                 <ListeArtAg changeAgenda = {changeAgenda} rubrique = {rubrique} agenda = {agendas} />
                 {isLoadingList ? <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" /> : (
@@ -167,6 +171,7 @@ export default function Agenda({route}) {
                 )}
             </View>
         </ScrollView>
+        </View>
     );
     
 }

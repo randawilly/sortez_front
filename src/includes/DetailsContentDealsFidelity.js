@@ -1,5 +1,5 @@
-import React, { useEffect,Component,useState } from 'react';
-import {Alert,Modal,View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator,AsyncStorage} from 'react-native';
+import React, { useEffect,useState } from 'react';
+import {ToastAndroid,Alert,Modal,View,Text,Picker,TouchableOpacity,Image,ActivityIndicator,AsyncStorage} from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
 import{ListeStyle} from '../style/ListeStyle';
 import{styles} from '../style/Style';
@@ -11,23 +11,80 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
     const dealsF = props.agenda.details;
     const typeDeals = props.typeDeals;
     const navigation = useNavigation();
-    const [isLogged, setIsLogged] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const [dateNow, setDateNow] = useState(new Date());
     const [nbPlace, setNbPlace] = useState("1");
-    async function getSession(){
-        var username = await AsyncStorage.getItem('username');
-        setIsLogged(username);
+    const [loading, setLoading] = useState(false);
+    
+    var username = props.username;
+    var ion_auth_id = props.ion_auth_id;
+    
+    function logOff(status){
+        username = status;
     }
+
+    if(typeDeals != "bonplan"){
+        var errorE = " ";
+    }else{
+        var errorE = "Vous devez vous connecter pour pouvoir reserver"
+    }
+
     function onChangeDate(date){
         setDateNow(date);
     }
-    function validateRes(id){
-        alert(isLogged);
+    function showToast (text) {
+        ToastAndroid.showWithGravity(text, ToastAndroid.LONG,ToastAndroid.CENTER);
+      };
+    function validateResYes(idBonplan,bonplan_type,nbPlace,dateNow){
+        setLoading(true);
+        fetch('https://www.sortez.org/sortez_pro/Api_front_global/demandeBonPlan',
+        {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_bonplan: idBonplan,
+                bonplan_type: bonplan_type,
+                bp_multiple_nbmax_client: nbPlace,
+                bp_multiple_date_visit_client: dateNow,
+                ion_auth_id: ion_auth_id,
+            })
+        }).then((response) => response.json())
+        .then((responseData) => {
+            
+            setLoading(false);
+            if(responseData.status == "ok"){
+                showToast('Votre Bonplan a été reservé');
+                setModalVisible(false);
+            }else{
+                showToast("une erreur s'est survenue")
+            }
+            
+        })
+        .catch((error) => {
+            setLoading(false);
+            console.log(error);
+            showToast("une erreur s'est survenue")
+        });
     }
-    useEffect(() => {
-        getSession();
-    }, []);
+function validateRes(idBonplan,bonplan_type,nbPlace,dateNow) {
+  Alert.alert(
+    "Se déconnecter",
+    "Voulez-vous reserver ce bonplan ?",
+    [
+      {
+        text: "Non",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "Oui", onPress: () => validateResYes(idBonplan,bonplan_type,nbPlace,dateNow) }
+    ],
+    { cancelable: false }
+  );
+}
+
     // alert(isLogged)
     if(typeof(dealsF) != "undefined"){
         if(typeDeals == "bonplan"){
@@ -40,6 +97,7 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
             });
             var img = dealsF.bonplan_photo1;
             var id = dealsF.bonplan_id;
+            var bonplan_type = dealsF.bonplan_type;
             var titre = dealsF.bonplan_titre;
             var description = <Text style={[styles.colorBlack,styles.textCenter,styles.paddingTop_10]}>{dealsF.bonplan_texte}</Text>;
             var txt_prix =  <View>
@@ -90,7 +148,7 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
 
             />
             
-            {isLogged != null && typeof(isLogged) != "undefined" && isLogged !="" && typeDeals =="bonplan" ? <View>
+            {username != null && typeof(username) != "undefined" && username !="" && typeDeals =="bonplan" ? <View>
                 <TouchableOpacity onPress={() => {
                     setModalVisible(true);
                     }} style={[styles.bouton_vert]}>
@@ -98,7 +156,7 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
                 </TouchableOpacity>
             </View>
             : (
-            <TouchableOpacity></TouchableOpacity>
+            <Text style={[styles.warning,styles.textCenter,styles.paddingTop_10]}>{errorE}</Text>
             )}
 
             <View style={styles.centeredView}>
@@ -142,10 +200,13 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
             <TouchableOpacity
               style={[styles.bouton_vert,styles.w_80]}
               onPress={() => {
-                validateRes(id);
+                validateRes(id,bonplan_type,nbPlace,dateNow);
               }}
             >
-              <Text style={styles.text_bouton}>Valider</Text>
+            {loading ? <ActivityIndicator style={{paddingTop:0}} size="large" color="white" /> :(
+                <Text style={styles.text_bouton}>Valider</Text>
+            )}
+              
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.bouton_red,styles.w_80]}
@@ -170,7 +231,7 @@ export default function DetailsContentDealsFidelity(props) {const [selectedValue
         navigation.goBack();
     }
     return(
-        <View style={[filstreStyle.sub_container,styles.paddingTop]}>
+        <View style={[filstreStyle.sub_container]}>
             <View style={filstreStyle.row}>
                 <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
                     {details}

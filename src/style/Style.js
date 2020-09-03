@@ -195,7 +195,6 @@ import { StyleSheet } from 'react-native';
         title_rubrique:{
             fontSize:20,
             fontFamily:"futuraMd"
-            
         },
         border_solid:{
             borderWidth:1,
@@ -236,12 +235,11 @@ import { StyleSheet } from 'react-native';
             height:50,
             position:"absolute",
             left:10,
-            top:"30%"
+            top:"15%",
         },
         btnBack:{
             textAlign:"center",
             width:"100%",
-            justifyContent: "center",
             alignItems: "center",
             paddingBottom:20,
             fontFamily:"futuraMd"
@@ -255,13 +253,31 @@ import { StyleSheet } from 'react-native';
             textAlign:"center",
             fontFamily:"futuraMd"
         },
+        btnLogoutAllTxt:{
+            backgroundColor:"red",
+            width:"50%",
+            padding:10,
+            color:"white",
+            marginTop:20,
+            textAlign:"center",
+            fontFamily:"futuraMd"
+        },
+        btnLoginAllTxt:{
+            backgroundColor:"green",
+            width:"50%",
+            padding:10,
+            color:"white",
+            marginTop:20,
+            textAlign:"center",
+            fontFamily:"futuraMd"
+        },
         btnAccountMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
             left:"20%",
-            top:"30%",
+            top:"15%",
         },
         centeredView: {
             flex: 1,
@@ -307,6 +323,30 @@ import { StyleSheet } from 'react-native';
           },
           w_80:{
               width:"80%"
+          },
+          blockLoggedin:{
+              width:"90%",
+              borderWidth:1
+          },
+          usernames:{
+            fontSize:20,
+            fontFamily:"futuraMd",
+            color:"black"
+          },
+          warning:{
+              color:"red",
+              fontFamily:"futuraMd",
+          },
+          headerHeight:{
+              height:265
+          },
+          btnMaCarteMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:"37%",
+            top:"15%",
           }
 
  });

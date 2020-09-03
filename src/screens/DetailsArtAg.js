@@ -52,12 +52,18 @@ export default function DetailsArtAg({route}) {
     }
 
     return (
-        <ScrollView>
+        <View style={{flex: 1,}}>
+        <View style={styles.headerHeight}>
         <Header />
+        </View>
+        <ScrollView>
+        
             <View style={[styles.container]}>
                 <DetailsContent rubrique = {rubrique} agenda = {data} />
             </View>
         </ScrollView>
+        
+        </View>
     );
     
 }

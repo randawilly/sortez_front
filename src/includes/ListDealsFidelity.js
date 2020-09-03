@@ -81,7 +81,7 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
     }
     
     return(
-        <View style={[filstreStyle.sub_container,styles.paddingTop]}>
+        <View style={[filstreStyle.sub_container]}>
             <View style={filstreStyle.row}>
                 <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
                     {bouclecommune}

@@ -63,7 +63,10 @@ export default function Dashboard({ route }) {
           });
     }
     function onBackPressed(){
-        navigation.goBack()
+        navigation.navigate("Home",{
+            itemId: 86,
+            message: 'anything you want here',
+          });
     }
     return (
         <View style={{height:'100%'}}>
@@ -74,7 +77,7 @@ export default function Dashboard({ route }) {
                 </View>
                 <View style={styles.container}>
                 <TouchableOpacity onPress={() => onBackPressed()} style={styles.loginBtn}>
-                        <Text style={styles.btnText}>Retour</Text>
+                        <Text style={styles.btnText}>Retour Menu</Text>
                     </TouchableOpacity>
                     <View style={styles.inputView} >
                             <TextInput
@@ -150,11 +153,11 @@ export default function Dashboard({ route }) {
                     {is_loaded ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Valider</Text>}
                     </TouchableOpacity>
                 </View>
-                <View style={styles.container}>
-                    <TouchableOpacity onPress={() => logout()} style={styles.loginBtn}>
+                {/* <View style={styles.container}>
+                    <TouchableOpacity onPress={() => logout()} style={styles.logoutBtn}>
                     <Text style={styles.btnText}>Se déconnecter</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </ScrollView>
         </View>
     );
@@ -204,6 +207,17 @@ const styles = StyleSheet.create({
     loginBtn: {
         width: "100%",
         backgroundColor: "#DC1A95",
+        borderRadius: 0,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        // marginTop:40,
+        marginBottom: 20,
+        fontFamily:"futuraMd"
+    },
+    logoutBtn: {
+        width: "100%",
+        backgroundColor: "red",
         borderRadius: 0,
         height: 50,
         alignItems: "center",
