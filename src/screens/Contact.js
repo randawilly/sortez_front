@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { Text,Image, View, Button,ScrollView,Dimensions,ActivityIndicator,ImageBackground,TextInput } from 'react-native';
+import {AsyncStorage, Text,Image, View, Button,ScrollView,Dimensions,ActivityIndicator,ImageBackground,TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import{filstreStyle} from '../style/FiltreStyle';
 import {styles} from '../style/Style';
@@ -16,8 +16,18 @@ export default function Contact({route}) {
     const [Email, setEmail] = useState("");
     const [Message, setMessage] = useState("");
     const [isLoading, setLoading] = useState(false);
+    const [isLogged, setIsLogged] = useState(null);
     function goBack(){
         navigation.goBack();
+    }
+    useEffect(() => {
+        setTimeout(function(){ 
+          getSession();
+        }, 200);
+      }, []);  
+    async function getSession(){
+        var username = await AsyncStorage.getItem('username');
+        setIsLogged(username);
     }
     function contact_us(){
         setLoading(true);
@@ -54,6 +64,7 @@ export default function Contact({route}) {
                                 style={styles.inputText}
                                 placeholder="Votre Email"
                                 placeholderTextColor="#003f5c"
+                                value={isLogged}
                                 onChangeText={(text) => { setEmail(text);}} />
                         </View>
                         <View style={styles.inputViewText} >
