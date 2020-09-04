@@ -103,7 +103,7 @@ function validateRes(idBonplan,bonplan_type,nbPlace,dateNow) {
             var txt_prix =  <View>
                                 <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Prix: {dealsF.prix_normbp}</Text>
                                 <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Valeur: {dealsF.prix_remisebp}</Text>
-                                <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Economie: {parseInt(dealsF.prix_remisebp)-parseInt(dealsF.prix_normbp)}</Text>
+                                <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Economie: {parseInt(dealsF.prix_normbp)-parseInt(dealsF.prix_remisebp)}</Text>
                             </View>
         }else{
             var img = dealsF.image;

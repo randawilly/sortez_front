@@ -58,9 +58,20 @@ async function logOutYes(){
         UserInfo: data,
     });
   }
+  function goFavorisPage(data){
+    navigation.navigate("Favoris",{
+        txt_rubrique: "Mes Favoris",
+        Favoris: data,
+    });
+  }
   function login(data){
     navigation.navigate("Login",{
         rubrique: "DealsFidelity",
+    });
+  }
+  function goContact(){
+    navigation.navigate("Contact",{
+      txt_rubrique: "Contacter nous",
     });
   }
   const logOut = () =>
@@ -82,6 +93,13 @@ async function logOutYes(){
     await AsyncStorage.setItem('username', username);
     await AsyncStorage.setItem('Nom', nom);
     await AsyncStorage.setItem('Prenom', prenom);
+  }
+
+  function goDashboard(data){
+    navigation.navigate("Dashboard",{
+      UserInfo: data,
+    });
+    
   }
 
   async function goAccount(){
@@ -116,7 +134,6 @@ async function logOutYes(){
   }
   async function goMaCarte(){
     const id_user = await AsyncStorage.getItem('id_user');
-    alert(id_user)
     if (id_user != null) {
         fetch('https://www.sortez.org/sortez_pro/Api_front_global/getcardinfo',
         {
@@ -138,12 +155,46 @@ async function logOutYes(){
         });
         // num_id_card_virtual
     }else{
+      
+      navigation.navigate("Login",{
+        rubrique: "agenda",
+        txt_rubrique: "L'Agenda événementiel",
+      });
+
+    }
+
+  }
+
+  async function goFavoris(){
+    const id_user = await AsyncStorage.getItem('id_user');
+    if (id_user != null) {
+        fetch('https://www.sortez.org/sortez_pro/Api_front_global/getFavoris',
+        {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              id_user: id_user
+            })
+        }).then((response) => response.json())
+        .then((responseData) => {
+            goFavorisPage(responseData);
+        })
+        .catch((error) => {
+            // setLoading(false);
+            console.log(error);
+        });
+        // num_id_card_virtual
+    }else{
       navigation.navigate("Login",{
         rubrique: "agenda",
         txt_rubrique: "L'Agenda événementiel",
       });
     }
   }
+  
   return (
         <View style={[styles.containerNopadding]}>
           <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/header_rapide.png')} />
@@ -155,6 +206,12 @@ async function logOutYes(){
           </View>
           <View style={[styles.btnMaCarteMenu]}>
             <TouchableOpacity onPress={()=>goMaCarte()} style={[filstreStyle.w_100,filstreStyle.heighted]}></TouchableOpacity>
+          </View>
+          <View style={[styles.btnfavorisMenu]}>
+            <TouchableOpacity onPress={()=>goFavoris()} style={[filstreStyle.w_100,filstreStyle.heighted]}></TouchableOpacity>
+          </View>
+          <View style={[styles.btnContactMenu]}>
+            <TouchableOpacity onPress={()=>goContact()} style={[filstreStyle.w_100,filstreStyle.heighted]}></TouchableOpacity>
           </View>
           {isLogged != null ?
           <View style={[styles.w_100,styles.blockLoggedin]}>

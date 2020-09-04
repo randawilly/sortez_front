@@ -125,6 +125,17 @@ import { StyleSheet } from 'react-native';
             marginBottom: 10,
             fontFamily:"futuraMd"
         },
+        bouton_rose_back: {
+            width: "100%",
+            backgroundColor: "#DC1A95",
+            borderRadius: 0,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop:10,
+            marginBottom: 10,
+            fontFamily:"futuraMd"
+        },
         paddingTop_10:{
             paddingTop:10,
         },
@@ -346,6 +357,27 @@ import { StyleSheet } from 'react-native';
             height:50,
             position:"absolute",
             left:"37%",
+            top:"15%",
+          },
+          btnfavorisMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:"53%",
+            top:"15%",
+          },
+          qr_image:{
+            height:400,
+            borderWidth:5,
+            borderColor:"#DC1A95"
+          },
+          btnContactMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:"70%",
             top:"15%",
           }
 
