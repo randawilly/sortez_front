@@ -1,5 +1,5 @@
 import React, { Component,useState } from 'react';
-import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator} from 'react-native';
+import {View,Platform,TextInput,Text,Picker,TouchableOpacity,Image,FlatList,ActivityIndicator,Linking} from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import{ListeStyle} from '../style/ListeStyle';
@@ -13,13 +13,16 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
     const agenda = props.agenda.toAnnonce;
     const navigation = useNavigation();
 
-    function goDetails(id){
-        if(parseInt(id)>0){
-            navigation.navigate("DetailsBoutique",{
-                idEvent: id,
-                rubrique: props.rubrique,
-            });
-        }
+    function goDetails(id,nom_url){
+        // detail_annonce_commercants/261
+        // if(parseInt(id)>0){
+        //     navigation.navigate("DetailsBoutique",{
+        //         idEvent: id,
+        //         rubrique: props.rubrique,
+        //     });
+        // }
+        var url_complete = base_dir+nom_url+"/detail_annonce_commercants/"+id;
+        Linking.openURL(url_complete).catch((err) => console.error('An error occurred', err));
     }
     if(typeof(agenda) !='undefined'){
         var bouclecommune = 
@@ -44,7 +47,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                             <Text style={ListeStyle.adresse_txt}>{item.quartier}</Text>
                             <Text style={ListeStyle.ville_txt}>{item.NomSociete} , {item.ville}</Text>
                             <Text style={ListeStyle.ville_txt}>{item.count}</Text>
-                            <TouchableOpacity onPress={()=>goDetails(item.annonce_id)} style={[styles.paddingTop_10,styles.paddingBottom10]}>
+                            <TouchableOpacity onPress={()=>goDetails(item.annonce_id,item.nom_url)} style={[styles.paddingTop_10,styles.paddingBottom10]}>
                                 <Image style={[ListeStyle.btn_details]} source={{uri:"https://www.sortez.org/mobile-test/wpimages/wp0958361f_06.png"}} />
                             </TouchableOpacity>
                         </View>
@@ -57,7 +60,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
     }
     
     return(
-        <View style={[filstreStyle.sub_container,styles.paddingTop]}>
+        <View style={[filstreStyle.sub_container]}>
             <View style={filstreStyle.row}>
                 <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
                 {bouclecommune}

@@ -134,6 +134,10 @@ export default function Boutique({route}) {
         setSelectedValueCommercant(idcom);
     }
     return (
+        <View style={{flex: 1,}}>
+        <View style={styles.headerHeight}>
+        <Header />
+        </View>
         <ScrollView
         onScroll={({nativeEvent}) => {
             if (isCloseToBottom(nativeEvent) && isLoadingList == false ) {
@@ -142,9 +146,8 @@ export default function Boutique({route}) {
         }}
         scrollEventThrottle={400}
         >
-        <Header />
             <View style={[styles.container]}>
-                <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
+                <Text style={[styles.title_rubrique,styles.paddingBottom10]}>{txt_rubrique}</Text>
                 <Filtre setCommercants={setCommercants} setmotscles={setmotscles} setcommune={setcommune} setCateg={setCateg} rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie} souscategorie = {souscategorie}  />
                 <ListAnnonce rubrique = {rubrique} agenda = {agendas} />
                 {isLoadingList ? <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" /> : (
@@ -152,6 +155,7 @@ export default function Boutique({route}) {
                 )}
             </View>
         </ScrollView>
+        </View>
         );
     
 }

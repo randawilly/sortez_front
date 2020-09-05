@@ -49,13 +49,19 @@ export default function DetailsBoutique({route}) {
     }
 
     return (
-        <ScrollView>
-        <Header />
-            <View style={[styles.container]}>
-                <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
-                <DetailsContentBoutique rubrique = {rubrique} agenda = {data} />
+        <View style={{flex: 1}}>
+            <View style={styles.headerHeight}>
+                <Header changestatus={changestatus} />
             </View>
-        </ScrollView>
+            <ScrollView></ScrollView>
+            <ScrollView>
+            <Header />
+                <View style={[styles.container]}>
+                    <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
+                    <DetailsContentBoutique rubrique = {rubrique} agenda = {data} />
+                </View>
+            </ScrollView>
+        </View>
     );
     
 }

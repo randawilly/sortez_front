@@ -103,8 +103,30 @@ import { StyleSheet } from 'react-native';
             marginBottom: 10,
             fontFamily:"futuraMd"
         },
+        bouton_red: {
+            width: "100%",
+            backgroundColor: "red",
+            borderRadius: 0,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop:10,
+            marginBottom: 10,
+            fontFamily:"futuraMd"
+        },
         bouton_rose_contact: {
             width: "80%",
+            backgroundColor: "#DC1A95",
+            borderRadius: 0,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop:10,
+            marginBottom: 10,
+            fontFamily:"futuraMd"
+        },
+        bouton_rose_back: {
+            width: "100%",
             backgroundColor: "#DC1A95",
             borderRadius: 0,
             height: 50,
@@ -184,7 +206,6 @@ import { StyleSheet } from 'react-native';
         title_rubrique:{
             fontSize:20,
             fontFamily:"futuraMd"
-            
         },
         border_solid:{
             borderWidth:1,
@@ -225,12 +246,11 @@ import { StyleSheet } from 'react-native';
             height:50,
             position:"absolute",
             left:10,
-            top:"30%"
+            top:"15%",
         },
         btnBack:{
             textAlign:"center",
             width:"100%",
-            justifyContent: "center",
             alignItems: "center",
             paddingBottom:20,
             fontFamily:"futuraMd"
@@ -243,6 +263,123 @@ import { StyleSheet } from 'react-native';
             margin:"auto",
             textAlign:"center",
             fontFamily:"futuraMd"
-        }
+        },
+        btnLogoutAllTxt:{
+            backgroundColor:"red",
+            width:"50%",
+            padding:10,
+            color:"white",
+            marginTop:20,
+            textAlign:"center",
+            fontFamily:"futuraMd"
+        },
+        btnLoginAllTxt:{
+            backgroundColor:"green",
+            width:"50%",
+            padding:10,
+            color:"white",
+            marginTop:20,
+            textAlign:"center",
+            fontFamily:"futuraMd"
+        },
+        btnAccountMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:"20%",
+            top:"15%",
+        },
+        centeredView: {
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 22,
+          },
+          modalView: {
+            margin: 20,
+            backgroundColor: "white",
+            borderRadius: 20,
+            padding: 35,
+            alignItems: "center",
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 2
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+            width:"90%"
+          },
+          openButton: {
+            backgroundColor: "#F194FF",
+            borderRadius: 20,
+            padding: 10,
+            elevation: 2
+          },
+          textStyle: {
+            color: "white",
+            fontWeight: "bold",
+            textAlign: "center"
+          },
+          modalText: {
+            marginBottom: 15,
+            textAlign: "center"
+          },
+          labelInput:{
+            fontFamily:"futuraMd",
+            paddingBottom:10,
+            color:"black"
+          },
+          w_80:{
+              width:"80%"
+          },
+          blockLoggedin:{
+              width:"90%",
+              borderWidth:1
+          },
+          usernames:{
+            fontSize:20,
+            fontFamily:"futuraMd",
+            color:"black"
+          },
+          warning:{
+              color:"red",
+              fontFamily:"futuraMd",
+          },
+          headerHeight:{
+              height:265
+          },
+          btnMaCarteMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:"37%",
+            top:"15%",
+          },
+          btnfavorisMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:"53%",
+            top:"15%",
+          },
+          qr_image:{
+            height:400,
+            borderWidth:5,
+            borderColor:"#DC1A95"
+          },
+          btnContactMenu:{
+            opacity:1,
+            width:50,
+            height:50,
+            position:"absolute",
+            left:"70%",
+            top:"15%",
+          }
+
  });
 export {styles}

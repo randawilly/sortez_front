@@ -10,6 +10,11 @@ import DealsFidelity from './src/screens/DealsFidelity';
 import DetailsArtAg from './src/screens/DetailsArtAg';
 import DetailsBoutique from './src/screens/DetailsBoutique';
 import DetailsDealsFidelite from './src/screens/DetailsDealsFidelite';
+import Login from './src/screens/Login';
+import Dashboard from './src/screens/Dashboard';
+import Card from './src/screens/Card';
+import Favoris from './src/screens/Favoris';
+import Contact from './src/screens/Contact';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -25,6 +30,11 @@ export default function App() {
       <Stack.Screen name="DetailsArtAg" component={DetailsArtAg} />
       <Stack.Screen name="DetailsBoutique" component={DetailsBoutique} />
       <Stack.Screen name="DetailsDealsFidelite" component={DetailsDealsFidelite} />
+      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Card" component={Card} />
+      <Stack.Screen name="Favoris" component={Favoris} />
+      <Stack.Screen name="Contact" component={Contact} />
     </Stack.Navigator>
   </NavigationContainer>
   );

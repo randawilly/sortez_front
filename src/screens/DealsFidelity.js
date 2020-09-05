@@ -137,6 +137,10 @@ export default function DealsFidelity({route}) {
           contentSize.height - paddingToBottom;
     };
     return (
+        <View style={{flex: 1,}}>
+        <View style={styles.headerHeight}>
+        <Header />
+        </View>
         <ScrollView
         onScroll={({nativeEvent}) => {
             if (isCloseToBottom(nativeEvent) && isLoadingList == false ) {
@@ -145,9 +149,8 @@ export default function DealsFidelity({route}) {
         }}
         scrollEventThrottle={400}
         >
-         <Header />
             <View style={[styles.container]}>
-                <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
+                <Text style={[styles.title_rubrique,styles.paddingBottom10]}>{txt_rubrique}</Text>
                 <Filtre setCommercants={setCommercants} setmotscles={setmotscles} setType={setType} setCateg={setCateg} setcommune={setcommune} rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} commercant = {commercant} categorie = {categorie} />
                 <ListAnnonce rubrique = {rubrique} agenda = {agendas} />
                 {isLoadingList ? <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" /> : (
@@ -155,6 +158,7 @@ export default function DealsFidelity({route}) {
                 )}
             </View>
         </ScrollView>
+        </View>
         );
     
 }

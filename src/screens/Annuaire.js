@@ -122,6 +122,10 @@ export default function Annuaire({route}) {
         .finally(() => setLoadingList(false));
     }
     return (
+        <View style={{flex: 1,}}>
+        <View style={styles.headerHeight}>
+        <Header />
+        </View>
         <ScrollView
         onScroll={({nativeEvent}) => {
             if (isCloseToBottom(nativeEvent) && isLoadingList == false ) {
@@ -130,9 +134,8 @@ export default function Annuaire({route}) {
         }}
         scrollEventThrottle={400}
         >
-        <Header />
             <View style={[styles.container]}>
-                <Text style={styles.title_rubrique}>{txt_rubrique}</Text>
+                <Text style={[styles.title_rubrique,styles.paddingBottom10]}>{txt_rubrique}</Text>
                 <Filtre setmotscles={setmotscles} setcommune={setcommune} setCateg={setCateg} setSubcategs={setSubcategs} rubrique = {rubrique} changeAgenda = {changeAgenda} agenda= {agendas} commune={commune} categorie = {categorie}  />
                 <ListeAnnuaire rubrique = {rubrique} commercant = {commercant} />
                 {isLoadingList ? <ActivityIndicator style={{paddingTop:11}} size="large" color="#DC1A95" /> : (
@@ -140,6 +143,7 @@ export default function Annuaire({route}) {
                 )}
             </View>
         </ScrollView>
+        </View>
     );
     
 }
