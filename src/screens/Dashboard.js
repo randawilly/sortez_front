@@ -208,9 +208,9 @@ export default function Dashboard({ route,props }) {
                 <TouchableOpacity onPress={()=>go_to_sortez()} style={styles.loginBtn}>
                         <Text style={styles.btnText}>www.magazine-sortez-org</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>logOut()} style={styles.loginBtn}>
+                {/* <TouchableOpacity onPress={()=>logOut()} style={styles.loginBtn}>
                         <Text style={styles.btnText}>Déconnexion</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 </View>
             </ScrollView>  
         </View>
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     loginBtn: {
         width: "100%",
         color:"white",
-        backgroundColor: "#ff0793",
+        backgroundColor: "#DC1A95",
         borderRadius: 0,
         height: 50,
         alignItems: "center",
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
             height: 80,
             flexDirection:'row',
             justifyContent:'space-between',
-            backgroundColor:'#ff0793'
+            backgroundColor:'#DC1A95'
       },
       logoImg:{
         width:70,

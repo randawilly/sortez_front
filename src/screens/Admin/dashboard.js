@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     loginBtn: {
         width: "100%",
         color:"white",
-        backgroundColor: "#ff0793",
+        backgroundColor: "#DC1A95",
         borderRadius: 0,
         height: 50,
         alignItems: "center",
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
             height: 80,
             flexDirection:'row',
             justifyContent:'space-between',
-            backgroundColor:'#ff0793'
+            backgroundColor:'#DC1A95'
       },
       logoImg:{
         width:70,

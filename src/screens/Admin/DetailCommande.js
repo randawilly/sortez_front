@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     second_title:{
         fontSize:25,
         alignItems: 'center',
-        color:"#ff0793",
+        color:"#DC1A95",
         fontFamily:"futuraMd"
     },
     Title:{
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     },
     loginBtn: {
         width: "100%",
-        backgroundColor: "#ff0793",
+        backgroundColor: "#DC1A95",
         borderRadius: 0,
         height: 50,
         alignItems: "center",

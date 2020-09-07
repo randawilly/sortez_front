@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     },
     loginBtn: {
         width: "100%",
-        backgroundColor: "#ff0793",
+        backgroundColor: "#DC1A95",
         borderRadius: 0,
         height: 50,
         alignItems: "center",
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     },
     border_card:{
         borderStyle:"solid",
-        borderColor:"#ff0793",
+        borderColor:"#DC1A95",
         borderWidth:10,
         marginTop: 20
     },
