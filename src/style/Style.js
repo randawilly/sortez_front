@@ -145,6 +145,9 @@ import { StyleSheet } from 'react-native';
             marginBottom: 10,
             fontFamily:"futuraMd"
         },
+        w_80:{
+            width:"80%",
+        },
         paddingTop_10:{
             paddingTop:10,
         },
