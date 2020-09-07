@@ -177,7 +177,7 @@ function validateRes(idBonplan,bonplan_type,nbPlace,dateNow) {
                     {bouclenbVisit}
                 </Picker>
             </View>
-            <Text style={[styles.labelInput]}>Nombre de Place:</Text>
+            <Text style={[styles.labelInput]}>Date de visite:</Text>
             <View style={styles.inputView} >
             <DatePicker
                 style={{width:"100%"}}

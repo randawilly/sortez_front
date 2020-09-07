@@ -95,9 +95,10 @@ async function logOutYes(){
     await AsyncStorage.setItem('Prenom', prenom);
   }
 
-  function goDashboard(data){
+  function goDashboard(data,Email){
     navigation.navigate("Dashboard",{
       UserInfo: data,
+      Email:Email,
     });
     
   }
@@ -119,7 +120,7 @@ async function logOutYes(){
                     .then((responseData) => {
                         setSession(responseData.user.IdUser,responseData.user.Login,responseData.user.Nom,responseData.user.Prenom);
                         // setLoading(false);
-                        goDashboard(responseData);
+                        goDashboard(responseData,responseData.user.Login);
                     })
                     .catch((error) => {
                         // setLoading(false);
@@ -214,21 +215,20 @@ async function logOutYes(){
             <TouchableOpacity onPress={()=>goContact()} style={[filstreStyle.w_100,filstreStyle.heighted]}></TouchableOpacity>
           </View>
           {isLogged != null ?
-          <View style={[styles.w_100,styles.blockLoggedin]}>
-            <Text style={[styles.usernames,styles.textCenter,styles.paddingTop_10]}>
+          <View style={[styles.blockLoggedin,styles.row]}>
+            <Text style={[styles.usernames,styles.textCenter,styles.paddingTop_5,styles.w_75]}>
               Bienvenue: {nomUser} {prenomUser}
             </Text>
-            <TouchableOpacity style={[styles.btnBack]} onPress={()=>logOut()}>
-                <Text style={[styles.btnLogoutAllTxt]}>Se déconnecter</Text>
+            <TouchableOpacity style={[styles.btnLogout,filstreStyle.w_100]} onPress={()=>logOut()}>
+                <Text style={[styles.btnLogoutAllTxt]}>Déconnecter</Text>
             </TouchableOpacity>
           </View> :(
-            <View style={[styles.w_100,styles.blockLoggedin]}>
-            <TouchableOpacity style={[styles.btnBack]} onPress={()=>login()}>
+          <View style={[styles.w_100,styles.blockLoggedin]}>
+            <TouchableOpacity style={[styles.btnLogin]} onPress={()=>login()}>
                 <Text style={[styles.btnLoginAllTxt]}>Se connecter</Text>
             </TouchableOpacity>
-            </View>
-          ) }
-          
+          </View>
+          )}
         </View>
       )
 }

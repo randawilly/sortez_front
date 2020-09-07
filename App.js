@@ -15,6 +15,15 @@ import Dashboard from './src/screens/Dashboard';
 import Card from './src/screens/Card';
 import Favoris from './src/screens/Favoris';
 import Contact from './src/screens/Contact';
+
+import MyData from './src/screens/Admin/MyData';
+import MyCard from './src/screens/Admin/MyCard';
+import MyFidelity from './src/screens/Admin/MyFidelity';
+import MyBonplan from './src/screens/Admin/MyBonplan';
+import DetailCommande from './src/screens/Admin/DetailCommande';
+import DetailCommercant from './src/screens/Admin/DetailCommercant';
+import MyCommande from './src/screens/Admin/MyCommande';
+
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -35,6 +44,15 @@ export default function App() {
       <Stack.Screen name="Card" component={Card} />
       <Stack.Screen name="Favoris" component={Favoris} />
       <Stack.Screen name="Contact" component={Contact} />
+
+      <Stack.Screen name="MyData" component={MyData} />
+      <Stack.Screen name="MyCard" component={MyCard} />
+      <Stack.Screen name="MyFidelity" component={MyFidelity} />
+      <Stack.Screen name="MyBonplan" component={MyBonplan} />
+      <Stack.Screen name="DetailCommande" component={DetailCommande} />
+      <Stack.Screen name="DetailCommercant" component={DetailCommercant} />
+      <Stack.Screen name="MyCommande" component={MyCommande} />
+
     </Stack.Navigator>
   </NavigationContainer>
   );

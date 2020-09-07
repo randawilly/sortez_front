@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
             alignItems: 'center',
             padding:20,
             width:"100%",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         containerNopadding: {
             flex: 1,
@@ -14,20 +14,23 @@ import { StyleSheet } from 'react-native';
             alignItems: 'center',
             padding:0,
             width:"100%",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         logo_home:{
             width:"100%",
         },
         sub_container:{
             width:"100%",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
+        },
+        w_75:{
+            width:"75%",
         },
         slogan:{
             fontSize:25,
             textAlign:"center",
             paddingTop:20,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         img_nb_lecteur:{
             width:"100%"
@@ -77,7 +80,7 @@ import { StyleSheet } from 'react-native';
             fontSize:20,
             color:"white",
             textTransform:"uppercase",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         textCenter:{
             textAlign:"center",
@@ -92,11 +95,11 @@ import { StyleSheet } from 'react-native';
             fontSize:20,
             color:"#E80EAE",
             textTransform:"uppercase",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         subtitle_info:{
             fontSize:15,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         bouton_vert: {
             width: "100%",
@@ -107,7 +110,7 @@ import { StyleSheet } from 'react-native';
             justifyContent: "center",
             marginTop:10,
             marginBottom: 10,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         bouton_red: {
             width: "100%",
@@ -118,7 +121,7 @@ import { StyleSheet } from 'react-native';
             justifyContent: "center",
             marginTop:10,
             marginBottom: 10,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         bouton_rose_contact: {
             width: "80%",
@@ -129,7 +132,7 @@ import { StyleSheet } from 'react-native';
             justifyContent: "center",
             marginTop:10,
             marginBottom: 10,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         bouton_rose_back: {
             width: "100%",
@@ -140,15 +143,18 @@ import { StyleSheet } from 'react-native';
             justifyContent: "center",
             marginTop:10,
             marginBottom: 10,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         paddingTop_10:{
             paddingTop:10,
         },
+        paddingTop_5:{
+            paddingTop:5,
+        },
         text_bouton:{
             color:"white",
             fontSize:15,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         icon_home:{
             margin:5
@@ -156,7 +162,7 @@ import { StyleSheet } from 'react-native';
         footer_adress:{
             fontSize:20,
             paddingTop:20,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         contact_footer:{
             
@@ -192,12 +198,12 @@ import { StyleSheet } from 'react-native';
         inputText: {
             height: 50,
             color: "black",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         inputTextArea: {
             height: 200,
             color: "black",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         Pabsolute:{
             position:"absolute",
@@ -211,7 +217,7 @@ import { StyleSheet } from 'react-native';
         },
         title_rubrique:{
             fontSize:20,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         border_solid:{
             borderWidth:1,
@@ -245,27 +251,41 @@ import { StyleSheet } from 'react-native';
             color:"#3653a2",
             fontSize:20,
             textAlign:"center",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         txt_fidelity2:{
             fontSize:18,
             textAlign:"center",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         btnHomeMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
-            left:10,
-            top:"15%",
+            left:"5%",
+            top:"18%",
         },
         btnBack:{
             textAlign:"center",
             width:"100%",
             alignItems: "center",
             paddingBottom:20,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
+        },
+        btnLogout:{
+            textAlign:"center",
+            width:"100%",
+            alignItems: "center",
+            paddingBottom:5,
+            fontFamily:"futuraMd"
+        },
+        btnLogin:{
+            textAlign:"center",
+            width:"100%",
+            alignItems: "center",
+            paddingBottom:5,
+            fontFamily:"futuraMd"
         },
         btnBackTxt:{
             backgroundColor:"#DC1A95",
@@ -274,41 +294,44 @@ import { StyleSheet } from 'react-native';
             color:"white",
             margin:"auto",
             textAlign:"center",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         btnLogoutAllTxt:{
             backgroundColor:"red",
-            width:"50%",
-            padding:10,
+            width:100,
+            height:25,
+            padding:3,
             color:"white",
-            marginTop:20,
+            marginTop:4,
             textAlign:"center",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         btnLoginAllTxt:{
             backgroundColor:"green",
             width:"50%",
-            padding:10,
+            height:25,
+            padding:4,
+            height:25,
             color:"white",
-            marginTop:20,
+            marginTop:4,
             textAlign:"center",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         btnAccountMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
-            left:"20%",
-            top:"15%",
+            left:"25%",
+            top:"18%",
         },
         centeredView: {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
             marginTop: 22,
-          },
-          modalView: {
+        },
+        modalView: {
             margin: 20,
             backgroundColor: "white",
             borderRadius: 20,
@@ -316,106 +339,110 @@ import { StyleSheet } from 'react-native';
             alignItems: "center",
             shadowColor: "#000",
             shadowOffset: {
-              width: 0,
-              height: 2
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-            width:"90%"
-          },
-          openButton: {
+                width: 0,
+                height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        width:"90%"
+        },
+        openButton: {
             backgroundColor: "#F194FF",
             borderRadius: 20,
             padding: 10,
             elevation: 2
-          },
-          textStyle: {
+        },
+        textStyle: {
             color: "white",
             fontWeight: "bold",
             textAlign: "center"
-          },
-          modalText: {
+        },
+        modalText: {
             marginBottom: 15,
             textAlign: "center"
-          },
-          labelInput:{
+        },
+        labelInput:{
             paddingBottom:10,
             color:"black",
-            /*fontFamily:"futuraMd"*/
-          },
-          w_80:{
-              width:"80%"
-          },
-          blockLoggedin:{
-              width:"90%",
-              borderWidth:1
-          },
-          usernames:{
-            fontSize:20,
+            fontFamily:"futuraMd"
+        },
+        w_90:{
+            width:"90%"
+        },
+        blockLoggedin:{
+            width:"90%",
+            borderWidth:1
+        },
+        usernames:{
+            fontSize:18,
             color:"black",
-            /*fontFamily:"futuraMd"*/
-          },
-          warning:{
-              color:"red",
-              /*fontFamily:"futuraMd"*/
-          },
-          headerHeight:{
-              height:265
-          },
-          btnMaCarteMenu:{
+            fontFamily:"futuraMd"
+        },
+        warning:{
+            color:"red",
+            fontFamily:"futuraMd"
+        },
+        headerHeight:{
+            height:164
+        },
+        btnMaCarteMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
-            left:"37%",
-            top:"15%",
-          },
-          btnfavorisMenu:{
+            left:"44%",
+            top:"18%",
+        },
+        btnfavorisMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
-            left:"53%",
-            top:"15%",
-          },
-          qr_image:{
+            left:"64%",
+            top:"18%",
+        },
+        qr_image:{
             height:400,
             borderWidth:5,
             borderColor:"#DC1A95"
-          },
-          btnContactMenu:{
+        },
+        btnContactMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
-            left:"70%",
-            top:"15%",
-          },
-          margin_0_15:{
-              marginTop:0,
-              marginBottom:15
-          },
-          borderRadius_5:{
-              borderRadius:5
-          },
-          borderRadius_img_top_5:{
+            left:"84%",
+            top:"18%",
+        },
+        margin_0_15:{
+            marginTop:0,
+            marginBottom:15
+        },
+        paddingLeftRight_10:{
+            paddingLeft:10,
+            paddingRight:10
+        },
+        borderRadius_5:{
+            borderRadius:5
+        },
+        borderRadius_img_top_5:{
             borderTopLeftRadius:5,
             borderTopRightRadius:5
-          },
-          paddingmargin_0:{
-              padding:0,
-              margin:0
-          },
-          marginTop_50:{
+        },
+        paddingmargin_0:{
+            padding:0,
+            margin:0
+        },
+        marginTop_50:{
             marginTop:50
-          },
-          marginTop_40:{
+        },
+        marginTop_40:{
             marginTop:40
-          },
-          marginTop_30:{
+        },
+        marginTop_30:{
             marginTop:30
-          }
+        }
 
  });
 export {styles}
