@@ -27,12 +27,12 @@ import { ceil } from 'react-native-reanimated';
         selectText:{
             color:"#E40EAB",
             fontSize:15,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         selectTextWhite:{
             color:"black",
             fontSize:15,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         heighted:{
             height:50,
@@ -42,18 +42,18 @@ import { ceil } from 'react-native-reanimated';
             color:"#E40EAB",
             paddingLeft:10,
             fontSize:15,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         inputText:{
             color:"#E40EAB",
             fontSize:15,
             paddingLeft:10,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         btn_pink:{
             alignItems:"center",
             paddingTop:12,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         bg_pink:{
             backgroundColor:"#E40EAB"
@@ -61,14 +61,14 @@ import { ceil } from 'react-native-reanimated';
         btn_text:{
             color: "white",
             fontSize:15,
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         },
         txt_date:{
             textAlign:"center",
             fontSize:15,
             paddingTop:10,
             color:"#E40EAB",
-            /*fontFamily:"futuraMd"*/
+            fontFamily:"futuraMd"
         }
  });
 export {filstreStyle}

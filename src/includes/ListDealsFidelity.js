@@ -36,7 +36,7 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
             <FlatList style={[filstreStyle.w_100]}
                     data={agenda}
                     renderItem={({item}) => (
-                    <View style={[filstreStyle.w_100,styles.paddingTop_10]}>
+                    <View style={[filstreStyle.w_100,styles.back_grey,styles.margin_0_15,styles.borderRadius_5]}>
                         <View style={[filstreStyle.w_100]} >
                             <Image  style={{height: 250, width: "100%"}}
                                 source={{uri: item.image}}
@@ -48,7 +48,7 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
                                 <Text style={ListeStyle.txt_categ}>{item.categorie}</Text>
                             </View>
                         </View>
-                        <View style={[filstreStyle.w_100,styles.paddingTop_10]}>
+                        <View style={[filstreStyle.w_100,styles.paddingTop_10,styles.paddingLeftRight_10]}>
                             <Text style={ListeStyle.titre_event}>{item.NomSociete}</Text>
                             <Text style={ListeStyle.ville_txt}>{item.ville_nom}</Text>
                             <Text style={ListeStyle.desc_txt}>{item.description}</Text>
