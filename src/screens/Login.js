@@ -14,10 +14,10 @@ export default function Login() {
     function goBack(){
         navigation.goBack();
     }
-    function goDashboard(data){
+    function goDashboard(data,Email){
         navigation.navigate("Dashboard",{
-            rubrique: "DealsFidelity",
             UserInfo: data,
+            Email:Email,
         });
     }
     function DealsFidelity(){
@@ -69,7 +69,7 @@ export default function Login() {
                         setSession(responseData.user.IdUser,responseData.user.Login,responseData.user.Nom,responseData.user.Prenom,responseData.user.user_ionauth_id);
                         setLoading(false);
                         // goBack();
-                        goDashboard(responseData);
+                        goDashboard(responseData,responseData.user.Login);
                     })
                     .catch((error) => {
                         setLoading(false);

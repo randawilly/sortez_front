@@ -330,8 +330,8 @@ import { StyleSheet } from 'react-native';
             justifyContent: "center",
             alignItems: "center",
             marginTop: 22,
-          },
-          modalView: {
+        },
+        modalView: {
             margin: 20,
             backgroundColor: "white",
             borderRadius: 20,
@@ -339,110 +339,110 @@ import { StyleSheet } from 'react-native';
             alignItems: "center",
             shadowColor: "#000",
             shadowOffset: {
-              width: 0,
-              height: 2
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-            width:"90%"
-          },
-          openButton: {
+                width: 0,
+                height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        width:"90%"
+        },
+        openButton: {
             backgroundColor: "#F194FF",
             borderRadius: 20,
             padding: 10,
             elevation: 2
-          },
-          textStyle: {
+        },
+        textStyle: {
             color: "white",
             fontWeight: "bold",
             textAlign: "center"
-          },
-          modalText: {
+        },
+        modalText: {
             marginBottom: 15,
             textAlign: "center"
-          },
-          labelInput:{
+        },
+        labelInput:{
             paddingBottom:10,
             color:"black",
             fontFamily:"futuraMd"
-          },
-          w_90:{
-              width:"90%"
-          },
-          blockLoggedin:{
-              width:"90%",
-              borderWidth:1
-          },
-          usernames:{
+        },
+        w_90:{
+            width:"90%"
+        },
+        blockLoggedin:{
+            width:"90%",
+            borderWidth:1
+        },
+        usernames:{
             fontSize:18,
             color:"black",
             fontFamily:"futuraMd"
-          },
-          warning:{
-              color:"red",
-              fontFamily:"futuraMd"
-          },
-          headerHeight:{
-              height:164
-          },
-          btnMaCarteMenu:{
+        },
+        warning:{
+            color:"red",
+            fontFamily:"futuraMd"
+        },
+        headerHeight:{
+            height:164
+        },
+        btnMaCarteMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
             left:"44%",
             top:"18%",
-          },
-          btnfavorisMenu:{
+        },
+        btnfavorisMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
             left:"64%",
             top:"18%",
-          },
-          qr_image:{
+        },
+        qr_image:{
             height:400,
             borderWidth:5,
             borderColor:"#DC1A95"
-          },
-          btnContactMenu:{
+        },
+        btnContactMenu:{
             opacity:1,
             width:50,
             height:50,
             position:"absolute",
             left:"84%",
             top:"18%",
-          },
-          margin_0_15:{
-              marginTop:0,
-              marginBottom:15
-          },
-          paddingLeftRight_10:{
+        },
+        margin_0_15:{
+            marginTop:0,
+            marginBottom:15
+        },
+        paddingLeftRight_10:{
             paddingLeft:10,
             paddingRight:10
-          },
-          borderRadius_5:{
-              borderRadius:5
-          },
-          borderRadius_img_top_5:{
+        },
+        borderRadius_5:{
+            borderRadius:5
+        },
+        borderRadius_img_top_5:{
             borderTopLeftRadius:5,
             borderTopRightRadius:5
-          },
-          paddingmargin_0:{
-              padding:0,
-              margin:0
-          },
-          marginTop_50:{
+        },
+        paddingmargin_0:{
+            padding:0,
+            margin:0
+        },
+        marginTop_50:{
             marginTop:50
-          },
-          marginTop_40:{
+        },
+        marginTop_40:{
             marginTop:40
-          },
-          marginTop_30:{
+        },
+        marginTop_30:{
             marginTop:30
-          }
+        }
 
  });
 export {styles}

@@ -1,11 +1,14 @@
 import React,{ useState } from 'react';
-import { AsyncStorage,Alert ,ToastAndroid,Text, View,Button,StyleSheet,TouchableOpacity,ScrollView,ActivityIndicator,Linking,Image } from 'react-native';
+import { Text, View,Button,StyleSheet,TouchableOpacity,ScrollView,ActivityIndicator,Linking,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Header from '../includes/Header';
+import { Navigation } from "react-native-navigation";
+import { Icon } from 'react-native-elements'
+
 export default function Dashboard({ route,props }) {
 
     const Email = route.params.Email;
     const userInfo = route.params.UserInfo;
+    alert(JSON.stringify(userInfo))
     const [is_loaded, setLoading] = useState(false);
     const [is_loaded2, setLoading2] = useState(false);
     const [is_loaded3, setLoading3] = useState(false);
@@ -118,6 +121,7 @@ export default function Dashboard({ route,props }) {
     }
 
     function MyBonplanpage(){
+        alert('okok')
         setLoading3(true);
         fetch('https://www.sortez.org/sortez_pro/Api_particulier/get_bonplan_user',
         {
@@ -149,38 +153,19 @@ export default function Dashboard({ route,props }) {
     function go_to_sortez(phone_number){
         Linking.openURL("https://www.magazine-sortez.org");
     }
-    function showToast (text) {
-        ToastAndroid.showWithGravity(text, ToastAndroid.LONG,ToastAndroid.CENTER);
-      };
-    async function logOutYes(){
-        await AsyncStorage.removeItem('id_user');
-        await AsyncStorage.removeItem('username');
-        await AsyncStorage.removeItem('Nom');
-        await AsyncStorage.removeItem('Prenom');
-        showToast("Vous êtes déconnecté");
-        navigation.navigate("Home",{
-          rubrique: "DealsFidelity",
-      });
-      }
-    const logOut = () =>
-    Alert.alert(
-    "Se déconnecter",
-    "Voulez-vous vraiment vous déconnecter ?",
-    [
-      {
-        text: "Non",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      { text: "Oui", onPress: () => logOutYes() }
-    ],
-    { cancelable: false }
-  );
     return (    
         <View style={{height:'100%'}}>
-        <View style={styles.headerHeight}>
-            <Header />
-        </View>
+            <View style={styles.ViewstyleHead}>
+                <View style={styles.ViewOneStyle} >
+                    
+                </View>
+                <View style={styles.ViewTwoStyle}>
+                    <Image
+                        style={styles.logoImg}
+                        source={require("../../../assets/img/logo_right.png")}
+                    />
+                </View>
+            </View>
             <ScrollView showsVerticalScrollIndicator={false}>  
                 <View style={styles.topTitle}>
                     <Text style={styles.titleText}>Menu général</Text>
@@ -208,7 +193,7 @@ export default function Dashboard({ route,props }) {
                 <TouchableOpacity onPress={()=>go_to_sortez()} style={styles.loginBtn}>
                         <Text style={styles.btnText}>www.magazine-sortez-org</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>logOut()} style={styles.loginBtn}>
+                <TouchableOpacity onPress={()=>logout()} style={styles.loginBtn}>
                         <Text style={styles.btnText}>Déconnexion</Text>
                 </TouchableOpacity>
                 </View>
@@ -221,24 +206,20 @@ const styles = StyleSheet.create({
         fontSize:30,
         textAlign:"center",
         marginTop:20,
-        fontWeight:'bold',
-        fontFamily:"futuraMd"
+        fontWeight:'bold'
     },
     topTitle:{
         backgroundColor:"white",
-        fontFamily:"futuraMd"
     },
     btnText:{
         color:"white",
-        fontSize:20,
-        fontFamily:"futuraMd"
+        fontSize:20
     },
     subtitleText:{
         fontSize:25,
         textAlign:"center",
         marginTop:10,
         marginBottom:20,
-        fontFamily:"futuraMd"
     },
     loginBtn: {
         width: "100%",
@@ -249,7 +230,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginBottom: 10,
-        fontFamily:"futuraMd"
     },
     container: {
         backgroundColor: 'white',
@@ -286,7 +266,4 @@ const styles = StyleSheet.create({
         marginBottom:10,
         marginTop:20
       },
-      headerHeight:{
-        height:164
-      }
 })

@@ -95,9 +95,10 @@ async function logOutYes(){
     await AsyncStorage.setItem('Prenom', prenom);
   }
 
-  function goDashboard(data){
+  function goDashboard(data,Email){
     navigation.navigate("Dashboard",{
       UserInfo: data,
+      Email:Email,
     });
     
   }
@@ -119,7 +120,7 @@ async function logOutYes(){
                     .then((responseData) => {
                         setSession(responseData.user.IdUser,responseData.user.Login,responseData.user.Nom,responseData.user.Prenom);
                         // setLoading(false);
-                        goDashboard(responseData);
+                        goDashboard(responseData,responseData.user.Login);
                     })
                     .catch((error) => {
                         // setLoading(false);
