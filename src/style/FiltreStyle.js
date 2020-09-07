@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { ceil } from 'react-native-reanimated';
      const filstreStyle = StyleSheet.create({
         row:{
             flex: 1,
@@ -26,12 +27,12 @@ import { StyleSheet } from 'react-native';
         selectText:{
             color:"#E40EAB",
             fontSize:15,
-            fontFamily:"futuraMd"
+            /*fontFamily:"futuraMd"*/
         },
         selectTextWhite:{
             color:"black",
             fontSize:15,
-            fontFamily:"futuraMd"
+            /*fontFamily:"futuraMd"*/
         },
         heighted:{
             height:50,
@@ -41,18 +42,18 @@ import { StyleSheet } from 'react-native';
             color:"#E40EAB",
             paddingLeft:10,
             fontSize:15,
-            fontFamily:"futuraMd"
+            /*fontFamily:"futuraMd"*/
         },
         inputText:{
             color:"#E40EAB",
             fontSize:15,
             paddingLeft:10,
-            fontFamily:"futuraMd"
+            /*fontFamily:"futuraMd"*/
         },
         btn_pink:{
             alignItems:"center",
             paddingTop:12,
-            fontFamily:"futuraMd"
+            /*fontFamily:"futuraMd"*/
         },
         bg_pink:{
             backgroundColor:"#E40EAB"
@@ -60,14 +61,14 @@ import { StyleSheet } from 'react-native';
         btn_text:{
             color: "white",
             fontSize:15,
-            fontFamily:"futuraMd"
+            /*fontFamily:"futuraMd"*/
         },
         txt_date:{
             textAlign:"center",
             fontSize:15,
             paddingTop:10,
             color:"#E40EAB",
-            fontFamily:"futuraMd"
+            /*fontFamily:"futuraMd"*/
         }
  });
 export {filstreStyle}
