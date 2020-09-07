@@ -26,12 +26,12 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
     }
     if(typeof(agenda) !='undefined'){
         var bouclecommune = 
-            <FlatList style={[filstreStyle.w_100]}
+            <FlatList style={[filstreStyle.w_100,styles.paddingTop]}
                     data={agenda}
                     renderItem={({item}) => (
-                    <View style={[filstreStyle.w_100,styles.paddingTop_10]}>
+                    <View style={[filstreStyle.w_100,styles.back_grey,styles.margin_0_15,styles.borderRadius_5]}>
                         <View style={[filstreStyle.w_100]} >
-                            <Image  style={{height: 250, width: "100%"}}
+                            <Image  style={{height: 250, width: "100%",borderTopLeftRadius:5,borderTopRightRadius:5}}
                                 source={{uri: base_dir+item.photo_link}}
                             />
                             <View style={[styles.textCenter,styles.Pabsolute,filstreStyle.w_100,styles.categ_bg]}>
@@ -41,7 +41,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
                                 <Text style={ListeStyle.txt_categ}>{item.NomSociete}</Text>
                             </View>
                         </View>
-                        <View style={[filstreStyle.w_100,styles.paddingTop_10]}>
+                        <View style={[filstreStyle.w_100,styles.padding_15]}>
                             <Text style={ListeStyle.ville_txt}>{item.texte_courte}</Text>
                             <Text style={ListeStyle.ville_txt}><Text style={ListeStyle.titre_event}>{item.prixtoview}</Text> Etat : {item.etat}</Text>
                             <Text style={ListeStyle.adresse_txt}>{item.quartier}</Text>
@@ -62,7 +62,7 @@ export default function Filtre(props) {const [selectedValue, setSelectedValue] =
     return(
         <View style={[filstreStyle.sub_container]}>
             <View style={filstreStyle.row}>
-                <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
+                <View style={[filstreStyle.w_100]}>
                 {bouclecommune}
                 </View>
             </View>

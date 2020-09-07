@@ -66,8 +66,8 @@ export default function Home() {
     
     return (    
         <ScrollView>
-    <View style={styles.container}>
-        <View style={styles.sub_container}>
+    <View style={styles.container,styles.paddingmargin_0}>
+        <View style={styles.sub_container,styles.marginTop_50}>
             <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/logo_home.png')} />
             <Text style={styles.slogan}>DÉCOUVREZ L’ESSENTIEL DES SORTIES ET DES LOISIRS DE FRÉJUS À MENTON ET BIEN PLUS ENCORE !…</Text>
         </View>
@@ -106,7 +106,7 @@ export default function Home() {
                 </TouchableOpacity>
             </View>
         </View>
-        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter,styles.padding_10]}>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/magazine_img.png')} />
             <Text style={[styles.title_info,styles.textCenter]}>le magazine sortez</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>Présentation, diffusion, audience, lectorat, archives</Text>
@@ -114,7 +114,7 @@ export default function Home() {
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>
-        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter,styles.padding_10]}>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/img_home_avantage.png')} />
             <Text style={[styles.title_info,styles.textCenter]}>les avantages des consommateurs</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>les bons plans, la fidélisation, la carte privilège, newsletter, alertes, tirages au sort ...</Text>
@@ -123,7 +123,7 @@ export default function Home() {
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>
-        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter,styles.padding_10]}>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/avantage_home.png')} />
             <Text style={[styles.title_info,styles.textCenter]}>les avantages des professionnels</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>Référencez et boostez immédiatement
@@ -136,7 +136,7 @@ export default function Home() {
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>
-        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter,styles.padding_10]}>
             <View style={[styles.row]}>
                 <Image resizeMode={'contain'} style={styles.icon_home} source={require('../../assets/imgs/fb_icon_home.png')} />
                 <Image resizeMode={'contain'} style={styles.icon_home} source={require('../../assets/imgs/twitter_home.png')} />

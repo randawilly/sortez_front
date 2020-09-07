@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         width:"100%",
         paddingLeft:15,
         paddingRight:15,
-        fontFamily:"futuraMd"
+        /*fontFamily:"futuraMd"*/
     },
     Title:{
         fontSize:30,
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         marginBottom:20,
         fontWeight:'bold',
         textAlign:'center',
-        fontFamily:"futuraMd"
+        /*fontFamily:"futuraMd"*/
     },
     inputView: {
         width: "100%",
@@ -191,18 +191,18 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         padding: 20,
         alignItems: 'center',
-        fontFamily:"futuraMd"
+        /*fontFamily:"futuraMd"*/
         
     },
     inputText: {
         height: 50,
         color: "black",
-        fontFamily:"futuraMd"
+        /*fontFamily:"futuraMd"*/
     },
     btnText:{
         color:"white",
         fontSize:20,
-        fontFamily:"futuraMd"
+        /*fontFamily:"futuraMd"*/
     },
     loginBtn: {
         width: "100%",
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         // marginTop:40,
         marginBottom: 20,
-        fontFamily:"futuraMd"
+        /*fontFamily:"futuraMd"*/
     },
     logoutBtn: {
         width: "100%",
@@ -224,6 +224,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         // marginTop:40,
         marginBottom: 20,
-        fontFamily:"futuraMd"
+        /*fontFamily:"futuraMd"*/
     },
 })
