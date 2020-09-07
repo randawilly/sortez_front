@@ -302,7 +302,7 @@ import { StyleSheet } from 'react-native';
             height:25,
             padding:3,
             color:"white",
-            marginTop:5,
+            marginTop:4,
             textAlign:"center",
             fontFamily:"futuraMd"
         },
@@ -313,7 +313,7 @@ import { StyleSheet } from 'react-native';
             padding:4,
             height:25,
             color:"white",
-            marginTop:5,
+            marginTop:4,
             textAlign:"center",
             fontFamily:"futuraMd"
         },
