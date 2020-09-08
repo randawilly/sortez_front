@@ -77,16 +77,16 @@ export default function Contact({route}) {
                                 onChangeText={text => setMessage(text)} />
                         </View>
                         <View style={[styles.w_80]}>
-                        <TouchableOpacity onPress={()=>contact_us()} style={[styles.bouton_rose_back]}>
-                            {isLoading ? <ActivityIndicator size="small" color="white" /> : (
-                                <Text style={styles.text_bouton}>Envoyer</Text>
-                            )}
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>goBack()} style={[styles.bouton_rose_back]}>
-                                    <Text style={styles.text_bouton}>Retour</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity onPress={()=>contact_us()} style={[styles.bouton_rose_back]}>
+                                {isLoading ? <ActivityIndicator size="small" color="white" /> : (
+                                    <Text style={styles.text_bouton}>Envoyer</Text>
+                                )}
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={()=>goBack()} style={[styles.bouton_rose_back]}>
+                                <Text style={styles.text_bouton}>Retour</Text>
+                            </TouchableOpacity>
                         </View>
-                        </ImageBackground>
+                    </ImageBackground>
                 </View>
                 </View>
             </ScrollView>
