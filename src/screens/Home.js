@@ -1,11 +1,13 @@
-import React from 'react';
-import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput } from 'react-native';
+import React,{ Component,useState } from 'react';
+import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput,Linking,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 export default function Home() {
     
     const navigation = useNavigation();
-
+    const [Email, setEmail] = useState("");
+    const [Message, setMessage] = useState("");
+    const [isLoading, setLoading] = useState(false);
     function agendaPage() {
         navigation.navigate("Agenda",{
             rubrique: "agenda",
@@ -15,7 +17,7 @@ export default function Home() {
     function articlePage() {
         navigation.navigate("Agenda",{
             rubrique: "article",
-            txt_rubrique: 'Les actualité',
+            txt_rubrique: 'L\'actualité & la revue de presse',
         });
     }
     function annuaire_page(){
@@ -24,26 +26,57 @@ export default function Home() {
             txt_rubrique: 'Les bonnes adresses',
         });
     }
+    function DealsFidelity(){
+        navigation.navigate("DealsFidelity",{
+            rubrique: "DealsFidelity",
+            txt_rubrique: 'Les deals & Fidélité',
+        });
+    }
     function boutiquePage() {
         navigation.navigate("Boutique",{
             rubrique: "boutique",
-            txt_rubrique: 'Les annonces',
+            txt_rubrique: 'Les boutiques en ligne',
           });
+    }
+
+    function editioMois(){
+        var url = "http://online.fliphtml5.com/ugbv/uguz/";
+        Linking.openURL(url).catch((err) => console.error('An error occurred', err));
+    }
+
+    function contact_us(){
+        setLoading(true);
+        var url_contact = "https://www.sortez.org/sortez_pro/Api_front_global/contact_us";
+        fetch(url_contact, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Email: Email,
+                Message: Message,
+            })
+            })
+            .then((response) => response.json())
+            .then((json) => alert(json.sent))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
     }
     
     return (    
         <ScrollView>
-    <View style={styles.container}>
-        <View style={styles.sub_container}>
+    <View style={styles.container,styles.paddingmargin_0}>
+        <View style={styles.sub_container,styles.marginTop_50}>
             <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/logo_home.png')} />
             <Text style={styles.slogan}>DÉCOUVREZ L’ESSENTIEL DES SORTIES ET DES LOISIRS DE FRÉJUS À MENTON ET BIEN PLUS ENCORE !…</Text>
         </View>
-        <View style={[styles.sub_container,styles.paddingTop]}>
+        <View style={[styles.sub_container]}>
             <Image resizeMode={'contain'} style={styles.img_nb_lecteur} source={require('../../assets/imgs/nb_lecteur.png')} />
         </View>
         <View style={[styles.sub_container,styles.paddingBottom,styles.back_pink]}>
             <View style={styles.row}>
-                <TouchableOpacity style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
+                <TouchableOpacity onPress={()=>editioMois()} style={[styles.w_50,styles.paddingLeft_20,styles.paddingRight_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/edition_mois.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>édition du mois</Text>
                 </TouchableOpacity>
@@ -67,30 +100,30 @@ export default function Home() {
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/boutiques_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>boutiques</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
+                <TouchableOpacity onPress={()=>DealsFidelity()} style={[styles.w_50,styles.paddingRight_20,styles.paddingLeft_10]} >
                     <Image resizeMode={'contain'} style={styles.img} source={require('../../assets/imgs/deals_btn.jpg')} />
                     <Text style={[styles.menu_title,styles.textCenter]}>deals & fidelité</Text>
                 </TouchableOpacity>
             </View>
         </View>
-        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter,styles.padding_10]}>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/magazine_img.png')} />
             <Text style={[styles.title_info,styles.textCenter]}>le magazine sortez</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>Présentation, diffusion, audience, lectorat, archives</Text>
-            <TouchableOpacity style={styles.bouton_vert}>
+            <TouchableOpacity onPress={()=>goLink('https://www.sortez.org')} style={styles.bouton_vert}>
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>
-        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter,styles.padding_10]}>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/img_home_avantage.png')} />
             <Text style={[styles.title_info,styles.textCenter]}>les avantages des consommateurs</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>les bons plans, la fidélisation, la carte privilège, newsletter, alertes, tirages au sort ...</Text>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/newsletter_home.png')} />
-            <TouchableOpacity style={styles.bouton_vert}>
+            <TouchableOpacity onPress={()=>goLink('https://www.sortez.org')} style={styles.bouton_vert}>
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>
-        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter,styles.padding_10]}>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/avantage_home.png')} />
             <Text style={[styles.title_info,styles.textCenter]}>les avantages des professionnels</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>Référencez et boostez immédiatement
@@ -103,7 +136,7 @@ export default function Home() {
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>
-        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
+        <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter,styles.padding_10]}>
             <View style={[styles.row]}>
                 <Image resizeMode={'contain'} style={styles.icon_home} source={require('../../assets/imgs/fb_icon_home.png')} />
                 <Image resizeMode={'contain'} style={styles.icon_home} source={require('../../assets/imgs/twitter_home.png')} />
@@ -119,24 +152,28 @@ export default function Home() {
                 <View style={styles.inputView} >
                 <TextInput
                     style={styles.inputText}
-                    placeholder="Votre identifiant"
+                    placeholder="Votre Email"
                     placeholderTextColor="#003f5c"
-                    /*onChangeText={(text) => { setEmail(text);}}*/ />
+                    onChangeText={(text) => { setEmail(text);}} />
             </View>
-            <View style={styles.inputView} >
+            <View style={styles.inputViewText} >
                 <TextInput
                     secureTextEntry
-                    style={styles.inputText}
-                    placeholder="Votre mot de passe"
+                    style={styles.inputTextArea}
+                    placeholder="Votre Message"
+                    multiline = {true}
                     placeholderTextColor="#003f5c"
-                    /*onChangeText={text => setPassword(text)}*/ />
+                    onChangeText={text => setMessage(text)} />
             </View>
-            <TouchableOpacity style={styles.bouton_rose_contact}>
+            <TouchableOpacity onPress={()=>contact_us()} style={styles.bouton_rose_contact}>
+            {isLoading ? <ActivityIndicator size="small" color="white" /> : (
                 <Text style={styles.text_bouton}>Envoyer</Text>
+            )}
             </TouchableOpacity>
             </ImageBackground>
         </View>
     </View>
     </ScrollView>
+
     );
 }

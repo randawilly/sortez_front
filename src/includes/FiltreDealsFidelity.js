@@ -2,31 +2,27 @@ import React, { Component,useState } from 'react';
 import {View,Platform,TextInput,Text,Picker,TouchableOpacity,ActivityIndicator} from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
 import DatePicker from 'react-native-datepicker';
-import { Agenda } from "../screens/Agenda";
+import { DealsFidelity } from "../screens/DealsFidelity";
 // import { Icon } from 'react-native-elements'
-export default function Filtre(props) {
+export default function FiltreDealsFidelity(props) {
 
     const [selectedValueCommune, setSelectedValueCommune] = useState("0");
     const [selectedValueCommercant, setSelectedValueCommercant] = useState("0");
-    const [selectedValueMedia, setSelectedValueMedia] = useState("0");
+    const [selectedValueType, setSelectedValueType] = useState("df");
     const [selectedValueCategorie, setSelectedValueCategorie] = useState("0");
-    const [selectedValueSubcateg, setSelectedValueSubcateg] = useState("0");
+    const [motcle, setmotcle] = useState("");
+
     const [isLoading, setLoading] = useState(false);
     const [isLoading2, setLoading2] = useState(false);
-    const [isLoading3, setLoading3] = useState(false);
-    const [dateDebut, setDateDebut] = useState("0000-00-00");
-    const [dateFin, setDateFin] = useState("0000-00-00");
-    const [motcle, setmotcle] = useState("");
+    
+    
     const [subcateg, setSubcateg] = useState("");
-
     const communes = props.commune.toVille;
 
-    if(subcateg != '' && subcateg != null && typeof(subcateg) != undefined){
-        if(subcateg.toSubcateg !=null && subcateg.toSubcateg !="" && typeof(subcateg.toSubcateg) !="undefined" ){
+    if(subcateg != ''){
         var bouclesubcateg = subcateg.toSubcateg.map( (s, i) => {
-            return <Picker.Item key={i} value={s.IdSousRubrique} label={s.Nom} />
+            return <Picker.Item key={i} value={s.IdRubrique} label={s.Nom} />
         }); 
-    }
     }
 
     if(typeof(props.commercant) !="undefined"){
@@ -34,24 +30,12 @@ export default function Filtre(props) {
     }
     const categorie = props.categorie.toCategorie_principale;
 
-    if(props.rubrique =="agenda"){
-        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterAgenda";
-        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getAgendasListe";
-    }else if(props.rubrique == "article"){
-        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterArticle";
-        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getArticlesListe"
-    }else if(props.rubrique =="annuaire"){
-        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterAnnuaire";
-        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getAnnuaireListe"
-    }
+        var url_filter = "https://www.sortez.org/sortez_pro/Api_front_global/filterDealsFidelity";
+        var url_reset_filter = "https://www.sortez.org/sortez_pro/Api_front_global/getBonplanFidelityListe";
 
     if(typeof(communes) !='undefined'){
         var bouclecommune = communes.map( (s, i) => {
-            if(typeof(s.Nom) !='undefined'){
-            return <Picker.Item key={i} value={s.IdVille} label={s.Nom} />
-            }else{
             return <Picker.Item key={i} value={s.IdVille} label={s.ville_nom} />
-            }
         });   
     }else{
         var bouclecommune = <Picker.Item label="Selectionner" value="0" />;
@@ -69,14 +53,10 @@ export default function Filtre(props) {
 
     if(typeof(categorie) !='undefined'){
         var bouclecategorie = categorie.map( (s, i) => {
-            if(typeof(s.agenda_categid) != "undefined"){
-            if(s.agenda_categid != "null"){
-            return <Picker.Item key={i} value={s.agenda_categid} label={s.category} />
+            if(typeof(s.categid) != "undefined"){
+            if(s.categid != "null"){
+            return <Picker.Item key={i} value={s.categid} label={s.categorie} />
             }
-        }else{
-            if(s.IdRubrique != "null"){
-                return <Picker.Item key={i} value={s.IdRubrique} label={s.Nom} />
-                }
         }
         });   
     }else{
@@ -94,20 +74,12 @@ export default function Filtre(props) {
     }
 
     function applyfilters(){
-
-
-            props.setmotscles(motcle);
+            setLoading(true);
             props.setcommune(selectedValueCommune);
             props.setCateg(selectedValueCategorie);
-            props.setSubcategs(selectedValueSubcateg);
-            if(props.rubrique !="annuaire"){
-                props.setdatedebut(dateDebut);
-                props.setdatefin(dateFin);
-                props.setcommercant(selectedValueCommercant);
-            }
-
-        
-            setLoading(true)
+            props.setType(selectedValueType);
+            props.setmotscles(motcle);
+            props.setCommercants(selectedValueCommercant);
             fetch(url_filter, {
             method: 'POST',
             headers: {
@@ -118,9 +90,7 @@ export default function Filtre(props) {
                 commune: selectedValueCommune,
                 commercant: selectedValueCommercant,
                 categorie:selectedValueCategorie,
-                souscategorie:selectedValueSubcateg,
-                date_debut:dateDebut,
-                date_fin:dateFin,
+                type:selectedValueType,
                 motcles:motcle,
             })
             })
@@ -137,12 +107,15 @@ export default function Filtre(props) {
     function resetall(){
         setSelectedValueCommune('0');
         setSelectedValueCommercant('0');
-        setSelectedValueMedia('0');
+        setSelectedValueType('df');
         setSelectedValueCategorie('0');
-        setDateDebut("0000-00-00");
-        setDateFin("0000-00-00");
         setmotcle('');
-        setLoading2(false)
+        setLoading2(false);
+        props.setcommune(selectedValueCommune);
+            props.setCateg(selectedValueCategorie);
+            props.setType(selectedValueType);
+            props.setmotscles(motcle);
+            props.setCommercants(selectedValueCommercant);
     }
 
     function resetfilters(){
@@ -152,18 +125,6 @@ export default function Filtre(props) {
             .then((json) => changeAgenda(json))
             .catch((error) => console.error(error))
             .finally(() => resetall(false));
-        props.setmotscles(motcle);
-        
-        props.setcommune(selectedValueCommune);
-        
-        props.setCateg(selectedValueCategorie);
-        props.setSubcategs(selectedValueSubcateg);
-        
-        if(props.rubrique !="annuaire"){
-            props.setdatefin(dateFin);
-            props.setdatedebut(dateDebut);
-            props.setcommercant(selectedValueCommercant);
-        }
     }
     function setDate_debut(){
         setDateDebut(new Date());
@@ -173,7 +134,7 @@ export default function Filtre(props) {
     }
     function changecateg(id_categ){
         setSelectedValueCategorie(id_categ);
-        setLoading3(true)
+        setLoading(true)
             fetch("https://www.sortez.org/sortez_pro/Api_front_global/getsubcategby_categid", {
             method: 'POST',
             headers: {
@@ -187,7 +148,7 @@ export default function Filtre(props) {
             .then((response) => response.json())
             .then((json) => setSubcateg(json))
             .catch((error) => console.error(error))
-            .finally(() => setLoading3(false));
+            .finally(() => setLoading(false));
     }
     return(
         
@@ -204,19 +165,7 @@ export default function Filtre(props) {
                 </Picker>
             </View>
         </View>
-        {props.rubrique =="annuaire" ? 
-        <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                    <Picker 
-                        selectedValue={selectedValueCategorie}
-                        style={filstreStyle.selectText}
-                        onValueChange={(itemValue, itemIndex) => changecateg(itemValue)}>
-                        <Picker.Item label="Catégories" value="0" />
-                        {bouclecategorie}
-                    </Picker>
-                </View>
-            </View>
-        : (
+       
         <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
             <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
                 <Picker
@@ -228,39 +177,9 @@ export default function Filtre(props) {
                 </Picker>
             </View>
         </View>
-        )}
         </View>
-        {props.rubrique =="annuaire" ? 
         
         <View style={filstreStyle.row}>
-            <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                {isLoading3 ? <ActivityIndicator style={{paddingTop:11}} size="small" color="#DC1A95" /> : (
-                    <Picker
-                        selectedValue={selectedValueSubcateg}
-                        style={filstreStyle.selectText}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValueSubcateg(itemValue)}>
-                        <Picker.Item label="Sous-catégories" value="0" />
-                        {bouclesubcateg}
-                    </Picker>
-                )}
-                </View>
-            </View>
-        </View>
-
-        : (
-        <View style={filstreStyle.row}>
-            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                    <Picker
-                        selectedValue={selectedValueMedia}
-                        style={filstreStyle.selectText}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValueMedia(itemValue)}>
-                        <Picker.Item label="Média" value="media" />
-                    
-                    </Picker>
-                </View>
-            </View>
             <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
                     <Picker 
@@ -272,77 +191,28 @@ export default function Filtre(props) {
                     </Picker>
                 </View>
             </View>
-        </View>
-        )}
-        {props.rubrique !="annuaire" ? 
-        <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                    <TouchableOpacity onPress={()=>setDate_debut()}>
-                        <View>
-                        {dateDebut =="0000-00-00" ? <Text style={filstreStyle.txt_date}>Date début</Text> : (
-                            <DatePicker
-                                style={{width:"100%"}}
-                                date={dateDebut}
-                                mode="date"
-                                placeholder="Date début"
-                                format="YYYY-MM-DD"
-                                minDate="2016-05-01"
-                                maxDate="2050-06-01"
-                                confirmBtnText="Valider"
-                                cancelBtnText="Annuler"
-                                customStyles={{
-                                dateInput: {
-                                    borderWidth: 0
-                                }
-                                }}
-                                onDateChange={(date) => {onChangeDebut(date)}}
-                        />
-                        )}
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View style={[filstreStyle.w_50,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]}>
-                    <TouchableOpacity onPress={()=>setDate_fin()}>
-                        <View>
-                        {dateFin =="0000-00-00" ? <Text style={filstreStyle.txt_date}>Date Fin</Text> : (
-                            <DatePicker
-                                style={{width:"100%"}}
-                                date={dateFin}
-                                mode="date"
-                                placeholder="Date fin"
-                                format="YYYY-MM-DD"
-                                minDate="2016-05-01"
-                                maxDate="2050-06-01"
-                                confirmBtnText="Valider"
-                                cancelBtnText="Annuler"
-                                customStyles={{
-                                dateInput: {
-                                    borderWidth: 0
-                                }
-                                }}
-                                onDateChange={(date) => {onChangeFin(date)}}
-                        />
-                        )}
-                        </View>
-                    </TouchableOpacity>
+                    <Picker 
+                        selectedValue={selectedValueType}
+                        style={filstreStyle.selectText}
+                        onValueChange={(itemValue, itemIndex) => setSelectedValueType(itemValue)}>
+                        <Picker.Item label="Deals et fidelité" value="df" />
+                        <Picker.Item label="Deals" value="d" />
+                        <Picker.Item label="FIdelité" value="f" />
+                    </Picker>
                 </View>
             </View>
         </View>
-        : (
-            <TouchableOpacity></TouchableOpacity>
-        )}
         <View style={filstreStyle.row}>
             <View style={[filstreStyle.w_100,filstreStyle.padding_5]}>
-                <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >
-                    <TextInput
-                        value={motcle}
-                        style={filstreStyle.inputText}
-                        placeholder="Mots clés"
-                        placeholderTextColor="#E40EAB"
-                        onChangeText={(text) => { setmotcle(text);}} />
+            <View style={[filstreStyle.bordered_rose,filstreStyle.heighted]} >
+                <TextInput
+                    value={motcle}
+                    style={filstreStyle.inputText}
+                    placeholder="Mots clés"
+                    placeholderTextColor="#E40EAB"
+                    onChangeText={(text) => { setmotcle(text);}} />
                 </View>
             </View>
         </View>
@@ -351,7 +221,7 @@ export default function Filtre(props) {
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted,filstreStyle.bg_pink]}>
                     <TouchableOpacity onPress={()=>applyfilters()} style={[filstreStyle.btn_pink]}>
                     {isLoading ? <ActivityIndicator size="small" color="white" /> : (
-                        <Text style={filstreStyle.btn_text}>Rechercher</Text>
+                        <Text style={filstreStyle.btn_text}>Chercher</Text>
                         )}
                     </TouchableOpacity>
                 </View>
