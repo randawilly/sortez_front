@@ -221,7 +221,7 @@ export default function FiltreDealsFidelity(props) {
                 <View style={[filstreStyle.bordered_rose,filstreStyle.heighted,filstreStyle.bg_pink]}>
                     <TouchableOpacity onPress={()=>applyfilters()} style={[filstreStyle.btn_pink]}>
                     {isLoading ? <ActivityIndicator size="small" color="white" /> : (
-                        <Text style={filstreStyle.btn_text}>Appliquez votre choix</Text>
+                        <Text style={filstreStyle.btn_text}>Chercher</Text>
                         )}
                     </TouchableOpacity>
                 </View>
