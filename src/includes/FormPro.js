@@ -15,6 +15,7 @@ export default function FormPro(props) {
     const [PostalCode, SetPostalCode] = useState("0");
     const [phoneFix, setPhoneFix] = useState("0");
     const [phoneMobile, setPhoneMobile] = useState("0");
+    const [Email, setEmail] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -26,9 +27,15 @@ export default function FormPro(props) {
     const [adresse2, setAdresse2] = useState("");
     const [department, setDepartment] = useState("0");
     const [isLoadingSubActivity, setLoadingSubActivity] = useState(false);
+    const [isLoadingSubActivityDep, setLoadingSubActivityDep] = useState(false);
     const [isLoading, setLoading] = useState(false);
     const [mainActivite, setMainActivite] = useState("0");
     const [subRubrique, setSubRubrique] = useState("");
+    const [nomResponsable, setNomResponsable] = useState("");
+    const [prenomResponsable, setPrenomResponsable] = useState("");
+    const [fonctionResponsable, setFonctionResponsable] = useState("");
+    const [telResponsable, setTelResponsable] = useState("");
+    const [emailResponsable, setEmailResponsable] = useState("");
 
 
     if(typeof(rubrique) !='undefined'){
@@ -117,6 +124,35 @@ export default function FormPro(props) {
             console.log(error);
         });
     }
+    function SetPostalCodeFunc(val){
+        setLoadingSubActivityDep(true);
+        SetPostalCode(val);
+        fetch('https://www.sortez.org/sortez_pro/Sortez_pro_mobile/getDepartByPostalCode',
+        {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                codePosta: val,
+            })
+        }).then((response) => response.json())
+        .then((responseData) => {
+            if(typeof(responseData.department.departement_id) != null){
+                alert(responseData.department.departement_id)
+                setDepartment(responseData.department.departement_id);
+            }else{
+                setDepartment(0) ;
+            }
+            setLoadingSubActivityDep(false);
+            // goBack();
+        })
+        .catch((error) => {
+            setLoadingSubActivityDep(false);
+            console.log(error);
+        });
+    }
     return(
         
         <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
@@ -124,6 +160,10 @@ export default function FormPro(props) {
                         <TouchableOpacity onPress={()=>goBack()} style={styles.bouton_rose_contact}>
                             <Text style={styles.text_bouton}>Retour</Text>
                         </TouchableOpacity>
+                        <View>
+                            <Text style={[styles.title_info,styles.txt_underline,styles.paddingBottom10]}>Votre activité</Text>
+                        </View>
+
                         <Text>Préciser votre activité *</Text>
                         <View style={styles.inputView} >
                         <Picker
@@ -205,7 +245,7 @@ export default function FormPro(props) {
                             placeholder="Code Postal *"
                             multiline = {true}
                             placeholderTextColor="#003f5c"
-                            onChangeText={text => SetPostalCode(text)} />
+                            onChangeText={text => SetPostalCodeFunc(text)} />
                     </View>
                     <Text>Departement</Text>
                     <View style={styles.inputView} >
@@ -217,41 +257,89 @@ export default function FormPro(props) {
                             {boucleDepartment}
                         </Picker>
                     </View>
+                    <Text>Téléphone directe</Text>
                     <View style={styles.inputView} >
                         <TextInput
                             
                             style={styles.inputText}
-                            placeholder="Adresse"
-                            multiline = {true}
-                            placeholderTextColor="#003f5c"
-                            onChangeText={text => SetAdresse(text)} />
-                    </View>
-                    <View style={styles.inputView} >
-                        <TextInput
-                            
-                            style={styles.inputText}
-                            placeholder="Code Postal"
-                            multiline = {true}
-                            placeholderTextColor="#003f5c"
-                            onChangeText={text => SetPostalCode(text)} />
-                    </View>
-                    <View style={styles.inputView} >
-                        <TextInput
-                            
-                            style={styles.inputText}
-                            placeholder="Téléphone fixe"
+                            placeholder="Téléphone directe"
                             multiline = {true}
                             placeholderTextColor="#003f5c"
                             onChangeText={text => setPhoneFix(text)} />
                     </View>
+                    <Text>Téléphone Mobile</Text>
                     <View style={styles.inputView} >
                         <TextInput
-                            
                             style={styles.inputText}
                             placeholder="Téléphone Mobile"
                             multiline = {true}
                             placeholderTextColor="#003f5c"
                             onChangeText={text => setPhoneMobile(text)} />
+                    </View>
+                    <Text>Email</Text>
+                    <View style={styles.inputView} >
+                        <TextInput
+                            style={styles.inputText}
+                            placeholder="Email"
+                            multiline = {true}
+                            placeholderTextColor="#003f5c"
+                            onChangeText={text => setEmail(text)} />
+                    </View>
+                    <View>
+                        <Text style={[styles.title_info,styles.txt_underline,styles.paddingBottom10]}>Les coordonnées du décideur</Text>
+                    </View>
+                    <View style={styles.inputView} >
+                        <Picker
+                            selectedValue={0}
+                            style={filstreStyle.selectText}
+                            onValueChange={(itemValue, itemIndex) => setCivilité(itemValue)}>
+                            <Picker.Item key={1} value={0} label={"Monsieur"} />
+                            <Picker.Item key={2} value={1} label={"Madamme"} />
+                            <Picker.Item key={3} value={2} label={"Mademoiselle"} />
+                        </Picker>
+                    </View>
+                    <View style={styles.inputView} >
+                        <TextInput
+                            style={styles.inputText}
+                            placeholder="Nom responsable *"
+                            multiline = {true}
+                            placeholderTextColor="#003f5c"
+                            onChangeText={text => setNomResponsable(text)} />
+                    </View>
+                    <View style={styles.inputView} >
+                        <TextInput
+                            style={styles.inputText}
+                            placeholder="Prénom responsable *"
+                            multiline = {true}
+                            placeholderTextColor="#003f5c"
+                            onChangeText={text => setPrenomResponsable(text)} />
+                    </View>
+                    <View style={styles.inputView} >
+                        <TextInput
+                            style={styles.inputText}
+                            placeholder="Fonction responsable *"
+                            multiline = {true}
+                            placeholderTextColor="#003f5c"
+                            onChangeText={text => setFonctionResponsable(text)} />
+                    </View>
+                    <View style={styles.inputView} >
+                        <TextInput
+                            style={styles.inputText}
+                            placeholder="Téléphone direct *"
+                            multiline = {true}
+                            placeholderTextColor="#003f5c"
+                            onChangeText={text => setTelResponsable(text)} />
+                    </View>
+                    <View style={styles.inputView} >
+                        <TextInput
+                            style={styles.inputText}
+                            placeholder="Email *"
+                            multiline = {true}
+                            placeholderTextColor="#003f5c"
+                            onChangeText={text => setEmailResponsable(text)} />
+                    </View>
+                    <View>
+                        <Text style={[styles.title_info,styles.txt_underline,styles.paddingBottom10]}>Votre identifiant et mot de passe</Text>
                     </View>
                     <View style={styles.inputView} >
                         <TextInput
