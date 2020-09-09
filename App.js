@@ -29,6 +29,8 @@ import ProDashboard from './src/screens/pro/ProDashboard';
 import ProMyData from './src/screens/pro/ProMyData';
 import ValidVisit from './src/screens/pro/ValidVisit';
 import signUp from './src/screens/Admin/signUp';
+import forgotPasswordPage from './src/screens/Admin/forgotPasswordPage';
+import ProSignIn from './src/screens/Admin/ProSignIn';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -67,6 +69,8 @@ export default function App() {
       <Stack.Screen name="ValidVisit" component={ValidVisit} />
 
       <Stack.Screen name="signUp" component={signUp} />
+      <Stack.Screen name="forgotPasswordPage" component={forgotPasswordPage} />
+      <Stack.Screen name="ProSignIn" component={ProSignIn} />
 
       
     </Stack.Navigator>
