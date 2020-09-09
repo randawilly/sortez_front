@@ -18,6 +18,7 @@ export default function Header(props) {
   const [isLogged, setIsLogged] = useState(null);
   const [nomUser, setUserName] = useState("null");
   const [prenomUser, setUserFName] = useState("null");
+  const [type, setType] = useState("null");
 
     useEffect(() => {
       setTimeout(function(){ 
@@ -37,15 +38,18 @@ export default function Header(props) {
     var username = await AsyncStorage.getItem('username');
     var nom = await AsyncStorage.getItem('Nom');
     var prenom = await AsyncStorage.getItem('Prenom');
+    var type = await AsyncStorage.getItem('type');
     setUserName(nom);
     setUserFName(prenom);
-    setIsLogged(username)
+    setIsLogged(username);
+    setType(type);
 }
 async function logOutYes(){
   await AsyncStorage.removeItem('id_user');
   await AsyncStorage.removeItem('username');
   await AsyncStorage.removeItem('Nom');
   await AsyncStorage.removeItem('Prenom');
+  await AsyncStorage.removeItem('type');
   setIsLogged(null);
   showToast("Vous êtes déconnecté");
   navigation.navigate("Home",{
@@ -96,16 +100,29 @@ async function logOutYes(){
   }
 
   function goDashboard(data,Email){
+    if(type =="particulier"){
     navigation.navigate("Dashboard",{
       UserInfo: data,
       Email:Email,
     });
+  }else if(type == "commercant"){
+    navigation.navigate("ProDashboard",{
+      infoCom: data,
+      Email:Email,
+    });
+  }
     
   }
-
+  function goProDashboard(data,Email){
+    navigation.navigate("ProDashboard",{
+        infoCom: data,
+        Email:Email,
+    });
+}
   async function goAccount(){
     const username = await AsyncStorage.getItem('username');
     if (username != null) {
+      if(type =="particulier"){
         fetch('https://www.sortez.org/sortez_pro/Api_particulier/get_user_info_by_username',
                     {
                         method: 'POST',
@@ -118,7 +135,7 @@ async function logOutYes(){
                         })
                     }).then((response) => response.json())
                     .then((responseData) => {
-                        setSession(responseData.user.IdUser,responseData.user.Login,responseData.user.Nom,responseData.user.Prenom);
+                        setSession(responseData.user.IdUser,responseData.user.Login,responseData.user.Nom,responseData.user.Prenom,"particulier");
                         // setLoading(false);
                         goDashboard(responseData,responseData.user.Login);
                     })
@@ -126,6 +143,26 @@ async function logOutYes(){
                         // setLoading(false);
                         console.log(error);
                     });
+      }else if(type == "commercant"){
+        fetch('https://www.sortez.org/sortez_pro/sortez_pro_mobile/get_login_by_id',
+                    {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            login: username
+                        })
+                    }).then((response) => response.json())
+                    .then((responseData) => {
+                        setSession(responseData.json.IdCommercant,responseData.json.Login,responseData.json.Nom,responseData.json.Prenom,responseData.json.user_ionauth_id,"commercant");
+                        goProDashboard(responseData,responseData.json.Login);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+        }
     }else{
       navigation.navigate("Login",{
         rubrique: "agenda",

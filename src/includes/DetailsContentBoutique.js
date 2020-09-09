@@ -5,8 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import{ListeStyle} from '../style/ListeStyle';
 import{styles} from '../style/Style';
 import { useNavigation } from '@react-navigation/native';
-import HTML from 'react-native-render-html';
-import { SliderBox } from "react-native-image-slider-box";
+// import { SliderBox } from "react-native-image-slider-box";
 // import { Icon } from 'react-native-elements'
 export default function DetailsContentBoutique(props) {const [selectedValue, setSelectedValue] = useState("java");
     const agenda = props.agenda.boutique;
@@ -53,13 +52,12 @@ export default function DetailsContentBoutique(props) {const [selectedValue, set
                 <Text style={[styles.btnBackTxt]}>Retour Liste</Text>
             </TouchableOpacity>
             {/* <Image style={{height: 250, width: "100%"}} source={{uri:agenda.photo1}} /> */}
-            <SliderBox circleLoop={true} autoplay={true} style={styles.slideImgAnnonce} resizeMode={'contain'} images={slides} />
+            {/* <SliderBox circleLoop={true} autoplay={true} style={styles.slideImgAnnonce} resizeMode={'contain'} images={slides} /> */}
             <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Désignation: {agenda.texte_courte}</Text>
             <Text style={[styles.title_info,styles.textCenter,styles.paddingTop_10]}>Tarif: € {agenda.prix_ancien}</Text>
             <Text style={[styles.paddingTop_10,styles.textCenter]}>Etat: {etat}</Text>
             <Text style={[styles.paddingTop_10,styles.textCenter]}>{agenda.NomSociete} ({agenda.ville})</Text>
             <Text style={[styles.paddingTop_10,styles.textCenter]}>{agenda.texte_longue}</Text>
-            <HTML html={btn_pay} />
         </View>
     }else{
         var details = 

@@ -24,6 +24,12 @@ import DetailCommande from './src/screens/Admin/DetailCommande';
 import DetailCommercant from './src/screens/Admin/DetailCommercant';
 import MyCommande from './src/screens/Admin/MyCommande';
 
+
+import ProDashboard from './src/screens/pro/ProDashboard';
+import ProMyData from './src/screens/pro/ProMyData';
+import ValidVisit from './src/screens/pro/ValidVisit';
+import signUp from './src/screens/Admin/signUp';
+
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -44,7 +50,7 @@ export default function App() {
       <Stack.Screen name="Card" component={Card} />
       <Stack.Screen name="Favoris" component={Favoris} />
       <Stack.Screen name="Contact" component={Contact} />
-
+      {/* particulier */}
       <Stack.Screen name="MyData" component={MyData} />
       <Stack.Screen name="MyCard" component={MyCard} />
       <Stack.Screen name="MyFidelity" component={MyFidelity} />
@@ -52,7 +58,17 @@ export default function App() {
       <Stack.Screen name="DetailCommande" component={DetailCommande} />
       <Stack.Screen name="DetailCommercant" component={DetailCommercant} />
       <Stack.Screen name="MyCommande" component={MyCommande} />
+      
+      {/* particulier */}
 
+      {/* pro */}
+      <Stack.Screen name="ProDashboard" component={ProDashboard} />
+      <Stack.Screen name="ProMyData" component={ProMyData} />
+      <Stack.Screen name="ValidVisit" component={ValidVisit} />
+
+      <Stack.Screen name="signUp" component={signUp} />
+
+      
     </Stack.Navigator>
   </NavigationContainer>
   );
