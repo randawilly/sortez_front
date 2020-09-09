@@ -26,9 +26,10 @@ export default function Login() {
             Email:Email,
         });
     }
-    function DealsFidelity(){
-        navigation.navigate("DealsFidelity",{
-            rubrique: "DealsFidelity",
+    
+    function signupPage(){
+        navigation.navigate("signUp",{
+            rubrique: "Login",
             txt_rubrique: 'Les deals & Fidélité',
         });
     }
@@ -41,7 +42,7 @@ export default function Login() {
     }
 
     function ForgotPasswordPage(){
-        navigation.navigate("forgotPassword",{
+        navigation.navigate("forgotPasswordPage",{
             rubrique: "Login",
             txt_rubrique: 'Les deals & Fidélité',
         });
