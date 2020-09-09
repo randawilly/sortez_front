@@ -206,25 +206,25 @@ async function logOutYes(){
   async function goFavoris(){
     const id_user = await AsyncStorage.getItem('id_user');
     if (id_user != null) {
-        fetch('https://www.sortez.org/sortez_pro/Api_front_global/getFavoris',
-        {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              id_user: id_user
-            })
-        }).then((response) => response.json())
+      fetch("https://www.sortez.org/sortez_pro/Api_front_global/getFavoris", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id_user: id_user,
+        }),
+      })
+        .then((response) => response.json())
         .then((responseData) => {
-            goFavorisPage(responseData);
+          goFavorisPage(responseData);
         })
         .catch((error) => {
-            // setLoading(false);
-            console.log(error);
+          // setLoading(false);
+          console.log(error);
         });
-        // num_id_card_virtual
+      // num_id_card_virtual
     }else{
       navigation.navigate("Login",{
         rubrique: "agenda",
