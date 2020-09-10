@@ -1,6 +1,6 @@
 
 import React, { Component,useState } from 'react';
-import {View,Platform,TextInput,Text,Picker,TouchableOpacity,ActivityIndicator} from 'react-native';
+import {Alert,View,Platform,TextInput,Text,Picker,TouchableOpacity,ActivityIndicator} from 'react-native';
 import{filstreStyle} from '../style/FiltreStyle';
 import{styles} from '../style/Style';
 import DatePicker from 'react-native-datepicker';
@@ -25,10 +25,8 @@ export default function FormPro(props) {
     const [nomSociete, setNomSociete] = useState("");
     const [adresse1, setAdresse1] = useState("");
     const [adresse2, setAdresse2] = useState("");
+    const [civilite, setCivilité] = useState("");
     const [department, setDepartment] = useState("0");
-    const [isLoadingSubActivity, setLoadingSubActivity] = useState(false);
-    const [isLoadingSubActivityDep, setLoadingSubActivityDep] = useState(false);
-    const [isLoading, setLoading] = useState(false);
     const [mainActivite, setMainActivite] = useState("0");
     const [subRubrique, setSubRubrique] = useState("");
     const [nomResponsable, setNomResponsable] = useState("");
@@ -37,6 +35,9 @@ export default function FormPro(props) {
     const [telResponsable, setTelResponsable] = useState("");
     const [emailResponsable, setEmailResponsable] = useState("");
 
+    const [isLoadingSubActivityDep, setLoadingSubActivityDep] = useState(false);
+    const [isLoadingSubActivity, setLoadingSubActivity] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     if(typeof(rubrique) !='undefined'){
         if(typeof(rubrique) != "undefined" && rubrique != null){
@@ -153,6 +154,138 @@ export default function FormPro(props) {
             console.log(error);
         });
     }
+
+
+    function signUpCommercant(){
+        setLoading(true);
+        if(password ==passwordConfirm){
+            if(nomResponsable !="" && prenomResponsable !="" && adresse1 !="" && PostalCode !="0" && login != "" ){
+        fetch('https://www.sortez.org/sortez_pro/Sortez_pro_mobile/ajouterCommercant',
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Societe:{
+                        idstatut:statut,
+                        NomSociete:nomSociete,
+                        Adresse1:adresse1,
+                        Adresse2:adresse2,
+                        CodePostal:PostalCode,
+                        departement_id:department,
+                        TelFixe:phoneFix,
+                        TelMobile:phoneMobile,
+                        Email:Email,
+                        Civilite:civilite,
+                        Nom:nomResponsable,
+                        Prenom:prenomResponsable,
+                        Responsabilite:fonctionResponsable,
+                        TelDirect:telResponsable,
+                        Email_decideur:emailResponsable,
+                        Login:login,
+                    },
+                    Password:{
+                        Societe_Password:password,
+                    },
+                    AssCommercantRubrique:{
+                        IdRubrique:mainActivite,
+                    },
+                    AssCommercantSousRubrique:{
+                        IdSousRubrique:subRubriqueVal,
+                    }
+                })
+            }).then((response) => response.json())
+            .then((responseData) => {
+                alert(responseData.status)
+                if(responseData.status =="ok"){
+                    Alert.alert(
+                        "Merci pour votre inscription",
+                        "Votre inscription s'est terminé avec succèss, Un mail est envoyé à "+login+" pour activer votre compte",
+                        [
+                            {
+                            text: "OK",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                            },
+                        ],
+                        { cancelable: false }
+                    );
+                    navigation.navigate("Login",{
+                        message: 'anything you want here',
+                      });
+                }else if(responseData.status =="ko1"){
+                    Alert.alert(
+                        "Erreur",
+                        "L'adresse "+login+" n'est plus disponible, veuillez inserer une autre",
+                        [
+                            {
+                            text: "OK",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                            },
+                        ],
+                        { cancelable: false }
+                    );
+                }else if(responseData.status == "koville"){
+                    Alert.alert(
+                        "Erreur",
+                        "Ville incorrecte",
+                        [
+                            {
+                            text: "OK",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                            },
+                        ],
+                        { cancelable: false }
+                    );
+                }else if(responseData.status =="ko"){
+                    Alert.alert(
+                        "Erreur",
+                        "Une erreur s'est produite",
+                        [
+                            {
+                            text: "OK",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                            },
+                        ],
+                        { cancelable: false }
+                    );
+                }else if(responseData.status == "koIonauth"){
+                    Alert.alert(
+                        "Erreur",
+                        "Une erreur s'est produite auth",
+                        [
+                            {
+                            text: "OK",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                            },
+                        ],
+                        { cancelable: false }
+                    );
+                }
+                setLoading(false);
+                // goBack();
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.log(error);
+            });
+        }else{
+            alert("Veuillez remplir le formulaire correctement !!!");
+            setLoading(false);
+        }
+        }else{
+            alert('Les mots de passe ne sont pas identiques !!! ');
+            setLoading(false);
+        }
+    }
+
+
     return(
         
         <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
@@ -290,7 +423,7 @@ export default function FormPro(props) {
                     </View>
                     <View style={styles.inputView} >
                         <Picker
-                            selectedValue={0}
+                            selectedValue={civilite}
                             style={filstreStyle.selectText}
                             onValueChange={(itemValue, itemIndex) => setCivilité(itemValue)}>
                             <Picker.Item key={1} value={0} label={"Monsieur"} />
@@ -368,7 +501,7 @@ export default function FormPro(props) {
                             placeholderTextColor="#003f5c"
                             onChangeText={text => setPasswordConfirm(text)} />
                     </View>
-                    <TouchableOpacity onPress={()=>signUpUser()} style={styles.bouton_rose_contact}>
+                    <TouchableOpacity onPress={()=>signUpCommercant()} style={styles.bouton_rose_contact}>
                     {isLoading ? <ActivityIndicator size="small" color="white" /> : (
                         <Text style={styles.text_bouton}>Je confirme mon inscription</Text>
                     )}

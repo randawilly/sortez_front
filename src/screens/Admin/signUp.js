@@ -144,7 +144,7 @@ export default function signUp() {
                     </View>
                     <View style={styles.inputView} >
                         <Picker
-                            selectedValue={0}
+                            selectedValue={civilite}
                             style={filstreStyle.selectText}
                             onValueChange={(itemValue, itemIndex) => setCivilité(itemValue)}>
                             <Picker.Item key={1} value={0} label={"Monsieur"} />

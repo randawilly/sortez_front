@@ -28,6 +28,9 @@ import MyCommande from './src/screens/Admin/MyCommande';
 import ProDashboard from './src/screens/pro/ProDashboard';
 import ProMyData from './src/screens/pro/ProMyData';
 import ValidVisit from './src/screens/pro/ValidVisit';
+import ReservationBonplan from './src/screens/pro/ReservationBonplan';
+
+
 import signUp from './src/screens/Admin/signUp';
 import forgotPasswordPage from './src/screens/Admin/forgotPasswordPage';
 import ProSignIn from './src/screens/Admin/ProSignIn';
@@ -71,6 +74,7 @@ export default function App() {
       <Stack.Screen name="signUp" component={signUp} />
       <Stack.Screen name="forgotPasswordPage" component={forgotPasswordPage} />
       <Stack.Screen name="ProSignIn" component={ProSignIn} />
+      <Stack.Screen name="ReservationBonplan" component={ReservationBonplan} />
 
       
     </Stack.Navigator>
