@@ -1,8 +1,7 @@
 import React,{ useState } from 'react';
 import { Text, View, Button,TouchableOpacity,StyleSheet,TextInput,ScrollView,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import  MenuHeader from './../components/MenuHeader';
-
+import Headerpro from '../../includes/Headerpro';
 
 export default function ProMyData({ route }) {
 
@@ -60,11 +59,13 @@ export default function ProMyData({ route }) {
         navigation.goBack()
     }
     return (
-        <View style={{height:'100%'}}>
-            {/* <MenuHeader /> */}
+        <View style={{flex: 1,}}>
             <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.headerHeight}>
+                <Headerpro />
+            </View>
                 <View style={styles.container}>
-                    <Text style={styles.Title}>Mes données</Text>
+                    <Text style={styles.Title}>Mes données Pro</Text>
                     <TouchableOpacity onPress={() => onBackPressed()} style={styles.loginBtn}>
                         <Text style={styles.btnText}>Retour</Text>
                     </TouchableOpacity>

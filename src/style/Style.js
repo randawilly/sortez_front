@@ -24,7 +24,7 @@ import { StyleSheet } from 'react-native';
             paddingTop:10,
             paddingBottom:20,
             width:"100%",
-            fontFamily:"futuraMd"
+            fontFamily:"futuraMd",
         },
         containerNormNoPadding: {
             flex: 1,
@@ -632,6 +632,101 @@ import { StyleSheet } from 'react-native';
         },
         text_right:{
             textAlign:"right"
+        },
+        txt_black:{
+            fontSize:15,
+            textAlign:"left",
+            color:"black",
+            fontFamily:"futuraMd"
+        },
+        Btn_green: {
+            width: "100%",
+            color:"white",
+            backgroundColor: "green",
+            borderRadius: 0,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 10,
+            borderRadius: 15,
+            borderColor:"black",
+            borderWidth:1,
+        },
+        btnText:{
+            color:"white",
+            fontSize:20
+        },
+        container_btn: {
+            flex: 1,
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            paddingLeft:20,
+            paddingRight:20,
+            paddingTop:15,
+            width:"100%",
+            fontFamily:"futuraMd"
+        },
+        w_45:{
+            width: "45%",
+            marginRight:10,
+        },
+        m_auto:{
+            margin:"auto",
+        },
+        container_pro: {
+            flex: 1,
+            backgroundColor: '#fff',
+            paddingLeft:15,
+            paddingRight:15,
+            width:"100%",
+            fontFamily:"futuraMd"
+        },
+        border_black:{
+            backgroundColor:"#fff",
+            borderColor:"black",
+            borderWidth:2,
+            width:"100%",
+            marginTop:15
+        },
+        padding_bottom_after:{
+            paddingBottom: 15,
+        },
+        margleft_right:{
+            marginLeft:15,
+            marginRight:15,
+        },
+        txt_black_pro:{
+            fontSize:18,
+            textAlign:"left",
+            paddingTop:15,
+            color:"black",
+            fontFamily:"futuraMd"
+        },
+        title_black_pro:{
+            fontSize:20,
+            textAlign:"left",
+            paddingTop:15,
+            color:"black",
+            fontFamily:"futuraMd"
+        },
+        comment_black_pro:{
+            fontSize:16,
+            textAlign:"left",
+            paddingTop:15,
+            color:"black",
+            fontFamily:"futuraMd"
+        },
+        marginBottom:{
+            marginBottom:25,
+        },
+        bg_white:{
+            backgroundColor:"white"
+        },
+        marginBottom_15:{
+            marginBottom:15
+        },
+        h100:{
+            height:"100%"
         }
  });
 export {styles}

@@ -33,7 +33,6 @@ import Plat from './src/screens/pro/Plat';
 import ListeClient from './src/screens/pro/ListeClient';
 import Reservationhebergenment from './src/screens/pro/Reservationhebergenment';
 import Reservationrestauration from './src/screens/pro/Reservationrestauration';
-import ReservationBonplan from './src/screens/pro/ReservationBonplan';
 
 
 import signUp from './src/screens/Admin/signUp';

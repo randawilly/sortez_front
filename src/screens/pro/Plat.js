@@ -3,6 +3,7 @@ import {Image, Alert,ToastAndroid,AsyncStorage,Picker,Text, View,ScrollView,Touc
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../../style/Style';
 import{filstreStyle} from '../../style/FiltreStyle';
+import Headerpro from '../../includes/Headerpro';
 
 export default function Plat() {
     
@@ -16,7 +17,10 @@ export default function Plat() {
     }
     
     return (
-            
+        <View style={{flex: 1,}}>
+        <View style={styles.headerHeight}>
+        <Headerpro />     
+        </View>   
     <ScrollView>
         <View style={styles.container}>
             <View style={[styles.sub_container,styles.paddingBottom,styles.paddingTop,styles.alignCenter]}>
@@ -119,6 +123,6 @@ export default function Plat() {
             </View>
         </View>
     </ScrollView>
-
+    </View>
     );
 }
