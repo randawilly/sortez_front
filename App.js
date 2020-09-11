@@ -29,6 +29,8 @@ import ProDashboard from './src/screens/pro/ProDashboard';
 import ProMyData from './src/screens/pro/ProMyData';
 import ValidVisit from './src/screens/pro/ValidVisit';
 import ReservationBonplan from './src/screens/pro/ReservationBonplan';
+import Plat from './src/screens/pro/Plat';
+import ListeClient from './src/screens/pro/ListeClient';
 
 
 import signUp from './src/screens/Admin/signUp';
@@ -75,6 +77,8 @@ export default function App() {
       <Stack.Screen name="forgotPasswordPage" component={forgotPasswordPage} />
       <Stack.Screen name="ProSignIn" component={ProSignIn} />
       <Stack.Screen name="ReservationBonplan" component={ReservationBonplan} />
+      <Stack.Screen name="Plat" component={Plat} />
+      <Stack.Screen name="ListeClient" component={ListeClient} />
 
       
     </Stack.Navigator>

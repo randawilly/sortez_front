@@ -8,6 +8,44 @@ import { StyleSheet } from 'react-native';
             width:"100%",
             fontFamily:"futuraMd"
         },
+        containerPink: {
+            flex: 1,
+            backgroundColor: '#DC1A95',
+            alignItems: 'center',
+            padding:20,
+            width:"100%",
+            fontFamily:"futuraMd"
+        },
+        containerNorm: {
+            flex: 1,
+            backgroundColor: '#DC1A95',
+            paddingLeft:20,
+            paddingRight:20,
+            paddingTop:10,
+            paddingBottom:20,
+            width:"100%",
+            fontFamily:"futuraMd"
+        },
+        containerNormNoPadding: {
+            flex: 1,
+            backgroundColor: '#DC1A95',
+            paddingLeft:20,
+            paddingRight:20,
+            paddingTop:10,
+            paddingBottom:20,
+            width:"100%",
+            fontFamily:"futuraMd"
+        },
+        containerNormBgWhite: {
+            flex: 1,
+            backgroundColor: 'white',
+            paddingLeft:20,
+            paddingRight:20,
+            paddingTop:10,
+            paddingBottom:20,
+            width:"100%",
+            fontFamily:"futuraMd"
+        },
         containerNopadding: {
             flex: 1,
             backgroundColor: '#fff',
@@ -47,6 +85,10 @@ import { StyleSheet } from 'react-native';
         row:{
             flex: 1,
             flexDirection: 'row'
+        },
+        row_reverse:{
+            flex: 1,
+            flexDirection: 'row-reverse'
         },
         w_50:{
             width:"50%"
@@ -243,6 +285,9 @@ import { StyleSheet } from 'react-native';
         marginTop_10:{
             marginTop:10
         },
+        marginTop_20:{
+            marginTop:20
+        },
         slideImgAnnonce:{
             width:"90%",
             height:300,
@@ -275,6 +320,34 @@ import { StyleSheet } from 'react-native';
             alignItems: "center",
             paddingBottom:20,
             fontFamily:"futuraMd"
+        },
+        btnVertContText:{
+            textAlign:"center",
+            width:"100%",
+            alignItems: "center",
+            paddingBottom:10,
+            paddingTop:10,
+            fontFamily:"futuraMd",
+            color:"white",
+        },
+        btnVertContTextClient:{
+            textAlign:"center",
+            width:"100%",
+            alignItems: "center",
+            paddingBottom:20,
+            paddingTop:16,
+            fontFamily:"futuraMd",
+            color:"white",
+            fontSize:20
+        },
+        btnVertCont:{
+            backgroundColor:"#008000",
+            borderRadius:15
+        },
+        btnVertContCLient:{
+            backgroundColor:"#008000",
+            borderRadius:15,
+            height:60
         },
         btnLogout:{
             textAlign:"center",
@@ -462,6 +535,103 @@ import { StyleSheet } from 'react-native';
         },
         buttonTouchable: {
         padding: 16
+        },
+        bg_pink:{
+            backgroundColor:"#DC1A95",
+        },
+        title_white:{
+            color:"white",
+            fontSize:25,
+            fontFamily:"futuraMd",
+            textAlign:"center"
+        },
+        title_black:{
+            color:"black",
+            fontSize:25,
+            fontFamily:"futuraMd",
+            textAlign:"center"
+        },
+        w_20:{
+            width:"20%",
+        },
+        txt_white:{
+            fontSize:15,
+            textAlign:"left",
+            color:"white",
+            fontFamily:"futuraMd"
+        },
+        bg_black:{
+            backgroundColor:"black",
+
+        },
+        float_right:{
+            position:"absolute",
+            right:5
+        },
+        float_left:{
+            position:"absolute",
+            right:"15%"
+        },
+        txt_box_green:{
+            color:"white",
+            backgroundColor:"#008000",
+            paddingTop:5,
+            width:40,
+            height:40,
+            fontSize:20,
+            textAlign:"center"
+        },
+        txt_box_red:{
+            color:"white",
+            backgroundColor:"red",
+            paddingTop:5,
+            width:40,
+            height:40,
+            fontSize:20,
+            textAlign:"center"
+        },
+        txt_box_white:{
+            color:"white",
+            backgroundColor:"white",
+            paddingTop:5,
+            width:40,
+            height:40,
+            fontSize:20,
+            textAlign:"center"
+        },
+        txt_nom_black:{
+            color:"black",
+            paddingTop:10,
+            fontFamily:"futuraMd",
+            fontSize:20
+        },
+        searchCLient:{
+            backgroundColor:"white",
+            width:"100%",
+            height:40
+        },
+        btnOkSearch:{
+            color:"white",
+            fontSize:20,
+
+        },
+        barreBlack:{
+            borderWidth:2,
+        },
+        bg_red:{
+            backgroundColor:"red",
+        },
+        w_25:{
+            width:"25%"
+        },
+        bg_blue:{
+            backgroundColor:"#3653A3"
+        },
+        font20:{
+            fontSize:20
+        },
+        text_right:{
+            textAlign:"right"
         }
 
  });

@@ -88,8 +88,14 @@ export default function ProDashboard({ route,props }) {
         });
 
     }
+    function PlatPage(){
+        navigation.navigate("Plat"); 
+    }
     function logout(){
         navigation.navigate("Home"); 
+    }
+    function MyCLientPage(){
+        navigation.navigate("ListeClient"); 
     }
     function MyCommandPage(){
         setLoading4(true);
@@ -176,13 +182,13 @@ export default function ProDashboard({ route,props }) {
                 <TouchableOpacity onPress={() => bonplanProPage()} style={styles.loginBtn}>
                         {is_loaded2 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Les bonplans en cours</Text>}
                 </TouchableOpacity>
-                {/* <TouchableOpacity onPress={() => MyBonplanpage()} style={styles.loginBtn}>
+                 <TouchableOpacity onPress={() => PlatPage()} style={styles.loginBtn}>
                         {is_loaded3 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Reservation plat du jours</Text>}
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => MyBonplanpage()} style={styles.loginBtn}>
-                        {is_loaded3 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Reservation restauration</Text>}
+                <TouchableOpacity onPress={() => MyCLientPage()} style={styles.loginBtn}>
+                        {is_loaded3 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Liste de mes clients</Text>}
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => MyCommandPage()} style={styles.loginBtn}>
+                {/*<TouchableOpacity onPress={() => MyCommandPage()} style={styles.loginBtn}>
                         {is_loaded4 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Reservation hebergement</Text>}
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => MyCommandPage()} style={styles.loginBtn}>
