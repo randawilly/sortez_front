@@ -34,7 +34,7 @@ export default function MyCard({ route }) {
                             style={styles.qr_image}
                             source={{
                             uri: 'https://www.sortez.org/application/resources/front/images/cards/qrcode_'+userInfo.user.virtual_card_img,
-                        }}
+                            }}
                         />
                     </View>
                     <View style={{width:"100%",alignItems:"center"}} >

@@ -51,9 +51,9 @@ export default function ProDashboard({ route,props }) {
             infoCom:infoCom,
         });
     }
-    function MyFidelityPage(){
+    function bonplanProPage(){
         setLoading2(true);
-        fetch('https://www.sortez.org/sortez_pro/Api_particulier/get_fidelity_user',
+        fetch('https://www.sortez.org/sortez_pro/sortez_pro_mobile/liste_reservationionic',
         {
             method: 'POST',
             headers: {
@@ -66,15 +66,19 @@ export default function ProDashboard({ route,props }) {
         }).then((response) => response.json())
         .then((responseData) => {
             setLoading2(false);
-            if(responseData.fiche_tampon ==[] && responseData.fiche_tampon == [] && responseData.fiche_remise == []){
-                // navigation.navigate("Empty");
-                alert("Liste vide");
-            }else{
-                navigation.navigate("MyFidelity",{
+            if(responseData.infoclient != null){
+                navigation.navigate("ReservationBonplan",{
                     Email:Email,
                     infoCom:infoCom,
-                    fidelity:responseData
+                    bonpaln:responseData
                 });
+            }else{
+                alert('liste vide');
+                // navigation.navigate("MyFidelity",{
+                //     Email:Email,
+                //     infoCom:infoCom,
+                //     fidelity:responseData
+                // });
             }
             
         })
@@ -86,6 +90,12 @@ export default function ProDashboard({ route,props }) {
     }
     function logout(){
         navigation.navigate("Home"); 
+    }
+    function reservationhebergement(){
+        navigation.navigate("Reservationhebergenment"); 
+    }
+    function reservationrestauration(){
+        navigation.navigate("Reservationrestauration"); 
     }
     function MyCommandPage(){
         setLoading4(true);
@@ -166,22 +176,22 @@ export default function ProDashboard({ route,props }) {
                 <TouchableOpacity onPress={() => MyDataPage()} style={styles.loginBtn}>
                         {is_loaded ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Mon compte</Text>}
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => ValidVisitPage()}  style={styles.loginBtn}>
+                {/* <TouchableOpacity onPress={() => ValidVisitPage()}  style={styles.loginBtn}>
                         <Text style={styles.btnText}>Valider une visite</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => MyFidelityPage()} style={styles.loginBtn}>
+                </TouchableOpacity> */}
+                <TouchableOpacity onPress={() => bonplanProPage()} style={styles.loginBtn}>
                         {is_loaded2 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Les bonplans en cours</Text>}
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => MyBonplanpage()} style={styles.loginBtn}>
+                {/* <TouchableOpacity onPress={() => MyBonplanpage()} style={styles.loginBtn}>
                         {is_loaded3 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Reservation plat du jours</Text>}
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => MyBonplanpage()} style={styles.loginBtn}>
-                        {is_loaded3 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Reservation restauration</Text>}
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => MyCommandPage()} style={styles.loginBtn}>
+                </TouchableOpacity>*/}
+                <TouchableOpacity onPress={() => reservationhebergement()} style={styles.loginBtn}>
                         {is_loaded4 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Reservation hebergement</Text>}
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => MyCommandPage()} style={styles.loginBtn}>
+                <TouchableOpacity onPress={() => reservationrestauration()} style={styles.loginBtn}>
+                        {is_loaded3 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Reservation restauration</Text>}
+                </TouchableOpacity>
+                {/*<TouchableOpacity onPress={() => MyCommandPage()} style={styles.loginBtn}>
                         {is_loaded4 ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.btnText}>Liste de mes clients</Text>}
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => MyCommandPage()} style={styles.loginBtn}>
@@ -192,7 +202,7 @@ export default function ProDashboard({ route,props }) {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>go_to_sortez()} style={styles.loginBtn}>
                         <Text style={styles.btnText}>www.magazine-sortez-org</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 {/* <TouchableOpacity onPress={()=>logOut()} style={styles.loginBtn}>
                         <Text style={styles.btnText}>Déconnexion</Text>
                 </TouchableOpacity> */}
