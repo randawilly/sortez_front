@@ -633,6 +633,5 @@ import { StyleSheet } from 'react-native';
         text_right:{
             textAlign:"right"
         }
-
  });
 export {styles}

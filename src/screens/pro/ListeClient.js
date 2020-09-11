@@ -68,6 +68,13 @@ export default function ListeClient() {
                     </TouchableOpacity>
                 </View>
             </View>
+            <View style={[styles.row,styles.paddingTop_10]}>
+                <View style={[filstreStyle.w_100,styles.paddingRight_10]}>
+                    <TouchableOpacity style={[styles.btnVertContCLient]}>
+                        <Text style={[styles.btnVertContTextClient]}>ADRESSER DES EMAILS OU SMS</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
             <View style={[styles.bg_black,styles.barreBlack,filstreStyle.w_100,styles.marginTop_20]}>
             </View>
             <View style={[filstreStyle.w_100,styles.marginTop_20,styles.row]}>
