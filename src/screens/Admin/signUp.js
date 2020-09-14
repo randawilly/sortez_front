@@ -220,9 +220,9 @@ export default function signUp() {
                         <Text style={styles.text_bouton}>Je confirme mon inscription</Text>
                     )}
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>requestProAccount()} style={styles.bouton_rose_contact}>
+                    {/* <TouchableOpacity onPress={()=>requestProAccount()} style={styles.bouton_rose_contact}>
                         <Text style={styles.text_bouton}>Demander un compte Professionnel</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         </ScrollView>
