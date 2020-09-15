@@ -144,7 +144,7 @@ export default function signUp() {
                     </View>
                     <View style={styles.inputView} >
                         <Picker
-                            selectedValue={0}
+                            selectedValue={civilite}
                             style={filstreStyle.selectText}
                             onValueChange={(itemValue, itemIndex) => setCivilité(itemValue)}>
                             <Picker.Item key={1} value={0} label={"Monsieur"} />
@@ -220,9 +220,9 @@ export default function signUp() {
                         <Text style={styles.text_bouton}>Je confirme mon inscription</Text>
                     )}
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>requestProAccount()} style={styles.bouton_rose_contact}>
+                    {/* <TouchableOpacity onPress={()=>requestProAccount()} style={styles.bouton_rose_contact}>
                         <Text style={styles.text_bouton}>Demander un compte Professionnel</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         </ScrollView>

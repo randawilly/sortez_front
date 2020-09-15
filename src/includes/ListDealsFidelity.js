@@ -38,7 +38,7 @@ export default function ListeDealsFidelity(props) {const [selectedValue, setSele
                     renderItem={({item}) => (
                     <View style={[filstreStyle.w_100,styles.back_grey,styles.margin_0_15,styles.borderRadius_5]}>
                         <View style={[filstreStyle.w_100]} >
-                            <Image  style={{height: 250, width: "100%",borderTopLeftRadius:5,borderTopRightRadius:5}}
+                            <Image  style={{height: 250, width: "100%"}}
                                 source={{uri: item.image}}
                             />
                             <View style={[styles.textCenter,styles.Pabsolute,filstreStyle.w_100,styles.categ_bg]}>

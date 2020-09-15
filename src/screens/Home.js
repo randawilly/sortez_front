@@ -14,6 +14,9 @@ export default function Home() {
             txt_rubrique: "L'Agenda événementiel",
           });
     }
+    function goLink(link){
+        Linking.openURL(link).catch((err) => console.error('An error occurred', err));
+    }
     function articlePage() {
         navigation.navigate("Agenda",{
             rubrique: "article",
@@ -119,7 +122,7 @@ export default function Home() {
             <Text style={[styles.title_info,styles.textCenter]}>les avantages des consommateurs</Text>
             <Text style={[styles.subtitle_info,styles.textCenter]}>les bons plans, la fidélisation, la carte privilège, newsletter, alertes, tirages au sort ...</Text>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/newsletter_home.png')} />
-            <TouchableOpacity onPress={()=>goLink('https://www.sortez.org')} style={styles.bouton_vert}>
+            <TouchableOpacity onPress={()=>goLink('https://www.soutenonslecommercelocal.fr/avantages-particuliers')} style={styles.bouton_vert}>
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>
@@ -132,7 +135,7 @@ export default function Home() {
                         Landing page, actualités, événements,
                         boutique en ligne...</Text>
             <Image resizeMode={'contain'} style={styles.img_home} source={require('../../assets/imgs/event_flash_home.png')} />
-            <TouchableOpacity style={styles.bouton_vert}>
+            <TouchableOpacity onPress={()=>goLink('https://www.soutenonslecommercelocal.fr/abonnement-premium')} style={styles.bouton_vert}>
                 <Text style={styles.text_bouton}>plus d'informations</Text>
             </TouchableOpacity>
         </View>

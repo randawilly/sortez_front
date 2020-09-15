@@ -99,26 +99,27 @@ export default function Login() {
                         console.log(error);
                     });
                 }else if(json.status == "logged in"){
-                    fetch('https://www.sortez.org/sortez_pro/sortez_pro_mobile/get_login_by_id',
-                    {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            login: Email
-                        })
-                    }).then((response) => response.json())
-                    .then((responseData) => {
-                        setSession(responseData.json.IdCommercant,responseData.json.Login,responseData.json.Nom,responseData.json.Prenom,responseData.json.user_ionauth_id,"commercant");
-                        setLoading(false);
-                        goProDashboard(responseData,responseData.json.Login);
-                    })
-                    .catch((error) => {
-                        setLoading(false);
-                        console.log(error);
-                    });
+                    // fetch('https://www.sortez.org/sortez_pro/sortez_pro_mobile/get_login_by_id',
+                    // {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         Accept: 'application/json',
+                    //         'Content-Type': 'application/json'
+                    //     },
+                    //     body: JSON.stringify({
+                    //         login: Email
+                    //     })
+                    // }).then((response) => response.json())
+                    // .then((responseData) => {
+                    //     setSession(responseData.json.IdCommercant,responseData.json.Login,responseData.json.Nom,responseData.json.Prenom,responseData.json.user_ionauth_id,"commercant");
+                    //     setLoading(false);
+                    //     goProDashboard(responseData,responseData.json.Login);
+                    // })
+                    // .catch((error) => {
+                    //     setLoading(false);
+                    //     console.log(error);
+                    // });
+                    alert('Login ou mots de passe incorrecte !!!')
                 }
             })
             .catch((error) => alert('Login ou mots de passe incorrecte !!!'))
