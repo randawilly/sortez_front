@@ -1,5 +1,5 @@
 import React,{ Component,useState } from 'react';
-import { Text, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput,Linking,ActivityIndicator } from 'react-native';
+import { Text,Modal, View,Image, ScrollView,TouchableOpacity,ImageBackground,TextInput,Linking,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {styles} from '../style/Style';
 export default function Home() {
@@ -7,7 +7,10 @@ export default function Home() {
     const navigation = useNavigation();
     const [Email, setEmail] = useState("");
     const [Message, setMessage] = useState("");
+    const [txtVisit, setTxtVisit] = useState("");
     const [isLoading, setLoading] = useState(false);
+    const [loading, setsLoading] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     function agendaPage() {
         navigation.navigate("Agenda",{
             rubrique: "agenda",
@@ -15,7 +18,12 @@ export default function Home() {
           });
     }
     function goLink(link){
-        Linking.openURL(link).catch((err) => console.error('An error occurred', err));
+        setTxtVisit(link)
+        setModalVisible(true)
+        }
+    function visitLink(){
+        Linking.openURL(txtVisit).catch((err) => console.error('An error occurred', err));
+        setModalVisible(false);
     }
     function articlePage() {
         navigation.navigate("Agenda",{
@@ -175,6 +183,36 @@ export default function Home() {
             </TouchableOpacity>
             </ImageBackground>
         </View>
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <Text style={[styles.title_info,styles.paddingBottom10]}>Ouvrir le site ? (Sortez.org)</Text>
+            <TouchableOpacity
+              style={[styles.bouton_vert,styles.w_80]}
+              onPress={() => {
+                visitLink();
+              }}
+            >
+            {loading ? <ActivityIndicator style={{paddingTop:0}} size="large" color="white" /> :(
+                <Text style={styles.text_bouton}>Visiter</Text>
+            )}
+              
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.bouton_red,styles.w_80]}
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.text_bouton}>Plus tard</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
     </ScrollView>
 

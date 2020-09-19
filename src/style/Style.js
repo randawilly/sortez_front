@@ -56,6 +56,7 @@ import { StyleSheet } from 'react-native';
         },
         logo_home:{
             width:"100%",
+            height:120
         },
         sub_container:{
             width:"100%",
@@ -353,12 +354,15 @@ import { StyleSheet } from 'react-native';
             textAlign:"center",
             width:"100%",
             alignItems: "center",
-            paddingBottom:5,
+            paddingBottom:0,
             fontFamily:"futuraMd"
+        },
+        w_70:{
+            width:"70%"
         },
         btnLogin:{
             textAlign:"center",
-            width:"100%",
+            width:300,
             alignItems: "center",
             paddingBottom:5,
             fontFamily:"futuraMd"
@@ -447,8 +451,8 @@ import { StyleSheet } from 'react-native';
             width:"90%"
         },
         blockLoggedin:{
-            width:"90%",
-            borderWidth:1
+            // borderWidth:1
+            height:50
         },
         usernames:{
             fontSize:18,
@@ -460,7 +464,7 @@ import { StyleSheet } from 'react-native';
             fontFamily:"futuraMd"
         },
         headerHeight:{
-            height:164
+            height:150
         },
         btnMaCarteMenu:{
             opacity:1,
@@ -665,6 +669,15 @@ import { StyleSheet } from 'react-native';
             paddingTop:15,
             width:"100%",
             fontFamily:"futuraMd"
+        },
+        container_login: {
+            flex: 1,
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            paddingLeft:20,
+            paddingRight:20,
+            width:"100%",
+            fontFamily:"futuraMd",
         },
         w_45:{
             width: "45%",

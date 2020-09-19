@@ -8,8 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
 // import { Icon } from 'react-native-elements'
 export default function DetailsContent(props) {const [selectedValue, setSelectedValue] = useState("java");
-    const base_dir = "https://www.sortez.org/";
-    const image_dir = base_dir+"application/resources/front/photoCommercant/imagesbank/";
     const agenda = props.agenda.article;
     const navigation = useNavigation();
     

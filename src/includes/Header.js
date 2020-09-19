@@ -235,7 +235,9 @@ async function logOutYes(){
   
   return (
         <View style={[styles.containerNopadding]}>
+        <View style={{width:"100%",paddingBottom:0,height:110}}>
           <Image resizeMode={'contain'} style={styles.logo_home} source={require('../../assets/imgs/header_rapide.png')} />
+        </View>
           <View style={[styles.btnHomeMenu]}>
             <TouchableOpacity onPress={()=>goMenu()} style={[filstreStyle.w_100,filstreStyle.heighted]}></TouchableOpacity>
           </View>
@@ -251,9 +253,10 @@ async function logOutYes(){
           <View style={[styles.btnContactMenu]}>
             <TouchableOpacity onPress={()=>goContact()} style={[filstreStyle.w_100,filstreStyle.heighted]}></TouchableOpacity>
           </View>
+          <View style={[styles.container_login]}>
           {isLogged != null ?
-          <View style={[styles.blockLoggedin,styles.row]}>
-            <Text style={[styles.usernames,styles.textCenter,styles.paddingTop_5,styles.w_75]}>
+          <View style={[styles.blockLoggedin,styles.row,filstreStyle.w_100]}>
+            <Text style={[styles.usernames,styles.textCenter,styles.paddingTop_5,styles.w_70]}>
               Bienvenue: {nomUser} {prenomUser}
             </Text>
             <TouchableOpacity style={[styles.btnLogout,filstreStyle.w_100]} onPress={()=>logOut()}>
@@ -266,6 +269,7 @@ async function logOutYes(){
             </TouchableOpacity>
           </View>
           )}
+          </View>
         </View>
       )
 }
